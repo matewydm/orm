@@ -15,17 +15,9 @@ public class DBColumnObject {
     private int precision;
     private DatabaseTypes databaseType;
 
-    public DBColumnObject(Field field){
+    public DBColumnObject(Field field) {
         this.field = field;
-        //To musi byc na zewnatrz zeby mozna bylo xml tworzc obiekt DBVolumnObject
-//        DBColumn annotation = field.getAnnotation(DBColumn.class);
-//        setColumnName(AnnotationUtils.preparePropertyName(annotation.name(),field.getName()));
-//        setUnique(annotation.unique());
-//        setMaxLength(annotation.maxLength());
-//        setNullable(annotation.nullable());
-//        setScale(annotation.scale());
-//        setPrecision(annotation.precision());
-
+        if (!this.field.isAccessible()) this.field.setAccessible(true);
 
     }
 
@@ -88,13 +80,14 @@ public class DBColumnObject {
 
     /**
      * To trzbeba gdzie indziej inicjowac zeby mozna swoje typy nadpisywac @see pl.edu.agh.wp.orm.annotations.Type
+     *
      * @param databaseType
      */
     public void setDatabaseType(DatabaseTypes databaseType) {
         this.databaseType = databaseType;
     }
 
-    public Object getValue(Object o){
+    public Object getValue(Object o) {
         try {
             return field.get(o);
         } catch (IllegalAccessException e) {

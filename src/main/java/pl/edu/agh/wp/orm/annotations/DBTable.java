@@ -8,7 +8,7 @@ import java.lang.annotation.Target;
 @Target(value = ElementType.TYPE)
 @Retention(value = RetentionPolicy.RUNTIME)
 public @interface DBTable {
-     String name() ;
-     String schema();
+     String name() default "";
+     String schema() default "";
      //TODO uniqueConstraints
 }

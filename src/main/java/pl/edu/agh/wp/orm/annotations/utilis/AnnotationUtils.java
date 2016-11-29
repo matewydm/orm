@@ -8,10 +8,10 @@ import java.lang.reflect.Field;
 public class AnnotationUtils {
     public static String preparePropertyName(String annotationName, String fieldName) {
         if (!annotationName.equals(CommonKey.DEFAULT)) return annotationName;
-        else return fieldName;
+        else return fieldName.toUpperCase();
     }
 
-    public static boolean hasColumnAnnotation(Field field) {
+    public static Boolean hasColumnAnnotation(Field field) {
         return field.getAnnotation(DBColumn.class) != null ? Boolean.TRUE : Boolean.FALSE;
     }
 
