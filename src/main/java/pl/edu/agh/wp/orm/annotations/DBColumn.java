@@ -11,7 +11,7 @@ import java.lang.annotation.Target;
 public @interface DBColumn {
     String name() default "";
     boolean nullable() default true;
-    long maxLength() default 255;
+    int maxLength() default 255;
     boolean unique() default false;
     int scale() default 0;
     int precision() default 0;

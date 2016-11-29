@@ -1,4 +1,4 @@
-package pl.edu.agh.wp.orm.postre;
+package pl.edu.agh.wp.orm.postres;
 
 
 public class DatebaseStatement {
