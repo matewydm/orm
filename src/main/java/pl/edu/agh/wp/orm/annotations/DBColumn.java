@@ -1,4 +1,4 @@
-package pl.edu.agh.wp.orm.annotation;
+package pl.edu.agh.wp.orm.annotations;
 
 
 import java.lang.annotation.ElementType;
