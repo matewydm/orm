@@ -1,5 +1,6 @@
 package pl.edu.agh.wp.orm.dto;
 
+import pl.edu.agh.wp.orm.converter.Type;
 import pl.edu.agh.wp.orm.postres.DatabaseTypes;
 
 import java.lang.reflect.Field;
@@ -13,7 +14,7 @@ public class DBColumnObject {
     private int maxLength;
     private int scale;
     private int precision;
-    private DatabaseTypes databaseType;
+    private Type databaseType;
 
     public DBColumnObject(Field field) {
         this.field = field;
@@ -45,7 +46,7 @@ public class DBColumnObject {
         return precision;
     }
 
-    public DatabaseTypes getDatabaseType() {
+    public Type getDatabaseType() {
         return databaseType;
     }
 
@@ -79,11 +80,12 @@ public class DBColumnObject {
 
 
     /**
-     * To trzbeba gdzie indziej inicjowac zeby mozna swoje typy nadpisywac @see pl.edu.agh.wp.orm.annotations.Type
+     *  @see pl.edu.agh.wp.orm.annotations.Type
+     *  @see pl.edu.agh.wp.orm.converter.Type
      *
      * @param databaseType
      */
-    public void setDatabaseType(DatabaseTypes databaseType) {
+    public void setDatabaseType(Type databaseType) {
         this.databaseType = databaseType;
     }
 

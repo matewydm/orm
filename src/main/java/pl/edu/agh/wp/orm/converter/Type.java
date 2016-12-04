@@ -1,5 +1,18 @@
 package pl.edu.agh.wp.orm.converter;
 
+import pl.edu.agh.wp.orm.postres.DatabaseTypes;
+
+//TODO zrobis magicznie jakos zeby jeden obiekt Javy był
+//Trzba zrobic na te podstawowe typy danych w javie
+// klikoma kolumnami w DB
 public interface Type {
+
+    Class getObjectClass();
+
+    DatabaseTypes getType();
+
+    String getAsString(Object obj);
+
+    Object getObject(String dbfield);
 
 }

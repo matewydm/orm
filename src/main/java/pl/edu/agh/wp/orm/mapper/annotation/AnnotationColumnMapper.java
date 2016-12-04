@@ -28,7 +28,10 @@ public class AnnotationColumnMapper implements ColumnMapper {
         dbColumn.setMaxLength(annotation.maxLength());
         dbColumn.setNullable(annotation.nullable());
         dbColumn.setScale(annotation.scale());
-        dbColumn.setPrecision(annotation.precision());
+
+        //TODO jak ma adnotacje @Type to ustaiwc patrac na nias
+
+       // dbColumn.setDatabaseType();
 
         return dbColumn;
     }

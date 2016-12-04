@@ -7,7 +7,7 @@ import java.lang.reflect.Field;
 
 public class AnnotationUtils {
     public static String preparePropertyName(String annotationName, String fieldName) {
-        if (!annotationName.equals(CommonKey.DEFAULT)) return annotationName;
+        if (!annotationName.isEmpty()) return annotationName;
         else return fieldName.toUpperCase();
     }
 

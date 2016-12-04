@@ -18,10 +18,16 @@ public class AnnotationUtilsTest {
     }
 
     @Test
-    public void preparePropertyName() throws Exception {
+    public void preparePropertyNameAnnotation() throws Exception {
         String propertyName = "test";
         String fieldName = "TTT";
         Assert.assertEquals("Not the same", propertyName, AnnotationUtils.preparePropertyName(propertyName, fieldName));
+    }
+    @Test
+    public void preparePropertyNameField() throws Exception {
+        String propertyName = "";
+        String fieldName = "column";
+        Assert.assertEquals("Not the same", fieldName.toUpperCase(), AnnotationUtils.preparePropertyName(propertyName, fieldName));
     }
 
     @Test
