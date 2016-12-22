@@ -1,6 +1,7 @@
 package pl.edu.agh.wp.orm.mapper.annotation;
 
 import pl.edu.agh.wp.orm.annotations.DBColumn;
+import pl.edu.agh.wp.orm.annotations.Type;
 import pl.edu.agh.wp.orm.annotations.utilis.AnnotationUtils;
 import pl.edu.agh.wp.orm.mapper.ColumnMapper;
 import pl.edu.agh.wp.orm.dto.DBColumnObject;
@@ -28,12 +29,23 @@ public class AnnotationColumnMapper implements ColumnMapper {
         dbColumn.setMaxLength(annotation.maxLength());
         dbColumn.setNullable(annotation.nullable());
         dbColumn.setScale(annotation.scale());
-
+        dbColumn.setPrecision(annotation.precision());
+        getType(field,dbColumn);
         //TODO jak ma adnotacje @Type to ustaiwc patrac na nias
 
        // dbColumn.setDatabaseType();
 
         return dbColumn;
+    }
+
+    private Type getType(Field field, DBColumnObject dbColumn) {
+        if(AnnotationUtils.hasAnnotation(field, Type.class)) handleTypeAnnotation(field,dbColumn);
+        return null;
+    }
+
+    private void handleTypeAnnotation(Field field, DBColumnObject dbColumn) {
+        field.getAnnotation(Type.class);
+        //TODO obsluzyc @TYPE annotatino
     }
 
 }

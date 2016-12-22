@@ -1,4 +1,4 @@
-package pl.edu.agh.wp.orm.converter;
+package pl.edu.agh.wp.orm.converter.types;
 
 import pl.edu.agh.wp.orm.postres.DatabaseTypes;
 

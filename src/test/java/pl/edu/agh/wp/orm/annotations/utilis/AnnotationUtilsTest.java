@@ -3,8 +3,10 @@ package pl.edu.agh.wp.orm.annotations.utilis;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import pl.edu.agh.wp.orm.annotations.DBColumn;
 import pl.edu.agh.wp.orm.example.Person;
 
+import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 
 import static org.junit.Assert.*;
@@ -35,5 +37,15 @@ public class AnnotationUtilsTest {
         Field field = Person.class.getDeclaredField("firstname");
         Assert.assertTrue("Problem with annotation",AnnotationUtils.hasColumnAnnotation(field));
     }
+
+    @Test
+    public  void hasAnnotation() throws Exception{
+        Field field = Person.class.getDeclaredField("firstname");
+        Boolean result = AnnotationUtils.hasAnnotation(field, DBColumn.class);
+        Assert.assertEquals(true,result);
+
+    }
+
+
 
 }

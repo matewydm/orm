@@ -1,25 +1,27 @@
-package pl.edu.agh.wp.orm.converter;
+package pl.edu.agh.wp.orm.converter.types;
 
 import pl.edu.agh.wp.orm.postres.DatabaseTypes;
 
-public class IntegerType implements  Type {
+public class StringType implements Type {
     @Override
     public Class getObjectClass() {
-        return Integer.class;
+        return String.class;
     }
 
     @Override
     public DatabaseTypes getType() {
-        return DatabaseTypes.INTEGER;
+        return DatabaseTypes.VARCHAR;
     }
 
     @Override
     public String getAsString(Object obj) {
-        return obj.toString();
+        String string = (String) obj;
+
+        return"'"+string.toString()+"'" ;
     }
 
     @Override
     public Object getObject(String dbfield) {
-        return Integer.valueOf(dbfield);
+        return dbfield;
     }
 }
