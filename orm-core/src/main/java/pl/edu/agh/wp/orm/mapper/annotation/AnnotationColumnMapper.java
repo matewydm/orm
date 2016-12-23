@@ -1,10 +1,10 @@
 package pl.edu.agh.wp.orm.mapper.annotation;
 
-import pl.edu.agh.wp.orm.annotations.DBColumn;
-import pl.edu.agh.wp.orm.annotations.Temporal;
-import pl.edu.agh.wp.orm.annotations.Type;
+import pl.ed.agh.wp.orm.annotations.DBColumn;
+import pl.ed.agh.wp.orm.annotations.Temporal;
+import pl.ed.agh.wp.orm.annotations.Type;
 import pl.edu.agh.wp.orm.annotations.utilis.AnnotationUtils;
-import pl.edu.agh.wp.orm.converter.types.TypeConverter;
+import pl.ed.agh.wp.orm.annotations.converter.types.TypeConverter;
 import pl.edu.agh.wp.orm.exception.ORMException;
 import pl.edu.agh.wp.orm.mapper.ColumnMapper;
 import pl.edu.agh.wp.orm.dto.DBColumnObject;

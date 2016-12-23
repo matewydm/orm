@@ -1,6 +1,7 @@
 package pl.edu.agh.wp.orm.dto;
 
-import pl.edu.agh.wp.orm.converter.types.TypeConverter;
+import pl.ed.agh.wp.orm.annotations.Type;
+import pl.ed.agh.wp.orm.annotations.converter.types.TypeConverter;
 
 import java.lang.reflect.Field;
 
@@ -79,7 +80,7 @@ public class DBColumnObject {
 
 
     /**
-     *  @see pl.edu.agh.wp.orm.annotations.Type
+     *  @see Type
      *  @see TypeConverter
      *
      * @param databaseType

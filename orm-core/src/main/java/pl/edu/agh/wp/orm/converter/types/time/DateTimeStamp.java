@@ -1,7 +1,7 @@
 package pl.edu.agh.wp.orm.converter.types.time;
 
-import pl.edu.agh.wp.orm.converter.types.TypeConverter;
-import pl.edu.agh.wp.orm.postres.DatabaseTypes;
+import pl.ed.agh.wp.orm.annotations.converter.types.TypeConverter;
+import pl.ed.agh.wp.orm.annotations.enums.DatabaseTypes;
 
 import java.sql.Timestamp;
 import java.util.Date;

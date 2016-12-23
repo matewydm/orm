@@ -1,6 +1,7 @@
-package pl.edu.agh.wp.orm.converter.types;
+package pl.ed.agh.wp.orm.annotations.converter.types;
 
-import pl.edu.agh.wp.orm.postres.DatabaseTypes;
+
+import pl.ed.agh.wp.orm.annotations.enums.DatabaseTypes;
 
 //TODO zrobis magicznie jakos zeby jeden obiekt Javy był
 //Trzba zrobic na te podstawowe typy danych w javie

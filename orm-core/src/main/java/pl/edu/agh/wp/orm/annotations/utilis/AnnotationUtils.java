@@ -1,7 +1,6 @@
 package pl.edu.agh.wp.orm.annotations.utilis;
 
-import pl.edu.agh.wp.orm.annotations.DBColumn;
-import pl.edu.agh.wp.orm.postres.CommonKey;
+import pl.ed.agh.wp.orm.annotations.DBColumn;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;

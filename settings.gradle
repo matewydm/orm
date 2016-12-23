@@ -1,0 +1,3 @@
+rootProject.name = 'ORM'
+include 'orm-interfaces'
+include 'orm-core'

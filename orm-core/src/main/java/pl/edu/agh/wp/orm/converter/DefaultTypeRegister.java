@@ -2,7 +2,7 @@ package pl.edu.agh.wp.orm.converter;
 
 import pl.edu.agh.wp.orm.converter.types.IntegerType;
 import pl.edu.agh.wp.orm.converter.types.StringType;
-import pl.edu.agh.wp.orm.converter.types.TypeConverter;
+import pl.ed.agh.wp.orm.annotations.converter.types.TypeConverter;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;

@@ -1,6 +1,7 @@
 package pl.edu.agh.wp.orm.converter.types;
 
-import pl.edu.agh.wp.orm.postres.DatabaseTypes;
+import pl.ed.agh.wp.orm.annotations.converter.types.TypeConverter;
+import pl.ed.agh.wp.orm.annotations.enums.DatabaseTypes;
 
 public class StringType implements TypeConverter {
     @Override

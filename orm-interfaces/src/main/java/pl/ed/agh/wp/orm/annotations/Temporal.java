@@ -1,6 +1,8 @@
-package pl.edu.agh.wp.orm.annotations;
+package pl.ed.agh.wp.orm.annotations;
 
-import pl.edu.agh.wp.orm.annotations.enums.TemporalType;
+
+
+import pl.ed.agh.wp.orm.annotations.enums.TemporalType;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

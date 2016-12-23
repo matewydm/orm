@@ -2,6 +2,7 @@ package pl.edu.agh.wp.orm.converter.types;
 
 import org.junit.Assert;
 import org.junit.Test;
+import pl.ed.agh.wp.orm.annotations.converter.types.TypeConverter;
 import pl.edu.agh.wp.orm.converter.types.time.DateTimeType;
 
 import java.text.SimpleDateFormat;

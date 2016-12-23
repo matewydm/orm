@@ -1,4 +1,4 @@
-package pl.edu.agh.wp.orm.annotations.enums;
+package pl.ed.agh.wp.orm.annotations.enums;
 
 public enum DBFetchType {
     LAZY,EAGER;
