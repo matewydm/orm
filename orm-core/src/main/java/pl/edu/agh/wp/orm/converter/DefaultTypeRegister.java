@@ -1,8 +1,10 @@
 package pl.edu.agh.wp.orm.converter;
 
+import pl.ed.agh.wp.orm.annotations.enums.DatabaseTypes;
 import pl.edu.agh.wp.orm.converter.types.IntegerType;
 import pl.edu.agh.wp.orm.converter.types.StringType;
 import pl.ed.agh.wp.orm.annotations.converter.types.TypeConverter;
+import pl.edu.agh.wp.orm.exception.ORMUnsupportedTypeConvert;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -24,6 +26,16 @@ public class DefaultTypeRegister implements TypeRegister {
     @Override
     public void unregister(TypeConverter type) {
         register.remove(type.getObjectClass());
+    }
+
+    @Override
+    public TypeConverter getConverter(Class clazz, DatabaseTypes dbtype) {
+        TypeConverter converter =  register.get(clazz);
+        if( converter == null || converter.getType() != dbtype)
+            throw new ORMUnsupportedTypeConvert("Cannot find converter for "
+                    +clazz.getName()+" " +dbtype.toString());
+        return converter;
+
     }
 
     private void addRegisterDefault() {

@@ -3,6 +3,7 @@ package pl.edu.agh.wp.orm.mapper.annotation;
 import pl.ed.agh.wp.orm.annotations.DBColumn;
 import pl.ed.agh.wp.orm.annotations.Temporal;
 import pl.ed.agh.wp.orm.annotations.Type;
+import pl.ed.agh.wp.orm.annotations.enums.TemporalType;
 import pl.edu.agh.wp.orm.annotations.utilis.AnnotationUtils;
 import pl.ed.agh.wp.orm.annotations.converter.types.TypeConverter;
 import pl.edu.agh.wp.orm.exception.ORMException;
@@ -44,13 +45,19 @@ public class AnnotationColumnMapper implements ColumnMapper {
 
     private TypeConverter getType(Field field, DBColumnObject dbColumn) {
         if(AnnotationUtils.hasAnnotation(field, Type.class))
-            return handleTypeAnnotation(field,dbColumn);
+            return handleTypeAnnotation(field);
         if(AnnotationUtils.hasAnnotation(field, Temporal.class))
-            return null;
+            return handleTemporalAnnotation(field);
         return null;
     }
 
-    private TypeConverter handleTypeAnnotation(Field field, DBColumnObject dbColumn) {
+    private TypeConverter handleTemporalAnnotation(Field field) {
+        Temporal annotation = field.getAnnotation(Temporal.class);
+        TemporalType type = annotation.type();
+        return null;
+    }
+
+    private TypeConverter handleTypeAnnotation(Field field) {
         Type type = field.getAnnotation(Type.class);
 
         Class<? extends TypeConverter> converter = type.converter();
