@@ -6,6 +6,9 @@ import pl.ed.agh.wp.orm.annotations.Type;
 import pl.ed.agh.wp.orm.annotations.enums.TemporalType;
 import pl.edu.agh.wp.orm.annotations.utilis.AnnotationUtils;
 import pl.ed.agh.wp.orm.annotations.converter.types.TypeConverter;
+import pl.edu.agh.wp.orm.converter.DefaultTypeRegister;
+import pl.edu.agh.wp.orm.converter.TemporalRegister;
+import pl.edu.agh.wp.orm.converter.TypeRegister;
 import pl.edu.agh.wp.orm.exception.ORMException;
 import pl.edu.agh.wp.orm.mapper.ColumnMapper;
 import pl.edu.agh.wp.orm.dto.DBColumnObject;
@@ -18,12 +21,18 @@ import java.util.stream.Collectors;
 
 public class AnnotationColumnMapper implements ColumnMapper {
 
+    TypeRegister register = new DefaultTypeRegister();
+    TemporalRegister temporalRegister = new TemporalRegister();
+
     @Override
     public List<DBColumnObject> getColumns(Class clazz) {
-        List<Field> fields = Arrays.stream(clazz.getDeclaredFields()).filter(AnnotationUtils::hasColumnAnnotation).collect(Collectors.toList());
+        List<DBColumnObject> objects = Arrays.stream(clazz.getDeclaredFields())
+                .filter(AnnotationUtils::hasColumnAnnotation)
+                .map(this::prepareColumn).
+                collect(Collectors.toList());
 
-        return null;
-        // Arrays.stream(clazz.getFields()).filter()
+        return objects;
+
     }
 
     private DBColumnObject prepareColumn(Field field) {
@@ -35,26 +44,29 @@ public class AnnotationColumnMapper implements ColumnMapper {
         dbColumn.setNullable(annotation.nullable());
         dbColumn.setScale(annotation.scale());
         dbColumn.setPrecision(annotation.precision());
-        getType(field,dbColumn);
-        //TODO jak ma adnotacje @TypeConverter to ustaiwc patrac na nias
-
-       // dbColumn.setDatabaseType();
-
+        dbColumn.setConverter(getType(field));
         return dbColumn;
     }
 
-    private TypeConverter getType(Field field, DBColumnObject dbColumn) {
+    private TypeConverter getType(Field field) {
         if(AnnotationUtils.hasAnnotation(field, Type.class))
             return handleTypeAnnotation(field);
-        if(AnnotationUtils.hasAnnotation(field, Temporal.class))
+        else if(AnnotationUtils.hasAnnotation(field, Temporal.class))
             return handleTemporalAnnotation(field);
-        return null;
+        else
+            return handleDefaultType(field);
+
+    }
+
+    private TypeConverter handleDefaultType(Field field) {
+        Class clazz = field.getType();
+        return register.getConverter(clazz);
     }
 
     private TypeConverter handleTemporalAnnotation(Field field) {
         Temporal annotation = field.getAnnotation(Temporal.class);
         TemporalType type = annotation.type();
-        return null;
+        return temporalRegister.getConverter(type);
     }
 
     private TypeConverter handleTypeAnnotation(Field field) {

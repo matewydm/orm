@@ -14,7 +14,7 @@ public class DBColumnObject {
     private int maxLength;
     private int scale;
     private int precision;
-    private TypeConverter databaseType;
+    private TypeConverter converter;
 
     public DBColumnObject(Field field) {
         this.field = field;
@@ -46,8 +46,8 @@ public class DBColumnObject {
         return precision;
     }
 
-    public TypeConverter getDatabaseType() {
-        return databaseType;
+    public TypeConverter getConverter() {
+        return converter;
     }
 
     public void setField(Field field) {
@@ -83,10 +83,10 @@ public class DBColumnObject {
      *  @see Type
      *  @see TypeConverter
      *
-     * @param databaseType
+     * @param converter
      */
-    public void setDatabaseType(TypeConverter databaseType) {
-        this.databaseType = databaseType;
+    public void setConverter(TypeConverter converter) {
+        this.converter = converter;
     }
 
     public Object getValue(Object o) {

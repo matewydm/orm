@@ -7,4 +7,5 @@ public interface TypeRegister {
     void register(TypeConverter type);
     void unregister(TypeConverter type);
     TypeConverter getConverter(Class clazz, DatabaseTypes dbtype);
+    TypeConverter getConverter(Class clazz);
 }

@@ -57,4 +57,14 @@ public class TemporalRegister implements TypeRegister {
         TemporalType temporal = getTemporalType(dbtype);
         return converters.get(temporal);
     }
+
+    @Override
+    public TypeConverter getConverter(Class clazz) {
+        //TODO zroibć logike
+        throw new UnsupportedOperationException();
+    }
+
+    public TypeConverter getConverter(TemporalType type){
+        return converters.get(type);
+    }
 }

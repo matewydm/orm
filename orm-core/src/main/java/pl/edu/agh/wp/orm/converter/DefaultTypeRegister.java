@@ -13,8 +13,9 @@ public class DefaultTypeRegister implements TypeRegister {
 
     private Map<Class,TypeConverter> register;
 
-    DefaultTypeRegister(){
+    public DefaultTypeRegister(){
         register = new ConcurrentHashMap<>();
+        addRegisterDefault();
 
     }
 
@@ -36,6 +37,11 @@ public class DefaultTypeRegister implements TypeRegister {
                     +clazz.getName()+" " +dbtype.toString());
         return converter;
 
+    }
+
+    @Override
+    public TypeConverter getConverter(Class clazz) {
+        return register.get(clazz);
     }
 
     private void addRegisterDefault() {
