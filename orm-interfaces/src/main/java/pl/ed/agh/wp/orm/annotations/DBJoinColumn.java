@@ -8,7 +8,7 @@ import java.lang.annotation.Target;
 @Target(value = ElementType.FIELD)
 @Retention(value = RetentionPolicy.RUNTIME)
 public @interface DBJoinColumn {
-    String name() default "";
+    String columnName() default "";
     String tableName() default "";
     boolean nullable() default false;
     boolean unique() default false;
