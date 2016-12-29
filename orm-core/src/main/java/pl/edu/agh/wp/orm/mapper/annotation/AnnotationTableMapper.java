@@ -21,6 +21,7 @@ public class AnnotationTableMapper implements TableMapper {
         tableObject.setTableName(AnnotationUtils.preparePropertyName(annotation.name(),clazz.getSimpleName()));
         tableObject.setFullName(prepareFullName(tableObject,clazz.getSimpleName()));
         tableObject.setColumns(mapper.getColumns(clazz));
+        tableObject.setEntity(clazz);
 
         return tableObject;
     }

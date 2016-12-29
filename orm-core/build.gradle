@@ -1,4 +1,6 @@
 dependencies{
     compile project(':orm-interfaces')
     compile group: 'postgresql', name: 'postgresql', version: '9.0-801.jdbc4'
+    compile group: 'org.springframework', name: 'spring-core', version: '4.3.5.RELEASE'
+    compile group: 'org.springframework', name: 'spring-context-support', version: '4.3.5.RELEASE'
 }

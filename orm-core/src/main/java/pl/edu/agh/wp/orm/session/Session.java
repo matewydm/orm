@@ -8,8 +8,6 @@ public interface Session {
 
     void update(Object object);
 
-
-
     void delete (Object object);
 
 }
