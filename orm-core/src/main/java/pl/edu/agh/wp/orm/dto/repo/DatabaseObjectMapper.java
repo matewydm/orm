@@ -1,12 +1,6 @@
 package pl.edu.agh.wp.orm.dto.repo;
 
-import org.springframework.context.annotation.ClassPathScanningCandidateComponentProvider;
+public interface DatabaseObjectMapper {
 
-public class DatabaseObjectMapper {
-
-    ClassPathScanningCandidateComponentProvider scanner;
-
-    public DatabaseObjectMapper() {
-
-    }
+    EntitiesRepository getEntities() throws ClassNotFoundException;
 }
