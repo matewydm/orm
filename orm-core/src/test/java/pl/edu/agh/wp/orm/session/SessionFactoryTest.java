@@ -1,18 +1,24 @@
-package pl.edu.agh.wp.orm.configuration;
+package pl.edu.agh.wp.orm.session;
 
 import org.junit.Assert;
 import org.junit.Test;
+import pl.edu.agh.wp.orm.configuration.Configuration;
 
-public class ConfigurationTest {
+public class SessionFactoryTest {
 
     @Test
-    public void addPropertiesTest() throws Exception {
+    public void openSessionFromConfigurationTest() throws Exception {
+
         Configuration configuration = new Configuration()
                 .addProperties("driver_class","org.postgresql.Driver")
                 .addProperties("db_url","jdbc:postgresql://localhost:5432/postgres")
                 .addProperties("user","postgres")
                 .addProperties("password","dare");
 
-        Assert.assertTrue(configuration.getProperty("driver_class").equals("org.postgresql.Driver"));
+        Session session = configuration.buildSessionFactory().openSession();
+
+        Assert.assertTrue(session.isOpened());
+
+        session.close();
     }
 }
