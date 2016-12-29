@@ -2,6 +2,7 @@ package pl.edu.agh.wp.orm.dto;
 
 import pl.ed.agh.wp.orm.annotations.Type;
 import pl.ed.agh.wp.orm.annotations.converter.types.TypeConverter;
+import pl.edu.agh.wp.orm.postres.CommonKey;
 
 import java.lang.reflect.Field;
 
@@ -89,6 +90,12 @@ public class DBColumnObject {
         this.converter = converter;
     }
 
+    public String getSQLStringValue(Object o){
+        Object value  =getValue(o);
+        if(value!= null)
+            return converter.getAsString(value);
+        else return CommonKey.NULL;
+    }
     public Object getValue(Object o) {
         try {
             return field.get(o);

@@ -19,7 +19,7 @@ public class AnnotationTableMapper implements TableMapper {
         DBTableObject tableObject = new DBTableObject();
         tableObject.setSchemaName(annotation.schema());
         tableObject.setTableName(AnnotationUtils.preparePropertyName(annotation.name(),clazz.getSimpleName()));
-        tableObject.setFullName(prepareFullName(tableObject));
+        tableObject.setFullName(prepareFullName(tableObject,clazz.getSimpleName()));
         tableObject.setColumns(mapper.getColumns(clazz));
 
         return tableObject;
@@ -30,10 +30,10 @@ public class AnnotationTableMapper implements TableMapper {
         mapper = columnMapper;
     }
 
-    private String prepareFullName(DBTableObject tableObject) {
+    private String prepareFullName(DBTableObject tableObject,String className) {
         String name = tableObject.getSchemaName();
         String schema = tableObject.getTableName();
-        if(name.isEmpty()) return name;
+        if(name.isEmpty()) return className.toUpperCase();
         else return schema +"."+name;
     }
 

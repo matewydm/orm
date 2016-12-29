@@ -12,7 +12,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class AnnotationManyToOneMapper implements ManyToOneMapper {
+
     private static final String defaultSuffix ="_ID";
+
     @Override
     public List<DBManyToOneReference> getManyToOneReferences(Class clazz) {
         List<DBManyToOneReference> objects = Arrays.stream(clazz.getDeclaredFields())
@@ -65,11 +67,11 @@ public class AnnotationManyToOneMapper implements ManyToOneMapper {
     }
 
     private void setDefaultJoinedClass(DBManyToOneReference reference, Field field) {
-        reference.setJointedClass(field.getClass());
+        reference.setJointedClass(field.getType());
     }
 
     private void setDefaultTableName(DBManyToOneReference reference, Field field) {
-        String tableName = field.getType().getSimpleName();
+        String tableName = field.getType().getSimpleName().toUpperCase();
         reference.setJoinTable(tableName);
     }
 
