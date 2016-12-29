@@ -8,7 +8,7 @@ public interface Session {
 
     void update(Object object);
 
-    List<Object> find(String query);
+
 
     void delete (Object object);
 
