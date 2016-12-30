@@ -13,7 +13,6 @@ public class Address {
     private Person person;
 
     @DBColumn
-
     private String street;
 
     public Address(){
