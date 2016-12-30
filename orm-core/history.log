@@ -1,0 +1,2 @@
+DEBUG main pl.edu.agh.wp.orm.session.DefaultSessionFactory - dare
+DEBUG main pl.edu.agh.wp.orm.session.DefaultSessionFactory - Connected to database

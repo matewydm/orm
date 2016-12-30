@@ -1,19 +1,17 @@
 package pl.edu.agh.wp.orm.session;
 
 import pl.edu.agh.wp.orm.dto.repo.EntitiesRepository;
-import pl.edu.agh.wp.orm.session.DefaultSession;
-import pl.edu.agh.wp.orm.session.Session;
-import pl.edu.agh.wp.orm.session.SessionFactory;
-
+import org.apache.log4j.Logger;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.util.List;
 import java.util.Properties;
 
 public class DefaultSessionFactory implements SessionFactory {
 
-    Properties properties;
+    private Properties properties;
+
+    private Logger logger = Logger.getLogger(DefaultSessionFactory.class);
 
     public DefaultSessionFactory(Properties propertiesList) {
         this.properties = propertiesList;
@@ -21,6 +19,7 @@ public class DefaultSessionFactory implements SessionFactory {
 
     public Session openSession() {
 
+        logger.debug("dare");
         String dbUrl = properties.getProperty("db_url");
         String user = properties.getProperty("user");
         String password = properties.getProperty("password");
@@ -30,15 +29,14 @@ public class DefaultSessionFactory implements SessionFactory {
             Class.forName(properties.getProperty("driver_class"));
             connection = DriverManager.getConnection(dbUrl, user, password);
             if (connection != null) {
-                System.out.println("Connected to the database");
+                logger.debug("Connected to database");
             }
         } catch (ClassNotFoundException ex) {
-            System.out.println("Could not find database driver class");
-            ex.printStackTrace();
+            logger.error(ex);
         } catch (SQLException ex) {
-            System.out.println("An error occurred. Maybe user/password is invalid");
-            ex.printStackTrace();
+            logger.error(ex);
         }
+
         DefaultSession defaultSession = new DefaultSession(new EntitiesRepository(),connection);
         return defaultSession;
     }
