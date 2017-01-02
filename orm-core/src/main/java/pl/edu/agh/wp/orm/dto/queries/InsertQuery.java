@@ -10,8 +10,6 @@ public class InsertQuery extends DBQuery {
     public InsertQuery(String table){
         super();
         tableName = table;
-
-
     }
 
     @Override
@@ -26,14 +24,14 @@ public class InsertQuery extends DBQuery {
     @Override
     public void doEndQuery() {
         super.doEndQuery();
-        if(getArgumetnNumber().equals(0))
+        if(getArgumentNumber().equals(0))
             throw new ORMException("Cannot create insert query with 0 arguments");
 
         appendWithSpace(")");
         appendWithSpace(DatabaseStatement.VALUES);
         append("(");
 
-        for(int i = 0; i<getArgumetnNumber()-1; i++){
+        for(int i = 0; i< getArgumentNumber()-1; i++){
             append("?,");
         }
 

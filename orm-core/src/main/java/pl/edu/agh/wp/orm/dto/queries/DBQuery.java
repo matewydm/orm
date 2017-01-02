@@ -28,9 +28,10 @@ public class DBQuery {
         queryBuilder.append(" ");
     }
 
-    protected Integer getArgumetnNumber(){
+    protected Integer getArgumentNumber(){
         return queryArguments.size();
     }
+
     public void doStartQuery(){
 
     }
@@ -43,8 +44,19 @@ public class DBQuery {
         return queryBuilder.toString();
     }
 
-    public List<String> getQueryArguments(){
-        return queryArguments;
+    public Object getArgument(int index){
+        return queryArguments.get(index);
     }
 
+    public void addArgument(String argument){
+        queryArguments.add(argument);
+    }
+
+    public void addArgumentList(List<String> argumentList){
+        queryArguments.addAll(argumentList);
+    }
+
+    public int countArguments() {
+        return queryArguments.size();
+    }
 }

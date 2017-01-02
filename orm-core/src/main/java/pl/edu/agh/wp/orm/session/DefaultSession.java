@@ -1,5 +1,7 @@
 package pl.edu.agh.wp.orm.session;
 
+import org.apache.log4j.Logger;
+import pl.edu.agh.wp.orm.criterion.CriteriaImpl;
 import pl.edu.agh.wp.orm.dto.repo.EntitiesRepository;
 
 import java.sql.Connection;
@@ -8,6 +10,7 @@ import java.sql.SQLException;
 public class DefaultSession implements Session {
 
     private Connection connection;
+    Logger logger = Logger.getLogger(DefaultSession.class);
 
     public DefaultSession(EntitiesRepository entitiesInformation, Connection connection) {
         this.connection = connection;
@@ -33,7 +36,7 @@ public class DefaultSession implements Session {
         try {
             return !connection.isClosed();
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.error(e);
         }
         return false;
     }
@@ -43,7 +46,18 @@ public class DefaultSession implements Session {
         try {
             connection.close();
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.error(e);
         }
     }
+
+    @Override
+    public CriteriaImpl createCriteria(Class clazz) {
+        try {
+            return new CriteriaImpl(connection.createStatement(),clazz);
+        } catch (SQLException e) {
+            logger.error(e);
+        }
+        return null;
+    }
+
 }

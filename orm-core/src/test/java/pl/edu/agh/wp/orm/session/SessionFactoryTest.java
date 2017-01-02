@@ -3,6 +3,11 @@ package pl.edu.agh.wp.orm.session;
 import org.junit.Assert;
 import org.junit.Test;
 import pl.edu.agh.wp.orm.configuration.Configuration;
+import pl.edu.agh.wp.orm.criterion.Restrictions;
+import pl.edu.agh.wp.orm.criterion.queries.Criterion;
+import pl.edu.agh.wp.orm.example.Person;
+
+import java.util.List;
 
 public class SessionFactoryTest {
 

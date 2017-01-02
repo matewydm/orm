@@ -16,4 +16,9 @@ public class DatabaseStatement {
     public static final String VALUES = "VALUES";
     public static final String INTO = "INTO";
     public static final String DELETE ="DELETE";
+    public static final String BETWEEN ="BETWEEN";
+    public static final String AND = "AND";
+    public static final String LIKE = "LIKE";
+    public static final String LIMIT = "LIMIT";
+
 }
