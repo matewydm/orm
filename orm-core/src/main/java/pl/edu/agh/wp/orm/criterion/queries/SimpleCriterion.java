@@ -4,7 +4,6 @@ import pl.edu.agh.wp.orm.converter.types.StringType;
 
 public class SimpleCriterion extends Criterion {
 
-    private String column;
     private Object value;
 
     public SimpleCriterion(String column, Object value, String operator){

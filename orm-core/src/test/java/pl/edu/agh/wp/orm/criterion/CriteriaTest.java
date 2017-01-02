@@ -32,6 +32,47 @@ public class CriteriaTest {
     }
 
     @Test
+    public void buildConjunctionCriteriaTest() {
+
+        String expected = "SELECT * FROM PERSON person WHERE person.name LIKE '%'  AND age BETWEEN 4 AND 3  AND person.lastname LIKE 'd%'  ";
+        DBQuery query = session.createCriteria(Person.class)
+                .add( Restrictions.and(
+                        Restrictions.like("name", "%"),
+                        Restrictions.between("age",4,3)) )
+                .add( Restrictions.like("lastname","d%"))
+                .build();
+
+        Assert.assertEquals(expected,query.getSQLQuery());
+
+    }
+
+
+    @Test
+    public void buildNullCriteriaTest() {
+
+        String expected = "SELECT * FROM PERSON person WHERE person.name IS NULL  ";
+        DBQuery query = session.createCriteria(Person.class)
+                .add( Restrictions.isNull("name"))
+                .build();
+
+        Assert.assertEquals(expected,query.getSQLQuery());
+
+    }
+
+    @Test
+    public void buildInCriteriaTest() {
+
+        Object[] array = {"dare", "daa"};
+        String expected = "SELECT * FROM PERSON person WHERE person.name IN ('dare','daa') ";
+        DBQuery query = session.createCriteria(Person.class)
+                .add( Restrictions.in("name", array))
+                .build();
+
+        Assert.assertEquals(expected,query.getSQLQuery());
+
+    }
+
+    @Test
     public void buildCriteriaTest() {
 
         String expected = "SELECT * FROM PERSON person WHERE person.name LIKE '%'  AND person.age BETWEEN 4 AND 3 ";

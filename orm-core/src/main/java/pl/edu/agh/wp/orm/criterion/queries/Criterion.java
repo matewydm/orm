@@ -10,6 +10,8 @@ public abstract class Criterion {
 
     protected String operator;
 
+    protected String column;
+
     public Criterion() {
         queryBuilder = new StringBuilder();
         queryArguments = new ArrayList<>();
@@ -27,7 +29,7 @@ public abstract class Criterion {
     }
 
     public void appendArgument(Object argument){
-        queryBuilder.append(argument.toString()).append("");
+        queryBuilder.append(argument.toString());
         queryArguments.add(argument.toString());
     }
 
@@ -41,6 +43,12 @@ public abstract class Criterion {
 
     public ArrayList<Object> getQueryArguments() {
         return queryArguments;
+    }
+
+    protected void handleString(Object value){
+        append("'");
+        appendArgument(value);
+        append("'");
     }
 
 

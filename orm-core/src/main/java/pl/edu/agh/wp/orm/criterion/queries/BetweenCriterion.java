@@ -5,7 +5,6 @@ import pl.edu.agh.wp.orm.postres.DatabaseStatement;
 public class BetweenCriterion extends Criterion {
 
     private String supportOperator;
-    private String column;
     private Object minValue;
     private Object maxValue;
 
