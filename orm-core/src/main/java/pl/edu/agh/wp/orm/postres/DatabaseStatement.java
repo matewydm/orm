@@ -16,4 +16,18 @@ public class DatabaseStatement {
     public static final String VALUES = "VALUES";
     public static final String INTO = "INTO";
     public static final String DELETE ="DELETE";
+    public static final String BETWEEN ="BETWEEN";
+    public static final String AND = "AND";
+    public static final String OR = "OR";
+    public static final String LIKE = "LIKE";
+    public static final String LIMIT = "LIMIT";
+    public static final String EQUAL = "=";
+    public static final String GREATER = ">";
+    public static final String GREATER_EQUAL = ">=";
+    public static final String LESS = "<";
+    public static final String LESS_EQUAL = "<=";
+    public static final String NULL = "IS NULL";
+    public static final String NOT_NULL = "IS NOT NULL";
+    public static final String IN = "IN";
+
 }

@@ -19,7 +19,6 @@ public class DefaultSessionFactory implements SessionFactory {
 
     public Session openSession() {
 
-        logger.debug("dare");
         String dbUrl = properties.getProperty("db_url");
         String user = properties.getProperty("user");
         String password = properties.getProperty("password");

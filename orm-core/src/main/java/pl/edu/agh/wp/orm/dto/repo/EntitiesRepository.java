@@ -18,7 +18,6 @@ public class EntitiesRepository {
     }
 
     public DBTableObject getTable(Class clazz){
-
         return repositories.get(clazz);
     }
 
