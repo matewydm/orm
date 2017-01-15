@@ -1,8 +1,6 @@
 package pl.edu.agh.wp.orm.criterion.queries;
 
-import pl.edu.agh.wp.orm.converter.types.StringType;
-
-public class SimpleCriterion extends Criterion {
+public class SimpleCriterion extends AbstractCriterion {
 
     private Object value;
 

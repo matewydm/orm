@@ -1,9 +1,8 @@
 package pl.edu.agh.wp.orm.criterion.queries;
 
-import pl.edu.agh.wp.orm.criterion.queries.Criterion;
 import pl.edu.agh.wp.orm.postres.DatabaseStatement;
 
-public class ArrayCriterion extends Criterion {
+public class ArrayCriterion extends AbstractCriterion {
 
     Object[] array;
 

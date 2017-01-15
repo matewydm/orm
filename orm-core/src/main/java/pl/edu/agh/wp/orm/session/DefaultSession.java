@@ -1,6 +1,7 @@
 package pl.edu.agh.wp.orm.session;
 
 import org.apache.log4j.Logger;
+import pl.edu.agh.wp.orm.criterion.Criteria;
 import pl.edu.agh.wp.orm.criterion.CriteriaImpl;
 import pl.edu.agh.wp.orm.dto.repo.EntitiesRepository;
 
@@ -18,7 +19,8 @@ public class DefaultSession implements Session {
 
     @Override
     public void save(Object object) {
-
+        EntitiesRepository repository = EntitiesRepository.getInstance();
+        repository.getTable(object.getClass());
     }
 
     @Override
@@ -51,7 +53,7 @@ public class DefaultSession implements Session {
     }
 
     @Override
-    public CriteriaImpl createCriteria(Class clazz) {
+    public Criteria createCriteria(Class clazz) {
         try {
             return new CriteriaImpl(connection.createStatement(),clazz);
         } catch (SQLException e) {

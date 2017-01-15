@@ -2,7 +2,7 @@ package pl.edu.agh.wp.orm.criterion.queries;
 
 import pl.edu.agh.wp.orm.postres.DatabaseStatement;
 
-public class BetweenCriterion extends Criterion {
+public class BetweenCriterion extends AbstractCriterion {
 
     private String supportOperator;
     private Object minValue;

@@ -4,14 +4,8 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import pl.edu.agh.wp.orm.configuration.Configuration;
-import pl.edu.agh.wp.orm.criterion.queries.Criterion;
 import pl.edu.agh.wp.orm.dto.queries.DBQuery;
-import pl.edu.agh.wp.orm.dto.queries.SelectQuery;
-import pl.edu.agh.wp.orm.dto.repo.EntitiesRepository;
 import pl.edu.agh.wp.orm.example.Person;
-import pl.edu.agh.wp.orm.mapper.annotation.AnnotationColumnMapper;
-import pl.edu.agh.wp.orm.mapper.annotation.AnnotationTableMapper;
-import pl.edu.agh.wp.orm.session.DefaultSession;
 import pl.edu.agh.wp.orm.session.Session;
 
 import java.util.List;

@@ -1,8 +1,6 @@
 package pl.edu.agh.wp.orm.criterion.queries;
 
-import pl.edu.agh.wp.orm.postres.DatabaseStatement;
-
-public class LogicalCriterion extends Criterion {
+public class LogicalCriterion extends AbstractCriterion {
 
     private Criterion left;
     private Criterion right;

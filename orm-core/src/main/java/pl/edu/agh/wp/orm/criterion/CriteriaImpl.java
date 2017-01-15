@@ -1,26 +1,17 @@
 package pl.edu.agh.wp.orm.criterion;
 
-import org.apache.log4j.Logger;
-import pl.ed.agh.wp.orm.annotations.DBColumn;
-import pl.ed.agh.wp.orm.annotations.DBTable;
 import pl.edu.agh.wp.orm.creator.QueryCreator;
 import pl.edu.agh.wp.orm.creator.SelectQueryCreator;
+import pl.edu.agh.wp.orm.criterion.queries.AbstractCriterion;
 import pl.edu.agh.wp.orm.criterion.queries.Criterion;
-import pl.edu.agh.wp.orm.dto.DBColumnObject;
 import pl.edu.agh.wp.orm.dto.DBTableObject;
 import pl.edu.agh.wp.orm.dto.queries.DBQuery;
-import pl.edu.agh.wp.orm.dto.queries.SelectQuery;
 import pl.edu.agh.wp.orm.mapper.TableMapper;
-import pl.edu.agh.wp.orm.mapper.annotation.AnnotationColumnMapper;
-import pl.edu.agh.wp.orm.mapper.annotation.AnnotationIdMapper;
-import pl.edu.agh.wp.orm.mapper.annotation.AnnotationManyToOneMapper;
-import pl.edu.agh.wp.orm.mapper.annotation.AnnotationTableMapper;
 import pl.edu.agh.wp.orm.mapper.factory.AnnotationORMFactory;
 import pl.edu.agh.wp.orm.mapper.factory.ORMFactory;
 import pl.edu.agh.wp.orm.postres.DatabaseStatement;
 import pl.edu.agh.wp.orm.session.SelectStatementExecutor;
 
-import java.lang.reflect.Field;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -49,7 +40,7 @@ public class CriteriaImpl implements Criteria {
 
     @Override
     public Criteria setMaxResult(Integer maxResult) {
-        this.limitQuery = new Criterion() {
+        this.limitQuery = new AbstractCriterion() {
             @Override
             public void buildQuery() {
                 appendWithSpace(DatabaseStatement.LIMIT);
@@ -58,7 +49,7 @@ public class CriteriaImpl implements Criteria {
         };
         return this;
     }
-
+    @Override
     public DBQuery build(){
         QueryCreator queryCreator = new SelectQueryCreator(table);
         return queryCreator.createQuery(criterionList);

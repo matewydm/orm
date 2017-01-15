@@ -10,7 +10,7 @@ public class Restrictions {
         return new LogicalCriterion(left,right, DatabaseStatement.AND);
     }
 
-    public static Criterion or(Criterion left, Criterion right){
+    public static Criterion or(AbstractCriterion left, AbstractCriterion right){
         return new LogicalCriterion(left,right, DatabaseStatement.OR);
     }
 
