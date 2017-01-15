@@ -6,7 +6,7 @@ import java.lang.reflect.Field;
 import java.util.List;
 
 public interface ManyToOneMapper {
-    List<DBManyToOneReference> getManyToOneReferences(Class clazz);
+    List<DBManyToOneReference> getManyToOneReferences(List<Field> fields);
 
 
 }

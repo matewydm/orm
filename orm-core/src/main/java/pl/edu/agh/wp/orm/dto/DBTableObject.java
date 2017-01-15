@@ -1,7 +1,5 @@
 package pl.edu.agh.wp.orm.dto;
 
-import pl.ed.agh.wp.orm.annotations.DBColumn;
-
 import java.util.List;
 
 
@@ -12,6 +10,25 @@ public class DBTableObject {
     private String tableName;
     private String fullName;
     private List<DBColumnObject> columns;
+    private DBIdObject idObject;
+    private List<DBManyToOneReference> manyToOneReferences;
+    private List<DBOneToManyReference> oneToManyMapper ;
+
+    public List<DBOneToManyReference> getOneToManyMapper() {
+        return oneToManyMapper;
+    }
+
+    public void setOneToManyMapper(List<DBOneToManyReference> oneToManyMapper) {
+        this.oneToManyMapper = oneToManyMapper;
+    }
+
+    public DBIdObject getIdObject() {
+        return idObject;
+    }
+
+    public void setIdObject(DBIdObject idObject) {
+        this.idObject = idObject;
+    }
 
     public String getSchemaName() {
         return schemaName;
@@ -51,5 +68,13 @@ public class DBTableObject {
 
     public void setColumns(List<DBColumnObject> columns) {
         this.columns = columns;
+    }
+
+    public List<DBManyToOneReference> getManyToOneReferences() {
+        return manyToOneReferences;
+    }
+
+    public void setManyToOneReferences(List<DBManyToOneReference> manyToOneReferences) {
+        this.manyToOneReferences = manyToOneReferences;
     }
 }

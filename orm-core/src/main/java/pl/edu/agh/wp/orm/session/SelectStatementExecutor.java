@@ -5,6 +5,8 @@ import pl.edu.agh.wp.orm.dto.DBColumnObject;
 import pl.edu.agh.wp.orm.dto.DBTableObject;
 import pl.edu.agh.wp.orm.mapper.TableMapper;
 import pl.edu.agh.wp.orm.mapper.annotation.AnnotationColumnMapper;
+import pl.edu.agh.wp.orm.mapper.annotation.AnnotationIdMapper;
+import pl.edu.agh.wp.orm.mapper.annotation.AnnotationManyToOneMapper;
 import pl.edu.agh.wp.orm.mapper.annotation.AnnotationTableMapper;
 
 import java.lang.reflect.Field;
@@ -21,8 +23,7 @@ public class SelectStatementExecutor  {
     private Class clazz;
 
     public SelectStatementExecutor(Statement statement,Class clazz){
-        TableMapper mapper = new AnnotationTableMapper();
-        mapper.setColumnMapper(new AnnotationColumnMapper());
+        TableMapper mapper = new AnnotationTableMapper(new AnnotationColumnMapper(),new AnnotationIdMapper(),new AnnotationManyToOneMapper());
         this.table = mapper.getTable(clazz);
         this.statement = statement;
         this.clazz = clazz;

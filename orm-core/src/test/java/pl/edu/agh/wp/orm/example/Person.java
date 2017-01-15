@@ -1,17 +1,37 @@
 package pl.edu.agh.wp.orm.example;
 
-import pl.ed.agh.wp.orm.annotations.DBColumn;
-import pl.ed.agh.wp.orm.annotations.DBTable;
-import pl.ed.agh.wp.orm.annotations.Temporal;
-import pl.ed.agh.wp.orm.annotations.Type;
+import pl.ed.agh.wp.orm.annotations.*;
 import pl.ed.agh.wp.orm.annotations.enums.TemporalType;
 
+import javax.annotation.Generated;
 import java.util.Date;
 
 @DBTable
 public class Person {
 
+    @DBId
+    @DBGeneratedValue(sequenceName = "Gen")
+    private Integer id;
+
+    @DBColumn(name = "name")
+    private String firstname ;
+
+    @DBColumn(name = "lastname")
+    private String lastname ;
+
+    @DBColumn(name = "age")
+    private Integer age;
+
+    @DBOneToMany
+    private Address address;
+    private Integer transients;
+
+    @DBColumn(name = "birth_date")
+    @Temporal(type = TemporalType.DATE)
+    private Date date ;
     public Person(){
+
+        address= new Address();
         firstname ="Mati";
         lastname ="xd";
         age = 20;
@@ -19,6 +39,8 @@ public class Person {
     }
 
     public Person(String fName,String lName){
+        address= new Address();
+
         firstname = fName;
         lastname =lName;
         age =20;
@@ -41,18 +63,6 @@ public class Person {
         return date;
     }
 
-    @DBColumn(name = "name")
-    private String firstname ;
-
-    @DBColumn(name = "lastname")
-    private String lastname ;
-
-    @DBColumn(name = "age")
-    private Integer age;
-
-    @DBColumn(name = "birth_date")
-    @Temporal(type = TemporalType.DATE)
-    private Date date ;
 
     public String toString() {
         return "Person: " + firstname + " " + lastname + " " + age + " " + date.toString();

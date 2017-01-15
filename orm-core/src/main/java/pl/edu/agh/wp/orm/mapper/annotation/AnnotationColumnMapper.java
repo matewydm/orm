@@ -25,10 +25,9 @@ public class AnnotationColumnMapper implements ColumnMapper {
     TemporalRegister temporalRegister = new TemporalRegister();
 
     @Override
-    public List<DBColumnObject> getColumns(Class clazz) {
-        List<DBColumnObject> objects = Arrays.stream(clazz.getDeclaredFields())
-                .filter(AnnotationUtils::hasColumnAnnotation)
-                .map(this::prepareColumn).
+    public List<DBColumnObject> getColumns(List<Field> fields) {
+        List<DBColumnObject> objects =
+                fields.stream().map(this::prepareColumn).
                 collect(Collectors.toList());
 
         return objects;

@@ -9,9 +9,8 @@ public class EntitiesRepository {
 
     private Map<Class,DBTableObject> repositories;
 
-    public EntitiesRepository(){
-        repositories = new ConcurrentHashMap<>();
-    }
+    public EntitiesRepository(){repositories = new ConcurrentHashMap<>();};
+
 
     public void addEntity(DBTableObject table){
         repositories.put(table.getEntity(),table);

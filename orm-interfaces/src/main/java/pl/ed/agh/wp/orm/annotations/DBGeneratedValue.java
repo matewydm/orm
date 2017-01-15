@@ -12,4 +12,5 @@ import java.lang.annotation.Target;
 @Retention(value = RetentionPolicy.RUNTIME)
 public @interface DBGeneratedValue {
     GenerationType strategy() default  GenerationType.AUTO;
+    String sequenceName() default "";
 }

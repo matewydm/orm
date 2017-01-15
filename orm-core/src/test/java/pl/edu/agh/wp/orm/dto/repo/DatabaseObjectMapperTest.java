@@ -5,6 +5,8 @@ import org.junit.Before;
 import org.junit.Test;
 import pl.edu.agh.wp.orm.mapper.TableMapper;
 import pl.edu.agh.wp.orm.mapper.annotation.AnnotationColumnMapper;
+import pl.edu.agh.wp.orm.mapper.annotation.AnnotationIdMapper;
+import pl.edu.agh.wp.orm.mapper.annotation.AnnotationManyToOneMapper;
 import pl.edu.agh.wp.orm.mapper.annotation.AnnotationTableMapper;
 
 public class DatabaseObjectMapperTest {
@@ -13,8 +15,8 @@ public class DatabaseObjectMapperTest {
     private TableMapper tableMapper;
     @Before
     public void setUp() throws Exception {
-        tableMapper = new AnnotationTableMapper();
-        tableMapper.setColumnMapper(new AnnotationColumnMapper());
+        tableMapper = new AnnotationTableMapper(new AnnotationColumnMapper(),new AnnotationIdMapper(),new AnnotationManyToOneMapper());
+
 
     }
 

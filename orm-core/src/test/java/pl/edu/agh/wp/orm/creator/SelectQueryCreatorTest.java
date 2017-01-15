@@ -11,6 +11,8 @@ import pl.edu.agh.wp.orm.dto.queries.DBQuery;
 import pl.edu.agh.wp.orm.example.Person;
 import pl.edu.agh.wp.orm.mapper.TableMapper;
 import pl.edu.agh.wp.orm.mapper.annotation.AnnotationColumnMapper;
+import pl.edu.agh.wp.orm.mapper.annotation.AnnotationIdMapper;
+import pl.edu.agh.wp.orm.mapper.annotation.AnnotationManyToOneMapper;
 import pl.edu.agh.wp.orm.mapper.annotation.AnnotationTableMapper;
 import pl.edu.agh.wp.orm.session.Session;
 
@@ -23,8 +25,8 @@ public class SelectQueryCreatorTest {
 
     @Before
     public void setUp() throws Exception {
-        mapper = new AnnotationTableMapper();
-        mapper.setColumnMapper(new AnnotationColumnMapper());
+        mapper = new AnnotationTableMapper(new AnnotationColumnMapper(),new AnnotationIdMapper(), new AnnotationManyToOneMapper());
+
 
     }
 

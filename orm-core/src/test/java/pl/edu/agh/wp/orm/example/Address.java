@@ -6,6 +6,7 @@ import pl.ed.agh.wp.orm.annotations.*;
 public class Address {
 
     @DBId
+    @DBColumn(name = "Address_ID")
     private Long Id;
 
 

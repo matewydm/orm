@@ -16,8 +16,8 @@ public class AnnotationManyToOneMapper implements ManyToOneMapper {
     private static final String defaultSuffix ="_ID";
 
     @Override
-    public List<DBManyToOneReference> getManyToOneReferences(Class clazz) {
-        List<DBManyToOneReference> objects = Arrays.stream(clazz.getDeclaredFields())
+    public List<DBManyToOneReference> getManyToOneReferences(List<Field> fields) {
+        List<DBManyToOneReference> objects =fields.stream()
                 .filter(AnnotationUtils::hasManyToOneAnnotation)
                 .map(this::prepareReference).
                         collect(Collectors.toList());
@@ -71,12 +71,12 @@ public class AnnotationManyToOneMapper implements ManyToOneMapper {
     }
 
     private void setDefaultTableName(DBManyToOneReference reference, Field field) {
-        String tableName = field.getType().getSimpleName().toUpperCase();
+        String tableName = field.getType().getSimpleName();
         reference.setJoinTable(tableName);
     }
 
     private void setDefaultColumnName(DBManyToOneReference reference, Field field) {
         String name = field.getName();
-        reference.setJoinColumn((name+defaultSuffix).toUpperCase());
+        reference.setJoinColumn((name+defaultSuffix));
     }
 }

@@ -6,6 +6,5 @@ public interface TableMapper {
 
     DBTableObject getTable(Class clazz );
 
-    void setColumnMapper(ColumnMapper columnMapper);
 
 }

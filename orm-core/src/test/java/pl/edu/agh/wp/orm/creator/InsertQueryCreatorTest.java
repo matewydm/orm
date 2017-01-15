@@ -9,6 +9,8 @@ import pl.edu.agh.wp.orm.example.Person;
 import pl.edu.agh.wp.orm.example.Pirson;
 import pl.edu.agh.wp.orm.mapper.TableMapper;
 import pl.edu.agh.wp.orm.mapper.annotation.AnnotationColumnMapper;
+import pl.edu.agh.wp.orm.mapper.annotation.AnnotationIdMapper;
+import pl.edu.agh.wp.orm.mapper.annotation.AnnotationManyToOneMapper;
 import pl.edu.agh.wp.orm.mapper.annotation.AnnotationTableMapper;
 
 public class InsertQueryCreatorTest {
@@ -16,8 +18,9 @@ public class InsertQueryCreatorTest {
 
     @Before
     public void setUp() throws Exception {
-        mapper = new AnnotationTableMapper();
-        mapper.setColumnMapper(new AnnotationColumnMapper());
+        mapper = new AnnotationTableMapper(new AnnotationColumnMapper(),new AnnotationIdMapper(),new AnnotationManyToOneMapper());
+
+
 
     }
 
