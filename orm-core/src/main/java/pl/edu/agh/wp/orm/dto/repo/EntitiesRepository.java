@@ -7,9 +7,16 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class EntitiesRepository {
 
+    private static class LazyLoader {
+        private static EntitiesRepository repository = new EntitiesRepository();
+    }
+
+    public static EntitiesRepository getInstance(){
+        return LazyLoader.repository;
+    }
     private Map<Class,DBTableObject> repositories;
 
-    public EntitiesRepository(){repositories = new ConcurrentHashMap<>();};
+    private EntitiesRepository(){repositories = new ConcurrentHashMap<>();};
 
 
     public void addEntity(DBTableObject table){

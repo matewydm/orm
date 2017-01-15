@@ -8,14 +8,17 @@ import pl.edu.agh.wp.orm.mapper.annotation.AnnotationColumnMapper;
 import pl.edu.agh.wp.orm.mapper.annotation.AnnotationIdMapper;
 import pl.edu.agh.wp.orm.mapper.annotation.AnnotationManyToOneMapper;
 import pl.edu.agh.wp.orm.mapper.annotation.AnnotationTableMapper;
+import pl.edu.agh.wp.orm.mapper.factory.AnnotationORMFactory;
+import pl.edu.agh.wp.orm.mapper.factory.ORMFactory;
 
 public class DatabaseObjectMapperTest {
 
     private static final String EXAMPLE_PACKAGE = "pl.edu.agh.wp.orm";
     private TableMapper tableMapper;
+    private ORMFactory factory = new AnnotationORMFactory();
     @Before
     public void setUp() throws Exception {
-        tableMapper = new AnnotationTableMapper(new AnnotationColumnMapper(),new AnnotationIdMapper(),new AnnotationManyToOneMapper());
+        tableMapper = factory.getMapper();
 
 
     }

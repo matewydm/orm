@@ -8,6 +8,8 @@ import pl.edu.agh.wp.orm.mapper.annotation.AnnotationColumnMapper;
 import pl.edu.agh.wp.orm.mapper.annotation.AnnotationIdMapper;
 import pl.edu.agh.wp.orm.mapper.annotation.AnnotationManyToOneMapper;
 import pl.edu.agh.wp.orm.mapper.annotation.AnnotationTableMapper;
+import pl.edu.agh.wp.orm.mapper.factory.AnnotationORMFactory;
+import pl.edu.agh.wp.orm.mapper.factory.ORMFactory;
 
 import java.lang.reflect.Field;
 import java.sql.ResultSet;
@@ -21,9 +23,9 @@ public class SelectStatementExecutor  {
     private final Statement statement;
     private DBTableObject table;
     private Class clazz;
-
+    private ORMFactory factory = new AnnotationORMFactory();
     public SelectStatementExecutor(Statement statement,Class clazz){
-        TableMapper mapper = new AnnotationTableMapper(new AnnotationColumnMapper(),new AnnotationIdMapper(),new AnnotationManyToOneMapper());
+        TableMapper mapper = factory.getMapper();
         this.table = mapper.getTable(clazz);
         this.statement = statement;
         this.clazz = clazz;

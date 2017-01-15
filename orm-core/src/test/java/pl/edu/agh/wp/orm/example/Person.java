@@ -4,7 +4,9 @@ import pl.ed.agh.wp.orm.annotations.*;
 import pl.ed.agh.wp.orm.annotations.enums.TemporalType;
 
 import javax.annotation.Generated;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @DBTable
 public class Person {
@@ -23,7 +25,7 @@ public class Person {
     private Integer age;
 
     @DBOneToMany
-    private Address address;
+    private List<Address> address;
     private Integer transients;
 
     @DBColumn(name = "birth_date")
@@ -31,7 +33,7 @@ public class Person {
     private Date date ;
     public Person(){
 
-        address= new Address();
+        address= new ArrayList<>();
         firstname ="Mati";
         lastname ="xd";
         age = 20;
@@ -39,7 +41,7 @@ public class Person {
     }
 
     public Person(String fName,String lName){
-        address= new Address();
+        address= new ArrayList<>();
 
         firstname = fName;
         lastname =lName;

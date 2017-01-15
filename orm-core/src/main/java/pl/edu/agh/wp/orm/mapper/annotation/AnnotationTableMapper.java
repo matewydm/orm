@@ -34,10 +34,11 @@ public class AnnotationTableMapper implements TableMapper {
         supportedAnnotation.add(DBOneToMany.class);
     }
 
-    public AnnotationTableMapper(ColumnMapper columnMapper, IdMapper idMapper,ManyToOneMapper manyToOneMapper) {
+    public AnnotationTableMapper(ColumnMapper columnMapper, IdMapper idMapper,ManyToOneMapper manyToOneMapper,OneToManyMapper oneToManyMapper) {
         this.columnMapper = columnMapper;
         this.idMapper = idMapper;
         this.manyToOneMapper = manyToOneMapper;
+        this.oneToManyMapper = oneToManyMapper;
     }
 
     public DBTableObject getTable(Class clazz) {

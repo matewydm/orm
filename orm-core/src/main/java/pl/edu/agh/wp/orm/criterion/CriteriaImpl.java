@@ -15,6 +15,8 @@ import pl.edu.agh.wp.orm.mapper.annotation.AnnotationColumnMapper;
 import pl.edu.agh.wp.orm.mapper.annotation.AnnotationIdMapper;
 import pl.edu.agh.wp.orm.mapper.annotation.AnnotationManyToOneMapper;
 import pl.edu.agh.wp.orm.mapper.annotation.AnnotationTableMapper;
+import pl.edu.agh.wp.orm.mapper.factory.AnnotationORMFactory;
+import pl.edu.agh.wp.orm.mapper.factory.ORMFactory;
 import pl.edu.agh.wp.orm.postres.DatabaseStatement;
 import pl.edu.agh.wp.orm.session.SelectStatementExecutor;
 
@@ -30,9 +32,9 @@ public class CriteriaImpl implements Criteria {
     private List<Criterion> criterionList;
     private DBTableObject table;
     private Criterion limitQuery;
-
+    private ORMFactory factory = new AnnotationORMFactory();
     public CriteriaImpl(Statement statement, Class clazz) {
-        TableMapper mapper = new AnnotationTableMapper(new AnnotationColumnMapper(),new AnnotationIdMapper(),new AnnotationManyToOneMapper());
+        TableMapper mapper = factory.getMapper();
         this.table = mapper.getTable(clazz);
         this.statement = statement;
         this.clazz = clazz;

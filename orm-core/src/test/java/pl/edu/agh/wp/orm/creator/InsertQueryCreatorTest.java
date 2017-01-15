@@ -12,14 +12,16 @@ import pl.edu.agh.wp.orm.mapper.annotation.AnnotationColumnMapper;
 import pl.edu.agh.wp.orm.mapper.annotation.AnnotationIdMapper;
 import pl.edu.agh.wp.orm.mapper.annotation.AnnotationManyToOneMapper;
 import pl.edu.agh.wp.orm.mapper.annotation.AnnotationTableMapper;
+import pl.edu.agh.wp.orm.mapper.factory.AnnotationORMFactory;
+import pl.edu.agh.wp.orm.mapper.factory.ORMFactory;
 
 public class InsertQueryCreatorTest {
     TableMapper mapper ;
 
     @Before
     public void setUp() throws Exception {
-        mapper = new AnnotationTableMapper(new AnnotationColumnMapper(),new AnnotationIdMapper(),new AnnotationManyToOneMapper());
-
+        ORMFactory factory = new AnnotationORMFactory();
+        mapper = factory.getMapper();
 
 
     }

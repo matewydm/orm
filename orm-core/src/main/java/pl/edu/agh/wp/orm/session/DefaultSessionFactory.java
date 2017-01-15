@@ -36,7 +36,7 @@ public class DefaultSessionFactory implements SessionFactory {
             logger.error(ex);
         }
 
-        DefaultSession defaultSession = new DefaultSession(new EntitiesRepository(),connection);
+        DefaultSession defaultSession = new DefaultSession(EntitiesRepository.getInstance(),connection);
         return defaultSession;
     }
 }

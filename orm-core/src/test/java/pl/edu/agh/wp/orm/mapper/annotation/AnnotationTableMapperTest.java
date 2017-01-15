@@ -6,6 +6,8 @@ import pl.ed.agh.wp.orm.annotations.DBTable;
 import pl.edu.agh.wp.orm.dto.DBTableObject;
 import pl.edu.agh.wp.orm.example.Person;
 import pl.edu.agh.wp.orm.mapper.TableMapper;
+import pl.edu.agh.wp.orm.mapper.factory.AnnotationORMFactory;
+import pl.edu.agh.wp.orm.mapper.factory.ORMFactory;
 
 import java.lang.reflect.Field;
 
@@ -15,7 +17,8 @@ public class AnnotationTableMapperTest {
 
     @Test
     public void getTable() throws Exception {
-        TableMapper mapper = new AnnotationTableMapper(new AnnotationColumnMapper(), new AnnotationIdMapper(),new AnnotationManyToOneMapper());
+        ORMFactory factory = new AnnotationORMFactory();
+        TableMapper mapper = factory.getMapper();
 
         DBTableObject table = mapper.getTable(Person.class);
 

@@ -14,6 +14,8 @@ import pl.edu.agh.wp.orm.mapper.annotation.AnnotationColumnMapper;
 import pl.edu.agh.wp.orm.mapper.annotation.AnnotationIdMapper;
 import pl.edu.agh.wp.orm.mapper.annotation.AnnotationManyToOneMapper;
 import pl.edu.agh.wp.orm.mapper.annotation.AnnotationTableMapper;
+import pl.edu.agh.wp.orm.mapper.factory.AnnotationORMFactory;
+import pl.edu.agh.wp.orm.mapper.factory.ORMFactory;
 import pl.edu.agh.wp.orm.session.Session;
 
 import java.util.ArrayList;
@@ -24,9 +26,9 @@ public class SelectQueryCreatorTest {
     TableMapper mapper ;
 
     @Before
-    public void setUp() throws Exception {
-        mapper = new AnnotationTableMapper(new AnnotationColumnMapper(),new AnnotationIdMapper(), new AnnotationManyToOneMapper());
-
+    public void setUp() throws Exception {;
+        ORMFactory factory = new AnnotationORMFactory();
+        mapper =factory.getMapper();
 
     }
 
