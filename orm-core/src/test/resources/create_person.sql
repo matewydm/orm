@@ -1,6 +1,6 @@
 CREATE TABLE public.person
 (
-  per_id integer NOT NULL DEFAULT nextval('person_per_id_seq'::regclass),
+  per_id serial NOT NULL DEFAULT,
   name character varying NOT NULL,
   lastname character varying NOT NULL,
   age integer NOT NULL,
