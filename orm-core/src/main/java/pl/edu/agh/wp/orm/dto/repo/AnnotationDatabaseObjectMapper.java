@@ -5,6 +5,7 @@ import org.springframework.context.annotation.ClassPathScanningCandidateComponen
 import org.springframework.core.type.filter.AnnotationTypeFilter;
 import pl.ed.agh.wp.orm.annotations.DBTable;
 import pl.edu.agh.wp.orm.dto.DBTableObject;
+import pl.edu.agh.wp.orm.exception.ORMException;
 import pl.edu.agh.wp.orm.mapper.TableMapper;
 
 public class AnnotationDatabaseObjectMapper implements DatabaseObjectMapper {
@@ -21,13 +22,19 @@ public class AnnotationDatabaseObjectMapper implements DatabaseObjectMapper {
     }
     
     @Override
-    public void initializEentitiesRepository() throws ClassNotFoundException {
+    public EntitiesRepository getEntitiesRepository()  {
         EntitiesRepository entities =  EntitiesRepository.getInstance();
         for(BeanDefinition bean :scanner.findCandidateComponents(basePackage)){
-             Class clazz  = Class.forName(bean.getBeanClassName());
-             DBTableObject table = mapper.getTable(clazz);
+            Class clazz  = null;
+            try {
+                clazz = Class.forName(bean.getBeanClassName());
+            } catch (ClassNotFoundException e) {
+                throw new ORMException("Class not found",e);
+            }
+            DBTableObject table = mapper.getTable(clazz);
              entities.addEntity(table);
       }
+      return entities;
 
     }
 }

@@ -14,10 +14,12 @@ import java.util.List;
 
 public class DefaultSession implements Session {
 
+    private EntitiesRepository entitiesInformation;
     private Connection connection;
     Logger logger = Logger.getLogger(DefaultSession.class);
 
     public DefaultSession(EntitiesRepository entitiesInformation, Connection connection) {
+        this.entitiesInformation = entitiesInformation;
         this.connection = connection;
     }
 
