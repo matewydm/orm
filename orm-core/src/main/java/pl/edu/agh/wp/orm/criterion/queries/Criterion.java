@@ -5,5 +5,5 @@ public interface Criterion {
 
     String toSqlQuery();
 
-    String getOperator();
+
 }

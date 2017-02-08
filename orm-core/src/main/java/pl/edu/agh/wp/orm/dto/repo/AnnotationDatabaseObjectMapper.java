@@ -21,15 +21,13 @@ public class AnnotationDatabaseObjectMapper implements DatabaseObjectMapper {
     }
     
     @Override
-    public EntitiesRepository getEntities() throws ClassNotFoundException {
-
+    public void initializEentitiesRepository() throws ClassNotFoundException {
         EntitiesRepository entities =  EntitiesRepository.getInstance();
-     for(BeanDefinition bean :scanner.findCandidateComponents(basePackage)){
-         Class clazz  = Class.forName(bean.getBeanClassName());
-         DBTableObject table = mapper.getTable(clazz);
-         entities.addEntity(table);
-     }
+        for(BeanDefinition bean :scanner.findCandidateComponents(basePackage)){
+             Class clazz  = Class.forName(bean.getBeanClassName());
+             DBTableObject table = mapper.getTable(clazz);
+             entities.addEntity(table);
+      }
 
-        return  entities;
     }
 }

@@ -36,7 +36,7 @@ public abstract class AbstractCriterion  implements Criterion{
         queryBuilder.append(string);
     }
 
-    @Override
+
     public String getOperator(){
         return operator;
     }

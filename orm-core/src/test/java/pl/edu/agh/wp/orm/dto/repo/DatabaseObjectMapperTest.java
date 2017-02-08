@@ -4,10 +4,6 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import pl.edu.agh.wp.orm.mapper.TableMapper;
-import pl.edu.agh.wp.orm.mapper.annotation.AnnotationColumnMapper;
-import pl.edu.agh.wp.orm.mapper.annotation.AnnotationIdMapper;
-import pl.edu.agh.wp.orm.mapper.annotation.AnnotationManyToOneMapper;
-import pl.edu.agh.wp.orm.mapper.annotation.AnnotationTableMapper;
 import pl.edu.agh.wp.orm.mapper.factory.AnnotationORMFactory;
 import pl.edu.agh.wp.orm.mapper.factory.ORMFactory;
 
@@ -26,8 +22,8 @@ public class DatabaseObjectMapperTest {
     @Test
     public void getEntities() throws Exception {
         AnnotationDatabaseObjectMapper mapper = new AnnotationDatabaseObjectMapper(EXAMPLE_PACKAGE,tableMapper);
-
-        Assert.assertNotNull( mapper.getEntities());
+        mapper.initializEentitiesRepository();
+        Assert.assertNotNull(EntitiesRepository.getInstance() );
     }
 
 

@@ -54,7 +54,7 @@ public class AnnotationTableMapper implements TableMapper {
         List<Field> simplyColumns = getSimpleColumn(fields.stream(),manyToOneReference,oneToManyReference,idReference);
         tableObject.setColumns(columnMapper.getColumns(simplyColumns));
         tableObject.setIdObject(idMapper.getIdObject(idReference));
-//        tableObject.setOneToManyMapper(oneToManyMapper.getManyToOneReferences(oneToManyReference));
+//        tableObject.setDbOneToManyReferences(oneToManyMapper.getManyToOneReferences(oneToManyReference));
         tableObject.setManyToOneReferences(manyToOneMapper.getManyToOneReferences(manyToOneReference));
 
         tableObject.setEntity(clazz);

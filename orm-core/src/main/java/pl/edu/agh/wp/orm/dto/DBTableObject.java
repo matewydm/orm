@@ -12,14 +12,14 @@ public class DBTableObject {
     private List<DBColumnObject> columns;
     private DBIdObject idObject;
     private List<DBManyToOneReference> manyToOneReferences;
-    private List<DBOneToManyReference> oneToManyMapper ;
+    private List<DBOneToManyReference> dbOneToManyReferences;
 
-    public List<DBOneToManyReference> getOneToManyMapper() {
-        return oneToManyMapper;
+    public List<DBOneToManyReference> getOneToManyReference() {
+        return dbOneToManyReferences;
     }
 
-    public void setOneToManyMapper(List<DBOneToManyReference> oneToManyMapper) {
-        this.oneToManyMapper = oneToManyMapper;
+    public void setDbOneToManyReferences(List<DBOneToManyReference> dbOneToManyReferences) {
+        this.dbOneToManyReferences = dbOneToManyReferences;
     }
 
     public DBIdObject getIdObject() {
