@@ -25,7 +25,7 @@ public class AnnotationUtilsTest {
     @Test
     public void preparePropertyNameField() throws Exception {
         String propertyName = "";
-        String fieldName = "column";
+        String fieldName = "COLUMN";
         Assert.assertEquals("Not the same", fieldName.toUpperCase(), AnnotationUtils.preparePropertyName(propertyName, fieldName));
     }
 

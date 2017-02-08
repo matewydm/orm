@@ -29,7 +29,7 @@ public class SelectQueryCreatorTest {
     @Test
     public void toSQLStringTest() throws Exception {
 
-        String expected = "SELECT * FROM PERSON person WHERE person.name LIKE '%'  AND person.age BETWEEN 4 AND 3 ";
+        String expected = "SELECT * FROM Person person WHERE person.name LIKE '%'  AND person.age BETWEEN 4 AND 3 ";
         List<Criterion> criterionList = new ArrayList<>();
         criterionList.add( Restrictions.like("name", "%") );
         criterionList.add( Restrictions.between("age",4,3));

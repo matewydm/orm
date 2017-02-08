@@ -28,7 +28,7 @@ public class CriteriaTest {
     @Test
     public void buildConjunctionCriteriaTest() {
 
-        String expected = "SELECT * FROM PERSON person WHERE person.name LIKE '%'  AND age BETWEEN 4 AND 3  AND person.lastname LIKE 'd%'  ";
+        String expected = "SELECT * FROM Person person WHERE person.name LIKE '%'  AND age BETWEEN 4 AND 3  AND person.lastname LIKE 'd%'  ";
         DBQuery query = session.createCriteria(Person.class)
                 .add( Restrictions.and(
                         Restrictions.like("name", "%"),
@@ -44,7 +44,7 @@ public class CriteriaTest {
     @Test
     public void buildNullCriteriaTest() {
 
-        String expected = "SELECT * FROM PERSON person WHERE person.name IS NULL  ";
+        String expected = "SELECT * FROM Person person WHERE person.name IS NULL  ";
         DBQuery query = session.createCriteria(Person.class)
                 .add( Restrictions.isNull("name"))
                 .build();
@@ -57,7 +57,7 @@ public class CriteriaTest {
     public void buildInCriteriaTest() {
 
         Object[] array = {"dare", "daa"};
-        String expected = "SELECT * FROM PERSON person WHERE person.name IN ('dare','daa') ";
+        String expected = "SELECT * FROM Person person WHERE person.name IN ('dare','daa') ";
         DBQuery query = session.createCriteria(Person.class)
                 .add( Restrictions.in("name", array))
                 .build();
@@ -69,7 +69,7 @@ public class CriteriaTest {
     @Test
     public void buildCriteriaTest() {
 
-        String expected = "SELECT * FROM PERSON person WHERE person.name LIKE '%'  AND person.age BETWEEN 4 AND 3 ";
+        String expected = "SELECT * FROM Person person WHERE person.name LIKE '%'  AND person.age BETWEEN 4 AND 3 ";
         DBQuery query = session.createCriteria(Person.class)
                 .add( Restrictions.like("name", "%") )
                 .add( Restrictions.between("age",4,3))
