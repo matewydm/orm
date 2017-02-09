@@ -6,7 +6,6 @@ import pl.edu.agh.wp.orm.criterion.queries.AbstractCriterion;
 import pl.edu.agh.wp.orm.criterion.queries.Criterion;
 import pl.edu.agh.wp.orm.dto.DBTableObject;
 import pl.edu.agh.wp.orm.dto.queries.DBQuery;
-import pl.edu.agh.wp.orm.dto.repo.EntitiesRepository;
 import pl.edu.agh.wp.orm.mapper.TableMapper;
 import pl.edu.agh.wp.orm.mapper.factory.AnnotationORMFactory;
 import pl.edu.agh.wp.orm.mapper.factory.ORMFactory;
@@ -19,15 +18,16 @@ import java.util.List;
 
 public class CriteriaImpl implements Criteria {
 
-    private final Statement statement;
+
     private Class clazz;
     private List<Criterion> criterionList;
     private DBTableObject table;
     private Criterion limitQuery;
+    private ORMFactory factory = new AnnotationORMFactory();
+    public CriteriaImpl( Connection connectino, Class clazz) {
+        TableMapper mapper = factory.getMapper();
+        this.table = mapper.getTable(clazz);
 
-    public CriteriaImpl(Statement statement, Class clazz) {
-        this.table = EntitiesRepository.getInstance().getTable(clazz);
-        this.statement = statement;
         this.clazz = clazz;
         this.criterionList = new ArrayList<>();
     }
@@ -59,7 +59,9 @@ public class CriteriaImpl implements Criteria {
     public List list() {
         DBQuery query = build();
         String sqlQuery = query.getSQLQuery();
-        return new SelectStatementExecutor(statement).execute(sqlQuery);
+//        return new SelectStatementExecutor(statement).execute(sqlQuery);
+        return null;
+        //TODO
     }
 
     public List<Criterion> getCriterionList() {

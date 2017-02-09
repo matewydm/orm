@@ -13,6 +13,7 @@ import pl.edu.agh.wp.orm.mapper.factory.ORMFactory;
 import pl.edu.agh.wp.orm.session.executor.StatementExecutor;
 
 import java.lang.reflect.Field;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -21,11 +22,11 @@ import java.util.List;
 
 public class SelectStatementExecutor extends StatementExecutor{
 
-    public SelectStatementExecutor(Statement statement) {
+    public SelectStatementExecutor(PreparedStatement statement) {
         super(statement);
 
     }
-
+    //TODO
     public List execute(String sqlQuery) {
         ResultSet resultSet;
         List<Object> outputList = new ArrayList<>();

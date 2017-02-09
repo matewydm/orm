@@ -77,4 +77,5 @@ public class DBTableObject {
     public void setManyToOneReferences(List<DBManyToOneReference> manyToOneReferences) {
         this.manyToOneReferences = manyToOneReferences;
     }
+
 }
