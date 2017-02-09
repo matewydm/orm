@@ -74,7 +74,11 @@ public class DefaultSession implements Session {
 
     @Override
     public Criteria createCriteria(Class clazz) {
-            return new CriteriaImpl(connection,clazz);
+        try {
+            return new CriteriaImpl(connection.createStatement(),clazz);
+        } catch (SQLException e) {
+            throw new ORMException("",e);
+        }
 
 
     }

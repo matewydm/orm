@@ -4,6 +4,7 @@ import pl.edu.agh.wp.orm.exception.ORMException;
 import pl.edu.agh.wp.orm.session.executor.StatementExecutor;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -16,7 +17,10 @@ public class InsertStatementExecutor extends StatementExecutor{
     public Object execute(String sql) {
         try {
 
-            return statement.execute(sql,Statement.RETURN_GENERATED_KEYS);
+             statement.execute(sql,Statement.RETURN_GENERATED_KEYS);
+             ResultSet rs = statement.getGeneratedKeys();
+            rs.next();
+            return rs.getObject(1);
         } catch (SQLException e) {
             throw new ORMException("Exception while executing insert query",e);
         }

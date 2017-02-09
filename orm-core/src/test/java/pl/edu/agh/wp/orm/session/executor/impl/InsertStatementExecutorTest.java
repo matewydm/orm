@@ -1,5 +1,6 @@
 package pl.edu.agh.wp.orm.session.executor.impl;
 
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import pl.edu.agh.wp.orm.configuration.Configuration;
@@ -34,14 +35,12 @@ public class InsertStatementExecutorTest {
     public void execute() throws Exception {
         String sqlString = "INSERT INTO person (name,lastname,age,birth_date) VALUES ('abba','a',20,'2017-02-09');";
         Connection connection = factory.openSession().getConnection();
-        PreparedStatement st = connection.prepareStatement(sqlString,Statement.RETURN_GENERATED_KEYS);
-        Statement stmt = connection.createStatement();
-        stmt.execute(sqlString,Statement.RETURN_GENERATED_KEYS);
-        ResultSet r =stmt.getGeneratedKeys();
-        r.next();
-        Object o = r.getObject(1);
-       // InsertStatementExecutor executor = new InsertStatementExecutor(statement);
-      //  executor.execute(sqlString);
+        Statement st = connection.createStatement();
+
+
+        InsertStatementExecutor executor = new InsertStatementExecutor(st);
+        Object o = executor.execute(sqlString);
+        Assert.assertNotNull(o);
     }
 
 }
