@@ -5,15 +5,16 @@ import pl.edu.agh.wp.orm.mapper.TableMapper;
 import pl.edu.agh.wp.orm.mapper.factory.AnnotationORMFactory;
 import pl.edu.agh.wp.orm.mapper.factory.ORMFactory;
 
+import java.sql.PreparedStatement;
 import java.sql.Statement;
 
 public abstract class StatementExecutor<T extends Object> {
 
-    protected final Statement statement;
+    protected final PreparedStatement statement;
 
 
 
-    public StatementExecutor(Statement statement){
+    public StatementExecutor(PreparedStatement statement){
 
         this.statement = statement;
 

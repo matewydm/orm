@@ -1,6 +1,7 @@
 package pl.edu.agh.wp.orm.session;
 
 import org.apache.log4j.Logger;
+import pl.ed.agh.wp.orm.annotations.DBJoinColumn;
 import pl.ed.agh.wp.orm.annotations.DBTable;
 import pl.edu.agh.wp.orm.creator.InsertQueryCreator;
 import pl.edu.agh.wp.orm.creator.QueryCreator;
@@ -14,7 +15,9 @@ import pl.edu.agh.wp.orm.exception.ORMException;
 import pl.edu.agh.wp.orm.session.executor.impl.InsertStatementExecutor;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.List;
 
 public class DefaultSession implements Session {
@@ -71,25 +74,40 @@ public class DefaultSession implements Session {
 
     @Override
     public Criteria createCriteria(Class clazz) {
-        try {
-            return new CriteriaImpl(connection.createStatement(),clazz);
-        } catch (SQLException e) {
-            logger.error(e);
-            throw new ORMException("Exception",e);
-        }
+            return new CriteriaImpl(connection,clazz);
+
 
     }
 
     private void simplySave(Object o, DBTableObject dbTableObject) {
         QueryCreator queryCreator =  new InsertQueryCreator(dbTableObject);
         DBQuery query = queryCreator.createQuery(o);
-        try {
-            InsertStatementExecutor insertExecutor = new InsertStatementExecutor(connection.createStatement(),o.getClass());
-            insertExecutor.execute(query.getSQLQuery());
-        } catch (SQLException e) {
-            throw new ORMException("Exception while creating insert statement",e);
-        }
+        InsertStatementExecutor insertExecutor =
+                new InsertStatementExecutor(preparedStatement(query.toString(),Statement.RETURN_GENERATED_KEYS));
+        insertExecutor.execute(query.getSQLQuery());
+
 
     }
 
+    public Statement getStatement() {
+        try {
+            return connection.createStatement();
+        } catch (SQLException e) {
+            logger.debug(e.getMessage());
+            throw new ORMException("Cannot create connectino",e);
+        }
+    }
+
+    @Override
+    public PreparedStatement preparedStatement(String sql, int type){
+        try {
+            return  connection.prepareStatement(sql,type);
+        } catch (SQLException e) {
+            throw new ORMException("",e);
+        }
+    }
+    @Override
+    public Connection getConnection(){
+        return connection;
+    }
 }
