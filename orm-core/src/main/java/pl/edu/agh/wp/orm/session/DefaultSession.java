@@ -11,6 +11,7 @@ import pl.edu.agh.wp.orm.dto.DBTableObject;
 import pl.edu.agh.wp.orm.dto.queries.DBQuery;
 import pl.edu.agh.wp.orm.dto.repo.EntitiesRepository;
 import pl.edu.agh.wp.orm.exception.ORMException;
+import pl.edu.agh.wp.orm.session.executor.impl.InsertStatementExecutor;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -31,7 +32,10 @@ public class DefaultSession implements Session {
     public void save(Object object) {
         EntitiesRepository repository = EntitiesRepository.getInstance();
         DBTableObject table = repository.getTable(object.getClass());
-        List<DBManyToOneReference> reference = table.getManyToOneReferences();
+        List<DBManyToOneReference> referenceList = table.getManyToOneReferences();
+        for (DBManyToOneReference reference : referenceList) {
+
+        }
     }
 
 
@@ -76,9 +80,14 @@ public class DefaultSession implements Session {
 
     }
 
-    private void simplySave(Object o,DBTableObject dbTableObject) {
+    private void simplySave(Object o, DBTableObject dbTableObject) {
         QueryCreator queryCreator =  new InsertQueryCreator(dbTableObject);
         DBQuery query = queryCreator.createQuery(o);
+        try {
+            new InsertStatementExecutor(connection.createStatement(),o.getClass()).execute(query.getSQLQuery());
+        } catch (SQLException e) {
+            throw new ORMException("Exception while creating insert statement",e);
+        }
 
     }
 

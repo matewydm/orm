@@ -24,7 +24,7 @@ public class Configuration {
         this.properties = new Properties();
     }
 
-    public Configuration addDriverClass (String driverClass) {
+    public Configuration addDriverClass(String driverClass) {
         return addProperties(DRIVER_CLASS,driverClass);
     }
 
@@ -32,11 +32,11 @@ public class Configuration {
         return addProperties(DB_URL,dbUrl);
     }
 
-    public Configuration addUser (String user) {
+    public Configuration addUser(String user) {
         return addProperties(USER,user);
     }
 
-    public Configuration addPassword (String password){
+    public Configuration addPassword(String password){
         return addProperties(PASSWORD, password);
     }
 
@@ -47,6 +47,7 @@ public class Configuration {
     public Configuration addScannedPackage(String pck){
         return addProperties(PACKAGE,pck);
     }
+
     private Configuration addProperties(String key, String value){
         properties.setProperty(key,value);
         return this;

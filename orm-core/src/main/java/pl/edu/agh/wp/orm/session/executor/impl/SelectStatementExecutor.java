@@ -1,4 +1,4 @@
-package pl.edu.agh.wp.orm.session;
+package pl.edu.agh.wp.orm.session.executor.impl;
 
 import pl.ed.agh.wp.orm.annotations.DBColumn;
 import pl.edu.agh.wp.orm.dto.DBColumnObject;
@@ -10,6 +10,7 @@ import pl.edu.agh.wp.orm.mapper.annotation.AnnotationManyToOneMapper;
 import pl.edu.agh.wp.orm.mapper.annotation.AnnotationTableMapper;
 import pl.edu.agh.wp.orm.mapper.factory.AnnotationORMFactory;
 import pl.edu.agh.wp.orm.mapper.factory.ORMFactory;
+import pl.edu.agh.wp.orm.session.executor.StatementExecutor;
 
 import java.lang.reflect.Field;
 import java.sql.ResultSet;
@@ -18,17 +19,10 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SelectStatementExecutor  {
+public class SelectStatementExecutor extends StatementExecutor{
 
-    private final Statement statement;
-    private DBTableObject table;
-    private Class clazz;
-    private ORMFactory factory = new AnnotationORMFactory();
     public SelectStatementExecutor(Statement statement,Class clazz){
-        TableMapper mapper = factory.getMapper();
-        this.table = mapper.getTable(clazz);
-        this.statement = statement;
-        this.clazz = clazz;
+        super(statement,clazz);
     }
 
     public List execute(String sqlQuery) {
