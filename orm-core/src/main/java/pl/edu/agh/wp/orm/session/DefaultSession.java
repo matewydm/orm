@@ -77,10 +77,9 @@ public class DefaultSession implements Session {
             throw new ORMException("",e);
         }
 
-
     }
 
-    private void simplySave(Object o, DBTableObject dbTableObject) {
+     void simplySave(Object o, DBTableObject dbTableObject) {
         QueryCreator queryCreator =  new InsertQueryCreator(dbTableObject);
         DBQuery query = queryCreator.createQuery(o);
         InsertStatementExecutor insertExecutor =
