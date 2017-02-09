@@ -16,7 +16,7 @@ local.properties
 
 # Eclipse Core
 .project
-
+history.log*
 # External tool builders
 .externalToolBuilders/
 
