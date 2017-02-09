@@ -31,12 +31,12 @@ public class InsertStatementExecutorTest {
 
     @Test
     public void execute() throws Exception {
-        String sqlString = "INSERT INTO Person (name,lastname,age,birth_date) VALUES ('abba','a',20,'2017-02-09');";
+        String sqlString = "INSERT INTO Person (per_id,name,lastname,age,birth_date) VALUES (2,'abba','a',20,'2017-02-09');";
         Connection connection = factory.openSession().getConnection();
         PreparedStatement st = connection.prepareStatement(sqlString,Statement.RETURN_GENERATED_KEYS);
         st.executeQuery();
-       // InsertStatementExecutor executor = new InsertStatementExecutor(statement);
-      //  executor.execute(sqlString);
+//        InsertStatementExecutor executor = new InsertStatementExecutor(st);
+//        executor.execute(sqlString);
     }
 
 }
