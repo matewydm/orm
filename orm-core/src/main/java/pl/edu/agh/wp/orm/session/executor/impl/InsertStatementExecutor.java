@@ -16,7 +16,7 @@ public class InsertStatementExecutor extends StatementExecutor{
     public Object execute(String sql) {
         try {
 
-            return statement.execute(sql);
+            return statement.execute(sql,Statement.RETURN_GENERATED_KEYS);
         } catch (SQLException e) {
             throw new ORMException("Exception while executing insert query",e);
         }
