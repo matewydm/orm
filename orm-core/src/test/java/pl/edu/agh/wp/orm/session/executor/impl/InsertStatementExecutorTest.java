@@ -8,6 +8,7 @@ import pl.edu.agh.wp.orm.session.SessionFactory;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.Statement;
 
 import static org.junit.Assert.*;
@@ -31,12 +32,16 @@ public class InsertStatementExecutorTest {
 
     @Test
     public void execute() throws Exception {
-        String sqlString = "INSERT INTO Person (per_id,name,lastname,age,birth_date) VALUES (2,'abba','a',20,'2017-02-09');";
+        String sqlString = "INSERT INTO person (name,lastname,age,birth_date) VALUES ('abba','a',20,'2017-02-09');";
         Connection connection = factory.openSession().getConnection();
         PreparedStatement st = connection.prepareStatement(sqlString,Statement.RETURN_GENERATED_KEYS);
-        st.executeQuery();
-//        InsertStatementExecutor executor = new InsertStatementExecutor(st);
-//        executor.execute(sqlString);
+        Statement stmt = connection.createStatement();
+        stmt.execute(sqlString,Statement.RETURN_GENERATED_KEYS);
+        ResultSet r =stmt.getGeneratedKeys();
+        r.next();
+        Object o = r.getObject(1);
+       // InsertStatementExecutor executor = new InsertStatementExecutor(statement);
+      //  executor.execute(sqlString);
     }
 
 }

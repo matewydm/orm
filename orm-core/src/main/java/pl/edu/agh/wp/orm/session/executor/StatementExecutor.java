@@ -10,11 +10,11 @@ import java.sql.Statement;
 
 public abstract class StatementExecutor<T extends Object> {
 
-    protected final PreparedStatement statement;
+    protected final Statement statement;
 
 
 
-    public StatementExecutor(PreparedStatement statement){
+    public StatementExecutor(Statement statement){
 
         this.statement = statement;
 

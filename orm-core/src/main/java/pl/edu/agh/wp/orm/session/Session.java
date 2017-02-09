@@ -24,7 +24,6 @@ public interface Session {
 
     Statement getStatement();
 
-    PreparedStatement preparedStatement(String sql, int type);
 
     Connection getConnection();
 }
