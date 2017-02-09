@@ -28,7 +28,7 @@ public class InsertQueryCreatorTest {
 
     @Test
     public void toSQLString() throws Exception {
-        String expected = "INSERT INTO Pirson ( firstname,Name,CUDO_AGE,date) VALUES ('Mati','xd',20,2017-02-09);";
+        String expected = "INSERT INTO Pirson ( PirsonID,firstname,Name,CUDO_AGE,date) VALUES (12,'Mati','xd',20,2017-02-09);";
         DBTableObject table = mapper.getTable(Pirson.class);
         Pirson p = new Pirson();
         QueryCreator queryCreator = new InsertQueryCreator(table);

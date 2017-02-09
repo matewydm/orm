@@ -21,6 +21,7 @@ public class DBIdObject {
     }
 
     public void setField(Field field) {
+        field.setAccessible(true);
         this.field = field;
     }
 

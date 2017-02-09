@@ -1,9 +1,6 @@
 package pl.edu.agh.wp.orm.example;
 
-import pl.ed.agh.wp.orm.annotations.DBColumn;
-import pl.ed.agh.wp.orm.annotations.DBId;
-import pl.ed.agh.wp.orm.annotations.DBTable;
-import pl.ed.agh.wp.orm.annotations.Temporal;
+import pl.ed.agh.wp.orm.annotations.*;
 import pl.ed.agh.wp.orm.annotations.enums.TemporalType;
 
 import java.util.Date;
@@ -13,7 +10,7 @@ public class Pirson {
 
     @DBId
     @DBColumn(name = "PirsonID")
-    private Integer Id;
+    private Integer Id=12;
 
     @DBColumn
     private String firstname ;

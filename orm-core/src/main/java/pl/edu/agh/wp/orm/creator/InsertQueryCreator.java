@@ -1,10 +1,13 @@
 package pl.edu.agh.wp.orm.creator;
 
 import pl.ed.agh.wp.orm.annotations.DBColumn;
+import pl.ed.agh.wp.orm.annotations.enums.GenerationType;
 import pl.edu.agh.wp.orm.dto.DBColumnObject;
+import pl.edu.agh.wp.orm.dto.DBIdObject;
 import pl.edu.agh.wp.orm.dto.DBTableObject;
 import pl.edu.agh.wp.orm.dto.queries.DBQuery;
 import pl.edu.agh.wp.orm.dto.queries.InsertQuery;
+import pl.edu.agh.wp.orm.exception.ORMException;
 import pl.edu.agh.wp.orm.postres.DatabaseStatement;
 
 import java.util.List;
@@ -22,6 +25,7 @@ public class InsertQueryCreator implements QueryCreator {
         DBQuery query = new InsertQuery(tableObject.getFullName());
 
         query.doStartQuery();
+        handleIdColumn(query,object,tableObject.getIdObject());
         List<DBColumnObject> columns = tableObject.getColumns();
         DBColumnObject firstColumn = columns.get(0);
         query.appendColumnWithArgument(firstColumn.getColumnName(),firstColumn.getSQLStringValue(object));
@@ -35,8 +39,17 @@ public class InsertQueryCreator implements QueryCreator {
         return query;
     }
 
+    private void handleIdColumn(DBQuery query, Object object, DBIdObject idObject) {
+        if (!idObject.isAutoGenereted() || (idObject.getGenerationType().equals(GenerationType.SEQUENCE))){
+            Object idValue = idObject.getValue(object);
+            if(idValue == null)
+                throw new ORMException("Cannot insert object with null id");
+            String idColumnName = idObject.getColumnName();
+            query.appendColumnWithArgument(idColumnName,idObject.getSQLStringValue(object));
+            query.append(",");
+        }
 
-
+    }
 
 
 }
