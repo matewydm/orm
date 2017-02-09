@@ -9,14 +9,14 @@ import java.sql.Statement;
 
 public class InsertStatementExecutor extends StatementExecutor{
 
-    public InsertStatementExecutor(PreparedStatement statement){
+    public InsertStatementExecutor(Statement statement){
         super(statement);
     }
 
     public Object execute(String sql) {
         try {
 
-            return statement.executeQuery();
+            return statement.execute(sql);
         } catch (SQLException e) {
             throw new ORMException("Exception while executing insert query",e);
         }

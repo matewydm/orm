@@ -22,7 +22,7 @@ import java.util.List;
 
 public class SelectStatementExecutor extends StatementExecutor{
 
-    public SelectStatementExecutor(PreparedStatement statement) {
+    public SelectStatementExecutor(Statement statement) {
         super(statement);
 
     }

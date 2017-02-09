@@ -83,7 +83,7 @@ public class DefaultSession implements Session {
         QueryCreator queryCreator =  new InsertQueryCreator(dbTableObject);
         DBQuery query = queryCreator.createQuery(o);
         InsertStatementExecutor insertExecutor =
-                new InsertStatementExecutor(preparedStatement(query.toString(),Statement.RETURN_GENERATED_KEYS));
+                new InsertStatementExecutor(getStatement());
         insertExecutor.execute(query.getSQLQuery());
 
 
@@ -98,14 +98,7 @@ public class DefaultSession implements Session {
         }
     }
 
-    @Override
-    public PreparedStatement preparedStatement(String sql, int type){
-        try {
-            return  connection.prepareStatement(sql,type);
-        } catch (SQLException e) {
-            throw new ORMException("",e);
-        }
-    }
+
     @Override
     public Connection getConnection(){
         return connection;
