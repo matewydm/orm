@@ -3,6 +3,7 @@ package pl.edu.agh.wp.orm.dto;
 import pl.ed.agh.wp.orm.annotations.converter.types.TypeConverter;
 import pl.ed.agh.wp.orm.annotations.enums.DatabaseTypes;
 import pl.ed.agh.wp.orm.annotations.enums.GenerationType;
+import pl.edu.agh.wp.orm.exception.ORMException;
 import pl.edu.agh.wp.orm.postres.CommonKey;
 
 import java.lang.reflect.Field;
@@ -68,7 +69,13 @@ public class DBIdObject {
         this.converter = converter;
     }
 
-
+    public void setGeneretedId(Object object, Object id){
+        try {
+            field.set(object,id);
+        } catch (IllegalAccessException e) {
+            new ORMException("",e);
+        }
+    }
     public String getSQLStringValue(Object o){
         Object value  =getValue(o);
         if(value!= null)

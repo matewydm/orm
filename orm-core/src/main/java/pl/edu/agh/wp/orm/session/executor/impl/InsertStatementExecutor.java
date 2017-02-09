@@ -19,8 +19,9 @@ public class InsertStatementExecutor extends StatementExecutor{
 
              statement.execute(sql,Statement.RETURN_GENERATED_KEYS);
              ResultSet rs = statement.getGeneratedKeys();
-            rs.next();
-            return rs.getObject(1);
+             if(rs.next())
+                 return rs.getObject(1);
+            return null;
         } catch (SQLException e) {
             throw new ORMException("Exception while executing insert query",e);
         }

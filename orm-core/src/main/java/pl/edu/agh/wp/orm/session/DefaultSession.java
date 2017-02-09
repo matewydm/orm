@@ -1,8 +1,6 @@
 package pl.edu.agh.wp.orm.session;
 
 import org.apache.log4j.Logger;
-import pl.ed.agh.wp.orm.annotations.DBJoinColumn;
-import pl.ed.agh.wp.orm.annotations.DBTable;
 import pl.edu.agh.wp.orm.creator.InsertQueryCreator;
 import pl.edu.agh.wp.orm.creator.QueryCreator;
 import pl.edu.agh.wp.orm.criterion.Criteria;
@@ -15,7 +13,6 @@ import pl.edu.agh.wp.orm.exception.ORMException;
 import pl.edu.agh.wp.orm.session.executor.impl.InsertStatementExecutor;
 
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
@@ -88,7 +85,10 @@ public class DefaultSession implements Session {
         DBQuery query = queryCreator.createQuery(o);
         InsertStatementExecutor insertExecutor =
                 new InsertStatementExecutor(getStatement());
-        insertExecutor.execute(query.getSQLQuery());
+        Object id = insertExecutor.execute(query.getSQLQuery());
+
+        if(id != null)
+            dbTableObject.getIdObject().setGeneretedId(o,id);
 
 
     }
