@@ -8,13 +8,13 @@ import java.sql.Statement;
 
 public class InsertStatementExecutor extends StatementExecutor{
 
-    public InsertStatementExecutor(Statement statement,Class clazz){
-        super(statement,clazz);
+    public InsertStatementExecutor(Statement statement){
+        super(statement);
     }
 
-    public void execute(String sql) {
+    public Object execute(String sql) {
         try {
-            statement.executeQuery(sql);
+          return statement.executeQuery(sql);
         } catch (SQLException e) {
             throw new ORMException("Exception while executing insert query",e);
         }

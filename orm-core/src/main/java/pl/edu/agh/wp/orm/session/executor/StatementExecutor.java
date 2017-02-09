@@ -7,17 +7,16 @@ import pl.edu.agh.wp.orm.mapper.factory.ORMFactory;
 
 import java.sql.Statement;
 
-public abstract class StatementExecutor {
+public abstract class StatementExecutor<T extends Object> {
 
     protected final Statement statement;
-    protected DBTableObject table;
-    protected Class clazz;
-    protected ORMFactory factory = new AnnotationORMFactory();
 
-    public StatementExecutor(Statement statement,Class clazz){
-        TableMapper mapper = factory.getMapper();
-        this.table = mapper.getTable(clazz);
+
+
+    public StatementExecutor(Statement statement){
+
         this.statement = statement;
-        this.clazz = clazz;
+
     }
+    public abstract T execute(String sqlString);
 }

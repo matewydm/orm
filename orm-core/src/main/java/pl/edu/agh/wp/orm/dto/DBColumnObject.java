@@ -2,6 +2,7 @@ package pl.edu.agh.wp.orm.dto;
 
 import pl.ed.agh.wp.orm.annotations.Type;
 import pl.ed.agh.wp.orm.annotations.converter.types.TypeConverter;
+import pl.edu.agh.wp.orm.exception.ORMException;
 import pl.edu.agh.wp.orm.postres.CommonKey;
 
 import java.lang.reflect.Field;
@@ -103,6 +104,13 @@ public class DBColumnObject {
             e.printStackTrace();
         }
         return null;
+    }
+    public void setValue(Object entity,Object dataBaseField){
+        try {
+            field.set(entity,dataBaseField);
+        } catch (IllegalAccessException e) {
+            throw new ORMException("Cannot set Object ",e);
+        }
     }
 }
 
