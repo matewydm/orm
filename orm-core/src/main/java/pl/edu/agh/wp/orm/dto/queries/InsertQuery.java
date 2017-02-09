@@ -32,10 +32,11 @@ public class InsertQuery extends DBQuery {
         append("(");
 
         for(int i = 0; i< getArgumentNumber()-1; i++){
-            append("?,");
+            append(getArgument(i).toString());
+            append(",");
         }
 
-        append("?");
+        append(getArgument(getArgumentNumber()-1).toString());
         append(");");
 
     }
