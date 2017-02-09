@@ -84,7 +84,7 @@ public class DefaultSession implements Session {
         QueryCreator queryCreator =  new InsertQueryCreator(dbTableObject);
         DBQuery query = queryCreator.createQuery(o);
         try {
-            InsertStatementExecutor insertExecutor = new InsertStatementExecutor(connection.createStatement(),o.getClass());
+            InsertStatementExecutor insertExecutor = new InsertStatementExecutor(connection.createStatement());
             insertExecutor.execute(query.getSQLQuery());
         } catch (SQLException e) {
             throw new ORMException("Exception while creating insert statement",e);
