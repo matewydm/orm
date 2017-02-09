@@ -10,7 +10,7 @@ import pl.edu.agh.wp.orm.mapper.TableMapper;
 import pl.edu.agh.wp.orm.mapper.factory.AnnotationORMFactory;
 import pl.edu.agh.wp.orm.mapper.factory.ORMFactory;
 import pl.edu.agh.wp.orm.postres.DatabaseStatement;
-import pl.edu.agh.wp.orm.session.SelectStatementExecutor;
+import pl.edu.agh.wp.orm.session.executor.impl.SelectStatementExecutor;
 
 import java.sql.*;
 import java.util.ArrayList;
