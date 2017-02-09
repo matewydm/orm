@@ -71,6 +71,7 @@ public class DBIdObject {
 
     public void setGeneretedId(Object object, Object id){
         try {
+
             field.set(object,id);
         } catch (IllegalAccessException e) {
             new ORMException("",e);
