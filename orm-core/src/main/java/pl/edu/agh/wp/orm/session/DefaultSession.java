@@ -36,7 +36,7 @@ public class DefaultSession implements Session {
         DBTableObject table = repository.getTable(object.getClass());
         List<DBManyToOneReference> referenceList = table.getManyToOneReferences();
         for (DBManyToOneReference reference : referenceList) {
-
+//            reference.get
         }
     }
 

@@ -11,7 +11,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class AnnotationManyToOneMapper implements ManyToOneMapper {
+public class AnnotationManyToOneMapper extends TypeMatcher implements ManyToOneMapper {
 
     private static final String defaultSuffix ="_ID";
 
@@ -26,10 +26,10 @@ public class AnnotationManyToOneMapper implements ManyToOneMapper {
 
     private DBManyToOneReference prepareReference(Field field) {
         DBManyToOneReference reference = new DBManyToOneReference();
+        reference.setField(field);
+        reference.setType(getType(field));
         DBManyToOne manyToOneAnnotation = field.getAnnotation(DBManyToOne.class);
         reference.setFetch(manyToOneAnnotation.fetch());
-
-
         if(AnnotationUtils.hasAnnotation(field,DBJoinColumn.class))
             handleJoinColumnAnnotation(reference,field);
         else
