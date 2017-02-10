@@ -48,12 +48,13 @@ public class CreateQueryCreator implements QueryCreator{
         }
     }
 
-    private void handleReference(DBQuery query, List<DBManyToOneReference> references){
+    /*private void handleReference(DBQuery query, List<DBManyToOneReference> references){
         for(DBManyToOneReference ref : references){
-            ref.getType().getType();
+            DatabaseTypes type = ref.getType().getType();
+            handleColumnType(query, );
         }
 
-    }
+    }*/
 
     private void handleSimpleColumn(DBQuery query, DBColumnObject column) {
         query.appendWithSpace(",");
