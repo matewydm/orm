@@ -21,7 +21,7 @@ public class DateType implements TypeConverter {
     public String getAsString(Object obj) {
 
         java.sql.Date sqlDate = new java.sql.Date(((Date) obj).getTime());
-        return sqlDate.toString();
+        return  "'"+sqlDate.toString()+ "'";
     }
 
     @Override

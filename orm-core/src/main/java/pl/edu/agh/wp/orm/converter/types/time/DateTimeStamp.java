@@ -20,7 +20,7 @@ public class DateTimeStamp implements TypeConverter {
     @Override
     public String getAsString(Object obj) {
         Timestamp sqlTimestamp = new Timestamp(((Date) obj).getTime());
-        return sqlTimestamp.toString();
+        return "'"+sqlTimestamp.toString()+ "'";
     }
 
     @Override

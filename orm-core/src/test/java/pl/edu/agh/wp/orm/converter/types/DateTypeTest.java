@@ -14,7 +14,7 @@ public class DateTypeTest {
         String dateString = "2016-12-30";
         SimpleDateFormat format = new SimpleDateFormat( "yyyy-MM-d");
         Date date = format.parse(dateString);
-        Assert.assertEquals(type.getAsString(date),dateString);
+        Assert.assertEquals(type.getAsString(date),"'"+dateString+"'");
     }
 
     @Test

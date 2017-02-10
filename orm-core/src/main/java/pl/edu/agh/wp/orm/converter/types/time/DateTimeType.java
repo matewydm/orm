@@ -20,7 +20,7 @@ public class DateTimeType implements TypeConverter {
     @Override
     public String getAsString(Object obj) {
         Time sqTime = new Time(((Date)obj).getTime());
-        return sqTime.toString();
+        return  "'"+sqTime.toString()+ "'";
     }
 
     @Override

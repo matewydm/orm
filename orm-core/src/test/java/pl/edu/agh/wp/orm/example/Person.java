@@ -94,6 +94,9 @@ public class Person {
         return date;
     }
 
+    public Integer getId() {
+        return id;
+    }
 
     public String toString() {
         return "Person: " + firstname + " " + lastname + " " + age + " " + date.toString();
