@@ -28,7 +28,7 @@ public class TypeMatcher {
 
     }
 
-    private TypeConverter handleDefaultType(Field field) {
+    protected TypeConverter handleDefaultType(Field field) {
         Class clazz = field.getType();
         return register.getConverter(clazz);
     }
