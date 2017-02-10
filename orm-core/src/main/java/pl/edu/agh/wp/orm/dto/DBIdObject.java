@@ -3,9 +3,13 @@ package pl.edu.agh.wp.orm.dto;
 import pl.ed.agh.wp.orm.annotations.converter.types.TypeConverter;
 import pl.ed.agh.wp.orm.annotations.enums.DatabaseTypes;
 import pl.ed.agh.wp.orm.annotations.enums.GenerationType;
+import pl.edu.agh.wp.orm.exception.ORMException;
 import pl.edu.agh.wp.orm.postres.CommonKey;
 
 import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class DBIdObject {
 
@@ -15,12 +19,13 @@ public class DBIdObject {
     private GenerationType generationType;
     private String sequenceName;
     private TypeConverter converter;
-
+    private List<Object> persistetIds = new ArrayList<>();
     public Field getField() {
         return field;
     }
 
     public void setField(Field field) {
+        field.setAccessible(true);
         this.field = field;
     }
 
@@ -64,7 +69,14 @@ public class DBIdObject {
         this.converter = converter;
     }
 
+    public void setGeneretedId(Object object, Object id){
+        try {
 
+            field.set(object,id);
+        } catch (IllegalAccessException e) {
+            new ORMException("",e);
+        }
+    }
     public String getSQLStringValue(Object o){
         Object value  =getValue(o);
         if(value!= null)
@@ -78,5 +90,9 @@ public class DBIdObject {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public void addPersistedId(Object o){
+        persistetIds.add(o);
     }
 }

@@ -8,10 +8,12 @@ public class ConfigurationTest {
     @Test
     public void addPropertiesTest() throws Exception {
         Configuration configuration = new Configuration()
-                .addProperties("driver_class","org.postgresql.Driver")
-                .addProperties("db_url","jdbc:postgresql://localhost:5432/postgres")
-                .addProperties("user","postgres")
-                .addProperties("password","dare");
+                .addDriverClass("org.postgresql.Driver")
+                .addDatabaseUrl("jdbc:postgresql://localhost:5432/postgres")
+                .addUser("postgres")
+                .addPassword("dare")
+                .setAnnotationParsing(true)
+                .addScannedPackage("pl.edu.agh");
 
         Assert.assertTrue(configuration.getProperty("driver_class").equals("org.postgresql.Driver"));
     }

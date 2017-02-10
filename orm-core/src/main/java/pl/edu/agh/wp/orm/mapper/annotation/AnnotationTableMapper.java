@@ -1,5 +1,6 @@
 package pl.edu.agh.wp.orm.mapper.annotation;
 
+import org.reflections.ReflectionUtils;
 import pl.ed.agh.wp.orm.annotations.DBColumn;
 import pl.ed.agh.wp.orm.annotations.DBId;
 import pl.ed.agh.wp.orm.annotations.DBOneToMany;
@@ -47,7 +48,8 @@ public class AnnotationTableMapper implements TableMapper {
         tableObject.setSchemaName(annotation.schema());
         tableObject.setTableName(AnnotationUtils.preparePropertyName(annotation.name(),clazz.getSimpleName()));
         tableObject.setFullName(prepareFullName(tableObject,clazz.getSimpleName()));
-        List<Field> fields = Arrays.stream(clazz.getDeclaredFields()).filter(AnnotationTableMapper::isFieldSuported).collect(Collectors.toList());
+        List<Field> fields = ReflectionUtils.getAllFields(clazz).stream()
+                .filter(AnnotationTableMapper::isFieldSuported).collect(Collectors.toList());
         List<Field> manyToOneReference = fields.stream().filter(AnnotationUtils::hasManyToOneAnnotation).collect(Collectors.toList());;
         List<Field> idReference = fields.stream().filter(AnnotationUtils::hasIdAnnotation).collect(Collectors.toList());;
         List<Field> oneToManyReference = fields.stream().filter(AnnotationUtils::hasOneToManyAnnotation).collect(Collectors.toList());;

@@ -1,11 +1,18 @@
 package pl.edu.agh.wp.orm.dto;
 
+import org.apache.log4j.Logger;
+import pl.ed.agh.wp.orm.annotations.DBTable;
+import pl.edu.agh.wp.orm.exception.ORMException;
+
+import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
 
 public class DBTableObject {
-    private Class entity;
 
+    Logger logger = Logger.getLogger(DBTable.class);
+
+    private Class entity;
     private String schemaName;
     private String tableName;
     private String fullName;
@@ -76,5 +83,14 @@ public class DBTableObject {
 
     public void setManyToOneReferences(List<DBManyToOneReference> manyToOneReferences) {
         this.manyToOneReferences = manyToOneReferences;
+    }
+
+    public Object getPersistedInstance() {
+        try {
+            return entity.getConstructor().newInstance();
+        } catch (NoSuchMethodException | InvocationTargetException | InstantiationException | IllegalAccessException e) {
+            logger.debug(e);
+            throw new ORMException("Creating new persisted instance");
+        }
     }
 }

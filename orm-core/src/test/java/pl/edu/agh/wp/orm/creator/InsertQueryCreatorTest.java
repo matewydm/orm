@@ -7,6 +7,7 @@ import pl.edu.agh.wp.orm.dto.DBTableObject;
 import pl.edu.agh.wp.orm.dto.queries.DBQuery;
 import pl.edu.agh.wp.orm.example.Person;
 import pl.edu.agh.wp.orm.example.Pirson;
+import pl.edu.agh.wp.orm.example.SuperPerson;
 import pl.edu.agh.wp.orm.mapper.TableMapper;
 import pl.edu.agh.wp.orm.mapper.annotation.AnnotationColumnMapper;
 import pl.edu.agh.wp.orm.mapper.annotation.AnnotationIdMapper;
@@ -28,7 +29,7 @@ public class InsertQueryCreatorTest {
 
     @Test
     public void toSQLString() throws Exception {
-        String expected = "INSERT INTO Pirson ( firstname,Name,CUDO_AGE,date) VALUES (?,?,?,?);";
+        String expected = "INSERT INTO Pirson ( PirsonID,firstname,Name,CUDO_AGE,date) VALUES (12,'Mati','xd',20,2017-02-09);";
         DBTableObject table = mapper.getTable(Pirson.class);
         Pirson p = new Pirson();
         QueryCreator queryCreator = new InsertQueryCreator(table);
@@ -38,9 +39,23 @@ public class InsertQueryCreatorTest {
 
     @Test
     public void toSQLStringPerson() throws Exception {
-        String expected = "INSERT INTO Person ( name,lastname,age,birth_date) VALUES (?,?,?,?);";
-        DBTableObject table = mapper.getTable(Person.class);
         Person p = new Person();
+        String expected = "INSERT INTO Person ( name,lastname,age,birth_date) VALUES ('Mati','xd',20,2017-02-09);";
+        DBTableObject table = mapper.getTable(Person.class);
+
+        QueryCreator queryCreator = new InsertQueryCreator(table);
+        DBQuery query = queryCreator.createQuery(p);
+        Assert.assertEquals(expected,query.getSQLQuery());
+
+    }
+
+    @Test
+    public void toSQLStringSuperPerson() throws Exception {
+        SuperPerson p = new SuperPerson();
+        p.setSuper(1);
+        String expected = "INSERT INTO SuperPerson ( spId,lastname,age,birth_date,name,isSuper) VALUES (null,'xd',20,2017-02-09,'Mati',1);";
+        DBTableObject table = mapper.getTable(SuperPerson.class);
+
         QueryCreator queryCreator = new InsertQueryCreator(table);
         DBQuery query = queryCreator.createQuery(p);
         Assert.assertEquals(expected,query.getSQLQuery());

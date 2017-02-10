@@ -22,7 +22,7 @@ public class DatabaseObjectMapperTest {
     @Test
     public void getEntities() throws Exception {
         AnnotationDatabaseObjectMapper mapper = new AnnotationDatabaseObjectMapper(EXAMPLE_PACKAGE,tableMapper);
-        mapper.initializEentitiesRepository();
+        mapper.getEntitiesRepository();
         Assert.assertNotNull(EntitiesRepository.getInstance() );
     }
 

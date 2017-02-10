@@ -13,7 +13,36 @@ public class Person {
 
     @DBId
     @DBGeneratedValue(sequenceName = "Gen")
+    @DBColumn(name = "per_id")
     private Integer id;
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
+    }
+
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
+    }
+
+    public void setAge(Integer age) {
+        this.age = age;
+    }
+
+    public void setAddress(List<Address> address) {
+        this.address = address;
+    }
+
+    public void setTransients(Integer transients) {
+        this.transients = transients;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
 
     @DBColumn(name = "name")
     private String firstname ;

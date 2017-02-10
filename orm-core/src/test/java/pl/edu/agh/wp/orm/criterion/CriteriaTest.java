@@ -17,10 +17,12 @@ public class CriteriaTest {
     @Before
     public void setUp() throws Exception {
         Configuration configuration = new Configuration()
-                .addProperties("driver_class","org.postgresql.Driver")
-                .addProperties("db_url","jdbc:postgresql://localhost:5432/postgres")
-                .addProperties("user","postgres")
-                .addProperties("password","dare");
+                .addDriverClass("org.postgresql.Driver")
+                .addDatabaseUrl("jdbc:postgresql://localhost:5432/postgres")
+                .addUser("postgres")
+                .addPassword("dare")
+                .setAnnotationParsing(true)
+                .addScannedPackage("pl.edu.agh");
 
         session = configuration.buildSessionFactory().openSession();
     }
