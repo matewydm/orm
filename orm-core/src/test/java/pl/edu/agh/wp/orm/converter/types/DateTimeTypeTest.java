@@ -15,7 +15,7 @@ public class DateTimeTypeTest {
         String timeString = "12:30:10";
         SimpleDateFormat format = new SimpleDateFormat( "HH:mm:ss");
         Date date = format.parse(timeString);
-        Assert.assertEquals(timeString,type.getAsString(date));
+        Assert.assertEquals("'"+timeString+"'",type.getAsString(date));
     }
 
     @Test

@@ -13,6 +13,7 @@ public class Person {
 
     @DBId
     @DBGeneratedValue(sequenceName = "Gen")
+    @DBColumn(name = "per_id")
     private Integer id;
 
     public void setId(Integer id) {
@@ -93,6 +94,9 @@ public class Person {
         return date;
     }
 
+    public Integer getId() {
+        return id;
+    }
 
     public String toString() {
         return "Person: " + firstname + " " + lastname + " " + age + " " + date.toString();

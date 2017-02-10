@@ -3,6 +3,7 @@ package pl.edu.agh.wp.orm.session.executor.impl;
 import pl.ed.agh.wp.orm.annotations.DBColumn;
 import pl.edu.agh.wp.orm.dto.DBColumnObject;
 import pl.edu.agh.wp.orm.dto.DBTableObject;
+import pl.edu.agh.wp.orm.exception.ORMException;
 import pl.edu.agh.wp.orm.mapper.TableMapper;
 import pl.edu.agh.wp.orm.mapper.annotation.AnnotationColumnMapper;
 import pl.edu.agh.wp.orm.mapper.annotation.AnnotationIdMapper;
@@ -24,12 +25,17 @@ public class SelectStatementExecutor extends StatementExecutor{
 
     public SelectStatementExecutor(Statement statement) {
         super(statement);
-
     }
-    //TODO
-    public List execute(String sqlQuery) {
+
+    public ResultSet execute(String sqlQuery) {
         ResultSet resultSet;
         List<Object> outputList = new ArrayList<>();
+        try {
+            return statement.executeQuery(sqlQuery);
+        } catch (SQLException e) {
+            throw new ORMException("Exception while executing select query");
+        }
+    }
 
 //        try {
 //            resultSet = statement.executeQuery(sqlQuery);
@@ -60,6 +66,4 @@ public class SelectStatementExecutor extends StatementExecutor{
 //        catch (SQLException | NoSuchFieldException | IllegalAccessException | InstantiationException e) {
 //            e.printStackTrace();
 //        }
-        return outputList;
-    }
 }
