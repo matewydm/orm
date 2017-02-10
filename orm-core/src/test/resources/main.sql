@@ -12,6 +12,3 @@ CREATE TABLE address
   PERSON_ID Integer FOREIGN KEY REFERENCES person,
   STREET VARCHAR(40)
 );
-
-
-

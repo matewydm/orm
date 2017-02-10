@@ -30,13 +30,7 @@ public class InsertQueryCreator implements QueryCreator {
             query.appendColumnWithArgument(column.getColumnName(),column.getSQLStringValue(object));
 
         }
-
         query.doEndQuery();
         return query;
     }
-
-
-
-
-
 }

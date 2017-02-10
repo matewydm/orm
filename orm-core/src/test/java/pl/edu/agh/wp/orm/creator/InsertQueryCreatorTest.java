@@ -34,7 +34,6 @@ public class InsertQueryCreatorTest {
         QueryCreator queryCreator = new InsertQueryCreator(table);
         DBQuery query = queryCreator.createQuery(p);
         Assert.assertEquals(expected,query.getSQLQuery());
-
     }
 
     @Test
@@ -45,6 +44,5 @@ public class InsertQueryCreatorTest {
         QueryCreator queryCreator = new InsertQueryCreator(table);
         DBQuery query = queryCreator.createQuery(p);
         Assert.assertEquals(expected,query.getSQLQuery());
-
     }
 }
