@@ -1,5 +1,6 @@
 package pl.edu.agh.wp.orm.session;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import pl.edu.agh.wp.orm.configuration.Configuration;
@@ -43,4 +44,5 @@ public class SaveTest {
         session.save(person);
 
     }
+
 }

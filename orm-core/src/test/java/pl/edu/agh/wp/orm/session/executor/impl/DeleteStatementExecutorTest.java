@@ -4,17 +4,12 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import pl.edu.agh.wp.orm.configuration.Configuration;
-import pl.edu.agh.wp.orm.session.Session;
 import pl.edu.agh.wp.orm.session.SessionFactory;
 
 import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.Statement;
 
-import static org.junit.Assert.*;
-
-public class InsertStatementExecutorTest {
+public class DeleteStatementExecutorTest {
 
     SessionFactory factory;
     @Before
@@ -33,14 +28,14 @@ public class InsertStatementExecutorTest {
 
     @Test
     public void execute() throws Exception {
-        String sqlString = "INSERT INTO person (name,lastname,age,birth_date) VALUES ('abba','a',21,'2017-02-10');";
+        String sqlString = "DELETE FROM Person person WHERE person.per_id = 19;";
         Connection connection = factory.openSession().getConnection();
         Statement st = connection.createStatement();
 
-
-        InsertStatementExecutor executor = new InsertStatementExecutor(st);
+        DeleteStatementExecutor executor = new DeleteStatementExecutor(st);
         Object o = executor.execute(sqlString);
         Assert.assertNotNull(o);
     }
+
 
 }
