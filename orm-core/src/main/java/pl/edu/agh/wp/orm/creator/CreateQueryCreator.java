@@ -50,7 +50,7 @@ public class CreateQueryCreator implements QueryCreator{
 
     private void handleReference(DBQuery query, List<DBManyToOneReference> references){
         for(DBManyToOneReference ref : references){
-            ref.
+            ref.getType().getType();
         }
 
     }
