@@ -33,7 +33,7 @@ public class InsertQueryCreatorTest {
 
     @Test
     public void toSQLString() throws Exception {
-        String expected = "INSERT INTO Pirson ( PirsonID,CUDO_AGE,Name,firstname,date) VALUES (12,20,'xd','Mati',"+ date +");";
+        String expected = "INSERT INTO Pirson ( PirsonID,CUDO_AGE,Name,firstname,date) VALUES (12,20,'xd','Mati',"+ "\'" + date + "\'" +");";
         DBTableObject table = mapper.getTable(Pirson.class);
         Pirson p = new Pirson();
         QueryCreator queryCreator = new InsertQueryCreator(table);
@@ -44,7 +44,7 @@ public class InsertQueryCreatorTest {
     @Test
     public void toSQLStringPerson() throws Exception {
         Person p = new Person();
-        String expected = "INSERT INTO Person ( lastname,age,birth_date,name) VALUES ('xd',20,"+date+",'Mati');";
+        String expected = "INSERT INTO Person ( lastname,age,birth_date,name) VALUES ('xd',20," + "\'" + date + "\'" +",'Mati');";
         DBTableObject table = mapper.getTable(Person.class);
 
         QueryCreator queryCreator = new InsertQueryCreator(table);
