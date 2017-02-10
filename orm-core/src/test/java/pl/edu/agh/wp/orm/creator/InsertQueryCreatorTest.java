@@ -52,19 +52,19 @@ public class InsertQueryCreatorTest {
         Assert.assertEquals(expected,query.getSQLQuery());
 
     }
-
-    @Test
-    public void toSQLStringSuperPerson() throws Exception {
-
-        SuperPerson p = new SuperPerson();
-        p.setSuper(1);
-
-        String expected = "INSERT INTO SuperPerson ( spId,lastname,age,birth_date,isSuper,name) VALUES (null,'xd',20," + date + ",1,'Mati');";
-        DBTableObject table = mapper.getTable(SuperPerson.class);
-
-        QueryCreator queryCreator = new InsertQueryCreator(table);
-        DBQuery query = queryCreator.createQuery(p);
-        String actual = query.getSQLQuery();
-        Assert.assertEquals(expected,actual);
-    }
+//
+//    @Test
+//    public void toSQLStringSuperPerson() throws Exception {
+//
+//        SuperPerson p = new SuperPerson();
+//        p.setSuper(1);
+//
+//        String expected = "INSERT INTO SuperPerson ( spId,lastname,age,birth_date,isSuper,name) VALUES (null,'xd',20," + date + ",1,'Mati');";
+//        DBTableObject table = mapper.getTable(SuperPerson.class);
+//
+//        QueryCreator queryCreator = new InsertQueryCreator(table);
+//        DBQuery query = queryCreator.createQuery(p);
+//        String actual = query.getSQLQuery();
+//        Assert.assertEquals(expected,actual);
+//    }
 }
