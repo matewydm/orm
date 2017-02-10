@@ -28,6 +28,12 @@ public class DBQuery {
         queryBuilder.append(" ");
     }
 
+    public void appendEquation(String column, String value) {
+        appendWithSpace(column);
+        appendWithSpace("=");
+        append(value);
+    }
+
     protected Integer getArgumentNumber(){
         return queryArguments.size();
     }

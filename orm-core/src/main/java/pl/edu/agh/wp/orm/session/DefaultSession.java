@@ -1,6 +1,7 @@
 package pl.edu.agh.wp.orm.session;
 
 import org.apache.log4j.Logger;
+import pl.edu.agh.wp.orm.creator.DeleteQueryCreator;
 import pl.edu.agh.wp.orm.creator.InsertQueryCreator;
 import pl.edu.agh.wp.orm.creator.QueryCreator;
 import pl.edu.agh.wp.orm.criterion.Criteria;
@@ -10,6 +11,7 @@ import pl.edu.agh.wp.orm.dto.DBTableObject;
 import pl.edu.agh.wp.orm.dto.queries.DBQuery;
 import pl.edu.agh.wp.orm.dto.repo.EntitiesRepository;
 import pl.edu.agh.wp.orm.exception.ORMException;
+import pl.edu.agh.wp.orm.session.executor.impl.DeleteStatementExecutor;
 import pl.edu.agh.wp.orm.session.executor.impl.InsertStatementExecutor;
 
 import java.sql.Connection;
@@ -47,6 +49,26 @@ public class DefaultSession implements Session {
 
     @Override
     public void delete(Object object) {
+        EntitiesRepository repository = EntitiesRepository.getInstance();
+        DBTableObject table = repository.getTable(object.getClass());
+        if (table != null) {
+            try {
+                QueryCreator queryCreator =  new DeleteQueryCreator(table);
+                DBQuery query = queryCreator.createQuery(object);
+                DeleteStatementExecutor deleteExecutor =
+                        new DeleteStatementExecutor(getStatement());
+                Object id = deleteExecutor.execute(query.getSQLQuery());
+
+                if(id == null)
+                    throw new ORMException("Object id was not found");
+            } catch (Exception e) {
+                throw e;
+            }
+        }
+        else {
+            throw new ORMException("Given class has no table in repository");
+        }
+
 
     }
 
@@ -97,7 +119,7 @@ public class DefaultSession implements Session {
             return connection.createStatement();
         } catch (SQLException e) {
             logger.debug(e.getMessage());
-            throw new ORMException("Cannot create connectino",e);
+            throw new ORMException("Cannot create connection",e);
         }
     }
 
