@@ -7,6 +7,8 @@ import pl.edu.agh.wp.orm.example.Address;
 import pl.edu.agh.wp.orm.example.NonExistent;
 import pl.edu.agh.wp.orm.example.Person;
 import pl.edu.agh.wp.orm.exception.ORMException;
+import pl.edu.agh.wp.orm.exception.ORMNoSuchRecordException;
+import pl.edu.agh.wp.orm.exception.ORMNoSuchTableException;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -31,33 +33,27 @@ public class DeleteTest {
         session = configuration.buildSessionFactory().openSession();
     }
 
-    @Test
-    public void deleteTest() throws Exception {
+//TODO
+//    @Test
+//    public void deleteTest() throws Exception {
+//        Person person = new Person();
+//        person.setId(1000);
+//        session.save(person);
+//        session.delete(person);
+//    }
+
+
+    @Test(expected = ORMNoSuchRecordException.class)
+    public void throwExceptionWhenIdIsWrong() throws ORMNoSuchRecordException {
         Person person = new Person();
-        person.setId(16);
+        person.setId(-1);
         session.delete(person);
+
     }
 
-    @Test
-    public void throwExceptionWhenIdIsWrong() throws Exception {
-        try {
-            Person person = new Person();
-            person.setId(-1);
-            session.delete(person);
-        } catch (final ORMException e) {
-            final String msg = "Object id was not found";
-            assertEquals(msg,e.getMessage());
-        }
-    }
-
-    @Test
-    public void throwExceptionWhenClassHasNoDBTableAnnotation() throws Exception {
-        try {
-            NonExistent nonExistent = new NonExistent();
-            session.delete(nonExistent);
-        } catch (final ORMException e) {
-            final String msg = "Given class has no table in repository";
-            assertEquals(msg,e.getMessage());
-        }
+    @Test(expected = ORMNoSuchTableException.class)
+    public void throwExceptionWhenClassHasNoDBTableAnnotation() throws ORMNoSuchTableException {
+        NonExistent nonExistent = new NonExistent();
+        session.delete(nonExistent);
     }
 }

@@ -28,13 +28,13 @@ public class DeleteStatementExecutorTest {
 
     @Test
     public void execute() throws Exception {
-        String sqlString = "DELETE FROM Person person WHERE person.per_id = 19;";
+        String sqlString = "DELETE FROM Person person WHERE person.per_id = -1;";
         Connection connection = factory.openSession().getConnection();
         Statement st = connection.createStatement();
 
         DeleteStatementExecutor executor = new DeleteStatementExecutor(st);
         Object o = executor.execute(sqlString);
-        Assert.assertNotNull(o);
+        Assert.assertNull(o);
     }
 
 

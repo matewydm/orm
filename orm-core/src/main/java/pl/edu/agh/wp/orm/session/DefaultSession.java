@@ -11,6 +11,8 @@ import pl.edu.agh.wp.orm.dto.DBTableObject;
 import pl.edu.agh.wp.orm.dto.queries.DBQuery;
 import pl.edu.agh.wp.orm.dto.repo.EntitiesRepository;
 import pl.edu.agh.wp.orm.exception.ORMException;
+import pl.edu.agh.wp.orm.exception.ORMNoSuchRecordException;
+import pl.edu.agh.wp.orm.exception.ORMNoSuchTableException;
 import pl.edu.agh.wp.orm.session.executor.impl.DeleteStatementExecutor;
 import pl.edu.agh.wp.orm.session.executor.impl.InsertStatementExecutor;
 
@@ -48,28 +50,10 @@ public class DefaultSession implements Session {
     }
 
     @Override
-    public void delete(Object object) {
+    public void delete(Object object) throws ORMException{
         EntitiesRepository repository = EntitiesRepository.getInstance();
         DBTableObject table = repository.getTable(object.getClass());
-        if (table != null) {
-            try {
-                QueryCreator queryCreator =  new DeleteQueryCreator(table);
-                DBQuery query = queryCreator.createQuery(object);
-                DeleteStatementExecutor deleteExecutor =
-                        new DeleteStatementExecutor(getStatement());
-                Object id = deleteExecutor.execute(query.getSQLQuery());
-
-                if(id == null)
-                    throw new ORMException("Object id was not found");
-            } catch (Exception e) {
-                throw e;
-            }
-        }
-        else {
-            throw new ORMException("Given class has no table in repository");
-        }
-
-
+        executeDeletion(table, object);
     }
 
     @Override
@@ -120,6 +104,20 @@ public class DefaultSession implements Session {
         } catch (SQLException e) {
             logger.debug(e.getMessage());
             throw new ORMException("Cannot create connection",e);
+        }
+    }
+
+    private void executeDeletion(DBTableObject table, Object object) throws ORMException {
+        if (table != null) {
+            QueryCreator queryCreator =  new DeleteQueryCreator(table);
+            DBQuery query = queryCreator.createQuery(object);
+            DeleteStatementExecutor deleteExecutor = new DeleteStatementExecutor(getStatement());
+            Object id = deleteExecutor.execute(query.getSQLQuery());
+            if(id == null)
+                throw new ORMNoSuchRecordException("There is no such record in database");
+        }
+        else {
+            throw new ORMNoSuchTableException("Given class has no table in database");
         }
     }
 
