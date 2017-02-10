@@ -1,8 +1,10 @@
 package pl.edu.agh.wp.orm.mapper.annotation;
 
+import org.reflections.ReflectionUtils;
 import pl.ed.agh.wp.orm.annotations.DBColumn;
 import pl.ed.agh.wp.orm.annotations.DBJoinColumn;
 import pl.ed.agh.wp.orm.annotations.DBManyToOne;
+import pl.ed.agh.wp.orm.annotations.converter.types.TypeConverter;
 import pl.edu.agh.wp.orm.annotations.utilis.AnnotationUtils;
 import pl.edu.agh.wp.orm.dto.DBManyToOneReference;
 import pl.edu.agh.wp.orm.exception.ORMException;
@@ -45,6 +47,12 @@ public class AnnotationManyToOneMapper extends TypeMatcher implements ManyToOneM
         handleSimpleColumn(field,reference);
         
         return reference;
+    }
+
+    @Override
+    protected TypeConverter getType(Field field) {
+      Field id =  ReflectionUtils.getAllFields(field.getType()).stream().filter(AnnotationUtils::hasIdAnnotation).findAny().get();
+        return super.getType(id);
     }
 
     private void handleSimpleColumn(Field field, DBManyToOneReference reference) {
