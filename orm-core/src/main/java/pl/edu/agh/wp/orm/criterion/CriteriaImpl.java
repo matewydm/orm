@@ -6,6 +6,7 @@ import pl.edu.agh.wp.orm.criterion.queries.AbstractCriterion;
 import pl.edu.agh.wp.orm.criterion.queries.Criterion;
 import pl.edu.agh.wp.orm.dto.DBColumnObject;
 import pl.edu.agh.wp.orm.dto.DBIdObject;
+import pl.edu.agh.wp.orm.dto.DBManyToOneReference;
 import pl.edu.agh.wp.orm.dto.DBTableObject;
 import pl.edu.agh.wp.orm.dto.queries.DBQuery;
 import pl.edu.agh.wp.orm.dto.repo.EntitiesRepository;
@@ -87,15 +88,18 @@ public class CriteriaImpl implements Criteria {
         DBTableObject tableObject = EntitiesRepository.getInstance().getTable(clazz);
         Object entity = tableObject.getPersistedInstance();
 
-        DBIdObject idObject = tableObject.getIdObject();
-        Object id = resultSet.getObject(idObject.getColumnName());
-        idObject.setGeneretedId(entity,id);
+        DBIdObject dbId = tableObject.getIdObject();
+        Object id = resultSet.getObject(dbId.getColumnName());
+        dbId.setGeneretedId(entity,id);
 
-        for (DBColumnObject columnObject : tableObject.getColumns()) {
-            Object column = resultSet.getObject(columnObject.getColumnName());
-            columnObject.setValue(entity,column);
+        for (DBColumnObject dbColumn : tableObject.getColumns()) {
+            Object column = resultSet.getObject(dbColumn.getColumnName());
+            dbColumn.setValue(entity,column);
         }
 
+//        for (DBManyToOneReference dbManyToOne : tableObject.getManyToOneReferences()) {
+//            Object manyToOne = resultSet.getObject(dbManyToOne.g)
+//        }
         return entity;
     }
 
