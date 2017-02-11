@@ -12,10 +12,10 @@ public class Pirson {
     @DBColumn(name = "PirsonID")
     private Integer Id=12;
 
-    @DBColumn
+    @DBColumn(maxLength = 100)
     private String firstname ;
 
-    @DBColumn(name = "Name")
+    @DBColumn(name = "Name", maxLength = 100)
     private String lastname ;
 
     @DBColumn(name = "CUDO_AGE")

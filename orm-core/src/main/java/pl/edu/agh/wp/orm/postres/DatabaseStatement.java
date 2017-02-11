@@ -29,5 +29,11 @@ public class DatabaseStatement {
     public static final String NULL = "IS NULL";
     public static final String NOT_NULL = "IS NOT NULL";
     public static final String IN = "IN";
+    public static final String CREATE = "CREATE";
+    public static final String UNIQUE = "UNIQUE";
+    public static final String TABLE = "TABLE";
+
+
+
 
 }

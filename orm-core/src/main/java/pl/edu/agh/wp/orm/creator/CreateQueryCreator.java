@@ -2,14 +2,12 @@ package pl.edu.agh.wp.orm.creator;
 
 
 import pl.ed.agh.wp.orm.annotations.enums.DatabaseTypes;
-import pl.ed.agh.wp.orm.annotations.enums.GenerationType;
 import pl.edu.agh.wp.orm.dto.DBColumnObject;
 import pl.edu.agh.wp.orm.dto.DBIdObject;
 import pl.edu.agh.wp.orm.dto.DBManyToOneReference;
 import pl.edu.agh.wp.orm.dto.DBTableObject;
 import pl.edu.agh.wp.orm.dto.queries.CreateQuery;
 import pl.edu.agh.wp.orm.dto.queries.DBQuery;
-import pl.edu.agh.wp.orm.exception.ORMException;
 import pl.edu.agh.wp.orm.postres.DatabaseStatement;
 
 import java.util.List;
@@ -32,7 +30,7 @@ public class CreateQueryCreator implements QueryCreator{
         handleId(query,id);
 
         handleColumns(query, columns);
-       // handleReference(query, references);
+        handleReference(query, references);
         query.doEndQuery();
         return query;
     }
@@ -48,14 +46,6 @@ public class CreateQueryCreator implements QueryCreator{
         }
     }
 
-    /*private void handleReference(DBQuery query, List<DBManyToOneReference> references){
-        for(DBManyToOneReference ref : references){
-            DatabaseTypes type = ref.getType().getType();
-            handleColumnType(query, );
-        }
-
-    }*/
-
     private void handleSimpleColumn(DBQuery query, DBColumnObject column) {
         query.appendWithSpace(",");
         query.appendWithSpace(column.getColumnName());
@@ -66,18 +56,28 @@ public class CreateQueryCreator implements QueryCreator{
             query.appendWithSpace(DatabaseStatement.UNIQUE);
     }
 
+    private void handleReference(DBQuery query, List<DBManyToOneReference> references){
+        for(DBManyToOneReference ref : references ){
+            query.appendWithSpace(",");
+            query.appendWithSpace(ref.getColumnName());
+            handleColumnType(query, ref);
+        }
+    }
+
     private void handleColumnType(DBQuery query, DBColumnObject column) {
         DatabaseTypes type = column.getConverter().getType();
         query.append(type.toString());
-        if(type == DatabaseTypes.VARCHAR || type == DatabaseTypes.CHAR)
-            query.append("(" + column.getMaxLength() + ")");
-        else if (type == DatabaseTypes.NUMERIC)
-            query.append("(" + column.getPrecision() + "," + column.getScale() + ")");
+        if(type == DatabaseTypes.VARCHAR || type == DatabaseTypes.CHAR){
+            query.append("(" + column.getMaxLength());
+            query.append(")");
+        }
+        else if (type == DatabaseTypes.NUMERIC) {
+            query.append("(" + column.getPrecision());
+            query.append(",");
+            query.append(column.getScale() + ")");
+        }
         //TODO
     }
 
 
 }
-
-
-

@@ -42,12 +42,11 @@ public class CreateQueryCreatorTest {
 
     @Test
     public void toSQLStringPhone() throws Exception {
-
+        String expected = "CREATE TABLE PhoneNumber (phone_id INTEGER, model VARCHAR(50), version VARCHAR(50), address_ID INTEGER, person_ID INTEGER);";
         DBTableObject table = mapper.getTable(PhoneNumber.class);
         QueryCreator queryCreator = new CreateQueryCreator(table);
         DBQuery query = queryCreator.createQuery(null);
-//        Assert.assertEquals(expected, query.getSQLQuery());
-
-
-    }
+        query.getSQLQuery();
+        Assert.assertEquals(expected, query.getSQLQuery());
+        }
 }
