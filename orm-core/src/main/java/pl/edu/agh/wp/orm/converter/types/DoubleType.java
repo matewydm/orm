@@ -1,28 +1,28 @@
 package pl.edu.agh.wp.orm.converter.types;
 
+
 import pl.ed.agh.wp.orm.annotations.converter.types.TypeConverter;
 import pl.ed.agh.wp.orm.annotations.enums.DatabaseTypes;
 
-public class StringType implements TypeConverter {
+public class DoubleType implements TypeConverter{
     @Override
     public Class getObjectClass() {
-        return String.class;
+        return Double.class;
     }
 
     @Override
     public DatabaseTypes getType() {
-        return DatabaseTypes.VARCHAR;
+        return DatabaseTypes.NUMERIC;
     }
 
     @Override
     public String getAsString(Object obj) {
-        String string = (String) obj;
-
-        return"'"+string.toString()+"'" ;
+        return obj.toString();
     }
 
     @Override
-    public Object getObject(String dBfield) {
-        return dBfield;
+    public Object getObject(String dbField) {
+        return Double.valueOf(dbField);
     }
 }
+

@@ -40,6 +40,7 @@ public class CreateQueryCreatorTest {
         Assert.assertEquals(expected, query.getSQLQuery());
     }
 
+    // Test z referencjami
     @Test
     public void toSQLStringPhone() throws Exception {
         String expected = "CREATE TABLE PhoneNumber (phone_id INTEGER, model VARCHAR(50), version VARCHAR(50), address_ID INTEGER, person_ID INTEGER);";

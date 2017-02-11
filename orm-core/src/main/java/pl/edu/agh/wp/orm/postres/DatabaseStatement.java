@@ -32,6 +32,7 @@ public class DatabaseStatement {
     public static final String CREATE = "CREATE";
     public static final String UNIQUE = "UNIQUE";
     public static final String TABLE = "TABLE";
+    public static final String ALTER = "ALTER";
 
 
 

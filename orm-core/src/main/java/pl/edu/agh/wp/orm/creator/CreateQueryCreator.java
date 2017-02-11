@@ -76,7 +76,7 @@ public class CreateQueryCreator implements QueryCreator{
             query.append(",");
             query.append(column.getScale() + ")");
         }
-        //TODO
+        //TODO another strange DatabaseTypes
     }
 
 

@@ -22,7 +22,7 @@ public class EntitiesRepository implements Iterable<DBTableObject> {
     }
     private Map<Class,DBTableObject> repositories;
 
-    private EntitiesRepository(){repositories = new ConcurrentHashMap<>();};
+    private EntitiesRepository(){repositories = new ConcurrentHashMap<>();}
 
 
     public void addEntity(DBTableObject table){
