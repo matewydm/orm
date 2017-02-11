@@ -6,6 +6,7 @@ import pl.edu.agh.wp.orm.creator.InsertQueryCreator;
 import pl.edu.agh.wp.orm.creator.QueryCreator;
 import pl.edu.agh.wp.orm.criterion.Criteria;
 import pl.edu.agh.wp.orm.criterion.CriteriaImpl;
+import pl.edu.agh.wp.orm.criterion.Restrictions;
 import pl.edu.agh.wp.orm.dto.DBManyToOneReference;
 import pl.edu.agh.wp.orm.dto.DBTableObject;
 import pl.edu.agh.wp.orm.dto.queries.DBQuery;
@@ -50,6 +51,14 @@ public class DefaultSession implements Session {
     }
 
     @Override
+    public Object get(Object id, Class clazz) {
+        DBTableObject table = entitiesInformation.getTable(clazz);
+        return createCriteria(clazz)
+                    .add( Restrictions.eq( table.getIdObject().getColumnName(),id ))
+                    .uniqueResult();
+    }
+
+    @Override
     public void delete(Object object) throws ORMException{
         EntitiesRepository repository = EntitiesRepository.getInstance();
         DBTableObject table = repository.getTable(object.getClass());
@@ -77,12 +86,7 @@ public class DefaultSession implements Session {
 
     @Override
     public Criteria createCriteria(Class clazz) {
-        try {
-            return new CriteriaImpl(connection.createStatement(),clazz);
-        } catch (SQLException e) {
-            throw new ORMException("",e);
-        }
-
+        return new CriteriaImpl(connection,clazz);
     }
 
      void simplySave(Object o, DBTableObject dbTableObject) {

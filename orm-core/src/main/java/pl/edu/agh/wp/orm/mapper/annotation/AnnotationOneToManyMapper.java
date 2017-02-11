@@ -11,8 +11,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class AnnotationOneToManyMapper implements OneToManyMapper {
+
     @Override
-    public List<DBOneToManyReference> getManyToOneReferences(List<Field> fields) {
+    public List<DBOneToManyReference> getOneToManyReferences (List<Field> fields) {
         List<DBOneToManyReference> objects =fields.stream()
 
                 .map(this::prepareReference).

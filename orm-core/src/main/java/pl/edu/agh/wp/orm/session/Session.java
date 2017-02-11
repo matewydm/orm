@@ -15,6 +15,8 @@ public interface Session {
 
     void update(Object object) throws ORMException;
 
+    Object get(Object id, Class clazz);
+
     void delete (Object object) throws ORMException;
 
     boolean isOpened();

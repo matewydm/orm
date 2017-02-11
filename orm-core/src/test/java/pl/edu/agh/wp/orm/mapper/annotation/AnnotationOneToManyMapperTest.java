@@ -9,15 +9,13 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.*;
-
 public class AnnotationOneToManyMapperTest {
     @Test
     public void getManyToOneReferences() throws Exception {
         OneToManyMapper mapper = new AnnotationOneToManyMapper();
         List<Field> list = new ArrayList<>();
         list.add(Person.class.getDeclaredField("address"));
-       Assert.assertNotNull(mapper.getManyToOneReferences(list));
+       Assert.assertNotNull(mapper.getOneToManyReferences(list));
     }
 
 }

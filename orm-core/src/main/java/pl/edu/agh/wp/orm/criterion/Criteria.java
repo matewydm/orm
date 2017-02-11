@@ -15,4 +15,6 @@ public interface Criteria {
     DBQuery build();
 
     List list();
+
+    Object uniqueResult();
 }
