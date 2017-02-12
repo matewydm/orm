@@ -19,11 +19,6 @@ public class DBOneToManyReference extends DBAbstractReference{
     }
 
     @Override
-    public String getColumnName() {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
     public boolean isUnique() {
         throw new UnsupportedOperationException();
     }
