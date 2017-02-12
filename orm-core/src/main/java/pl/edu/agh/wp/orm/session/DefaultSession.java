@@ -1,6 +1,7 @@
 package pl.edu.agh.wp.orm.session;
 
 import org.apache.log4j.Logger;
+import pl.edu.agh.wp.orm.creator.CreateQueryCreator;
 import pl.edu.agh.wp.orm.creator.DeleteQueryCreator;
 import pl.edu.agh.wp.orm.creator.InsertQueryCreator;
 import pl.edu.agh.wp.orm.creator.QueryCreator;
@@ -14,6 +15,7 @@ import pl.edu.agh.wp.orm.dto.repo.EntitiesRepository;
 import pl.edu.agh.wp.orm.exception.ORMException;
 import pl.edu.agh.wp.orm.exception.ORMNoSuchRecordException;
 import pl.edu.agh.wp.orm.exception.ORMNoSuchTableException;
+import pl.edu.agh.wp.orm.session.executor.impl.CreateStatementExecutor;
 import pl.edu.agh.wp.orm.session.executor.impl.DeleteStatementExecutor;
 import pl.edu.agh.wp.orm.session.executor.impl.InsertStatementExecutor;
 
@@ -101,6 +103,15 @@ public class DefaultSession implements Session {
 
 
     }
+    /*public void executeTableCreation(DBTableObject table, Object object) throws ORMException {
+        if(table != null){
+            QueryCreator queryCreator = new CreateQueryCreator(table);
+            DBQuery query = queryCreator.createQuery(object);
+            CreateStatementExecutor createExecutor = new CreateStatementExecutor(getStatement());
+            Object id = createExecutor.execute(query.getSQLQuery());
+
+        }
+    }*/
 
     public Statement getStatement() {
         try {

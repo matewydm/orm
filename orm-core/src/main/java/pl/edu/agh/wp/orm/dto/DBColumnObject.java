@@ -7,7 +7,7 @@ import pl.edu.agh.wp.orm.postres.CommonKey;
 
 import java.lang.reflect.Field;
 
-public class DBColumnObject {
+public class DBColumnObject{
 
     protected Field field;
     private String columnName;
@@ -20,8 +20,8 @@ public class DBColumnObject {
 
     public DBColumnObject(Field field) {
         this.field = field;
-        if (!this.field.isAccessible()) this.field.setAccessible(true);
-
+        if (!this.field.isAccessible())
+            this.field.setAccessible(true);
     }
 
     public String getColumnName() {
@@ -92,7 +92,7 @@ public class DBColumnObject {
     }
 
     public String getSQLStringValue(Object o){
-        Object value  =getValue(o);
+        Object value  = getValue(o);
         if(value!= null)
             return converter.getAsString(value);
         else return CommonKey.NULL;

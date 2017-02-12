@@ -7,7 +7,7 @@ public class Address {
 
     @DBId
     @DBColumn(name = "Address_ID")
-    private Long Id;
+    private Integer Id;
 
 
     @DBManyToOne

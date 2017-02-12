@@ -1,8 +1,7 @@
 package pl.edu.agh.wp.orm.converter;
 
 import pl.ed.agh.wp.orm.annotations.enums.DatabaseTypes;
-import pl.edu.agh.wp.orm.converter.types.IntegerType;
-import pl.edu.agh.wp.orm.converter.types.StringType;
+import pl.edu.agh.wp.orm.converter.types.*;
 import pl.ed.agh.wp.orm.annotations.converter.types.TypeConverter;
 import pl.edu.agh.wp.orm.exception.ORMUnsupportedTypeConvert;
 
@@ -47,6 +46,9 @@ public class DefaultTypeRegister implements TypeRegister {
     private void addRegisterDefault() {
         register(new StringType());
         register(new IntegerType());
-//        registernew
+        register(new DoubleType());
+        register(new BooleanType());
+        register(new FloatType());
+        register(new LongType());
     }
 }
