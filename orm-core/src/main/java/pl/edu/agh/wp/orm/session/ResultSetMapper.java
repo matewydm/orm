@@ -5,12 +5,10 @@ import pl.edu.agh.wp.orm.creator.QueryCreator;
 import pl.edu.agh.wp.orm.creator.SelectQueryCreator;
 import pl.edu.agh.wp.orm.criterion.Restrictions;
 import pl.edu.agh.wp.orm.criterion.queries.Criterion;
-import pl.edu.agh.wp.orm.dto.DBColumnObject;
-import pl.edu.agh.wp.orm.dto.DBIdObject;
-import pl.edu.agh.wp.orm.dto.DBManyToOneReference;
-import pl.edu.agh.wp.orm.dto.DBTableObject;
+import pl.edu.agh.wp.orm.dto.*;
 import pl.edu.agh.wp.orm.dto.repo.EntitiesRepository;
 import pl.edu.agh.wp.orm.exception.ORMException;
+import pl.edu.agh.wp.orm.mapper.annotation.AnnotationReferenceMapper;
 import pl.edu.agh.wp.orm.session.executor.impl.SelectStatementExecutor;
 
 import java.sql.Connection;
@@ -18,10 +16,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+import java.util.concurrent.ConcurrentLinkedQueue;
 
 public class ResultSetMapper{
 
+    ConcurrentLinkedQueue<Class> joinedClasses = new ConcurrentLinkedQueue<>();
     private final Connection connection;
 
     public ResultSetMapper(Connection connection) {
@@ -45,6 +46,8 @@ public class ResultSetMapper{
 
     private Object processRecord(Class entityClass, ResultSet resultSet) {
 
+        joinedClasses.add(entityClass);
+
         DBTableObject tableObject = EntitiesRepository.getInstance().getTable(entityClass);
         Object entity = tableObject.getPersistedInstance();
 
@@ -58,16 +61,28 @@ public class ResultSetMapper{
         }
 
         for (DBManyToOneReference dbManyToOne : tableObject.getManyToOneReferences()) {
-            if (dbManyToOne.getFetch().equals(DBFetchType.EAGER)) {
+            if (dbManyToOne.isEager() && !isAlreadyJoined(dbManyToOne)) {
                 Object manyToOne = getObject(resultSet,dbManyToOne.getColumnName());
 
-                QueryCreator queryCreator = new SelectQueryCreator(EntitiesRepository.getInstance().getTable(dbManyToOne.getJointedClass()));
+                QueryCreator queryCreator = new SelectQueryCreator(EntitiesRepository.getInstance().getTable(dbManyToOne.getJoinedClass()));
                 List<Criterion> idCriterion = new ArrayList<>();
                 idCriterion.add(Restrictions.eq(dbManyToOne.getColumnName(), manyToOne));
                 String sqlJoinedQuery = queryCreator.createQuery(idCriterion).getSQLQuery();
-                Object joinedEntity = uniqueResultSet(dbManyToOne.getJointedClass(), sqlJoinedQuery);
+                Object joinedEntity = uniqueResultSet(dbManyToOne.getJoinedClass(), sqlJoinedQuery);
 
                 dbManyToOne.setValue(entity, joinedEntity);
+            }
+        }
+
+        for (DBOneToManyReference dbOneToMany : tableObject.getOneToManyReference()) {
+            if (dbOneToMany.isEager() && !isAlreadyJoined(dbOneToMany)) {
+
+                QueryCreator queryCreator = new SelectQueryCreator(EntitiesRepository.getInstance().getTable(dbOneToMany.getJoinedClass()));
+                List<Criterion> idCriterion = new ArrayList<>();
+                idCriterion.add(Restrictions.eq(dbOneToMany.getColumnName(), id));
+                String sqlJoinedQuery = queryCreator.createQuery(idCriterion).getSQLQuery();
+                List joinedEntities = listResultSet(dbOneToMany.getJoinedClass(), sqlJoinedQuery);
+                dbOneToMany.setValue(entity, joinedEntities);
             }
         }
 
@@ -90,6 +105,9 @@ public class ResultSetMapper{
         }
     }
 
+    private boolean isAlreadyJoined(DBAbstractReference reference) {
+        return joinedClasses.contains(reference.getJoinedClass());
+    }
     private Statement getStatement() {
         try {
             return connection.createStatement();

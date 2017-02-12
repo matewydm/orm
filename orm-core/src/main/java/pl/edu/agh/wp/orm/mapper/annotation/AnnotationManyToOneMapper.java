@@ -6,24 +6,17 @@ import pl.ed.agh.wp.orm.annotations.DBJoinColumn;
 import pl.ed.agh.wp.orm.annotations.DBManyToOne;
 import pl.ed.agh.wp.orm.annotations.converter.types.TypeConverter;
 import pl.edu.agh.wp.orm.annotations.utilis.AnnotationUtils;
+import pl.edu.agh.wp.orm.dto.DBAbstractReference;
 import pl.edu.agh.wp.orm.dto.DBManyToOneReference;
 import pl.edu.agh.wp.orm.exception.ORMException;
 import pl.edu.agh.wp.orm.mapper.ManyToOneMapper;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class AnnotationManyToOneMapper extends TypeMatcher implements ManyToOneMapper {
-
-    private static final String defaultSuffix ="_ID";
-    public static final String nullable ="nullable";
-    public static final  String maxLength ="maxLength";
-    public static final String unique = "unique";
-    public static final String scale ="scale";
-    public static final String precision="precision";
+public class AnnotationManyToOneMapper extends AnnotationReferenceMapper implements ManyToOneMapper {
 
     @Override
     public List<DBManyToOneReference> getManyToOneReferences(List<Field> fields) {
@@ -47,12 +40,6 @@ public class AnnotationManyToOneMapper extends TypeMatcher implements ManyToOneM
         handleSimpleColumn(field,reference);
         
         return reference;
-    }
-
-    @Override
-    protected TypeConverter getType(Field field) {
-      Field id =  ReflectionUtils.getAllFields(field.getType()).stream().filter(AnnotationUtils::hasIdAnnotation).findAny().get();
-        return super.getType(id);
     }
 
     private void handleSimpleColumn(Field field, DBManyToOneReference reference) {
@@ -80,7 +67,7 @@ public class AnnotationManyToOneMapper extends TypeMatcher implements ManyToOneM
         Method m = clazz.getMethod(nullable);
         reference.setNullable((Boolean) m.getDefaultValue());
 
-        m= clazz.getMethod(maxLength);
+        m = clazz.getMethod(maxLength);
         reference.setMaxLength((Integer) m.getDefaultValue());
         m = clazz.getMethod(precision);
         reference.setPrecision((Integer) m.getDefaultValue());
@@ -93,43 +80,16 @@ public class AnnotationManyToOneMapper extends TypeMatcher implements ManyToOneM
 
     }
 
-    private void handleJoinColumnAnnotation(DBManyToOneReference reference, Field field) {
-        DBJoinColumn joinColumnAnnotation = field.getAnnotation(DBJoinColumn.class);
-        String columnName = joinColumnAnnotation.columnName();
-        String tableName = joinColumnAnnotation.tableName();
-        if(columnName.isEmpty())
-           setDefaultColumnName(reference,field);
-        else reference.setColumnName(columnName);
-
-        if(tableName.isEmpty())
-            setDefaultTableName(reference,field);
-        else reference.setJoinTable(tableName);
-
-        setDefaultJoinedClass(reference,field);
-
-
-
-
+    protected void setDefaultJoinedClass(DBAbstractReference reference, Field field) {
+        reference.setJoinedClass(field.getType());
     }
 
-    private void handleDefaultJoinColumn(DBManyToOneReference reference, Field field) {
-        setDefaultColumnName(reference,field);
-        setDefaultTableName(reference,field);
-        setDefaultJoinedClass(reference,field);
-
-
-    }
-
-    private void setDefaultJoinedClass(DBManyToOneReference reference, Field field) {
-        reference.setJointedClass(field.getType());
-    }
-
-    private void setDefaultTableName(DBManyToOneReference reference, Field field) {
+    protected void setDefaultTableName(DBAbstractReference reference, Field field) {
         String tableName = field.getType().getSimpleName();
         reference.setJoinTable(tableName);
     }
 
-    private void setDefaultColumnName(DBManyToOneReference reference, Field field) {
+    protected void setDefaultColumnName(DBAbstractReference reference, Field field) {
         String name = field.getName();
         reference.setColumnName((name+defaultSuffix));
     }

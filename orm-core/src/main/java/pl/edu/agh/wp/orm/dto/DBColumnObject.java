@@ -9,7 +9,7 @@ import java.lang.reflect.Field;
 
 public class DBColumnObject {
 
-    private Field field;
+    protected Field field;
     private String columnName;
     private boolean unique;
     private boolean nullable;

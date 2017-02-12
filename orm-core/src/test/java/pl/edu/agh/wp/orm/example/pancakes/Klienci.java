@@ -1,12 +1,10 @@
 package pl.edu.agh.wp.orm.example.pancakes;
 
-import pl.ed.agh.wp.orm.annotations.DBColumn;
-import pl.ed.agh.wp.orm.annotations.DBId;
-import pl.ed.agh.wp.orm.annotations.DBOneToMany;
-import pl.ed.agh.wp.orm.annotations.DBTable;
+import pl.ed.agh.wp.orm.annotations.*;
 import pl.ed.agh.wp.orm.annotations.enums.DBFetchType;
 
 import java.util.List;
+import java.util.Set;
 
 @DBTable
 public class Klienci {
@@ -30,6 +28,7 @@ public class Klienci {
     private String telefon;
 
     @DBOneToMany(fetch = DBFetchType.EAGER)
+    @DBJoinColumn(columnName = "idklienta")
     private List<Zamowienia> zamowienia;
 
     public List<Zamowienia> getZamowienia() {

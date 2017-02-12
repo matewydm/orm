@@ -21,6 +21,7 @@ public class Zamowienia {
     private Date datarealizacji;
 
     @DBOneToMany(fetch = DBFetchType.LAZY)
+    @DBJoinColumn(columnName = "id")
     private List<Artykuly> artykuly;
 
 

@@ -1,42 +1,23 @@
 package pl.edu.agh.wp.orm.dto;
 
 import pl.ed.agh.wp.orm.annotations.enums.DBFetchType;
+import pl.edu.agh.wp.orm.exception.ORMException;
 
-public class DBOneToManyReference {
-    private String column;
-    private String joinTable;
-    private Class jointedClass;
-    private DBFetchType fetch;
+import java.lang.reflect.Field;
+import java.util.Arrays;
+import java.util.Collection;
 
-    public String getColumn() {
-        return column;
+public class DBOneToManyReference extends DBAbstractReference{
+
+    public DBOneToManyReference(Field field) {
+        super(field);
     }
 
-    public void setColumn(String column) {
-        this.column = column;
-    }
-
-    public String getJoinTable() {
-        return joinTable;
-    }
-
-    public void setJoinTable(String joinTable) {
-        this.joinTable = joinTable;
-    }
-
-    public Class getJointedClass() {
-        return jointedClass;
-    }
-
-    public void setJointedClass(Class jointedClass) {
-        this.jointedClass = jointedClass;
-    }
-
-    public DBFetchType getFetch() {
-        return fetch;
-    }
-
-    public void setFetch(DBFetchType fetch) {
-        this.fetch = fetch;
+    public void setValue(Object entity,Object dataBaseField){
+        try {
+            field.set(entity,dataBaseField);
+        } catch (IllegalAccessException   e) {
+            throw new ORMException("Cannot set Object ",e);
+        }
     }
 }

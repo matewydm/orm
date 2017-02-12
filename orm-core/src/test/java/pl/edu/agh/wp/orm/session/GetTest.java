@@ -6,14 +6,9 @@ import org.junit.Test;
 import pl.edu.agh.wp.orm.configuration.Configuration;
 import pl.edu.agh.wp.orm.example.Address;
 import pl.edu.agh.wp.orm.example.Person;
+import pl.edu.agh.wp.orm.example.pancakes.Klienci;
+import pl.edu.agh.wp.orm.example.pancakes.Zamowienia;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-
-/**
- * Created by mucha on 12.02.2017.
- */
 public class GetTest {
 
     Session session;
@@ -34,7 +29,12 @@ public class GetTest {
     @Test
     public void getTest1() throws Exception {
         Object expectedId = 1;
-        Person person = (Person) session.get(expectedId,Person.class);
-        Assert.assertEquals(person.getId(),expectedId);
+        Zamowienia zamowienia = (Zamowienia) session.get(expectedId,Zamowienia.class);
+    }
+
+    @Test
+    public void getTest2() throws Exception {
+        Object expectedId = 1;
+        Klienci klienci = (Klienci) session.get(expectedId,Klienci.class);
     }
 }
