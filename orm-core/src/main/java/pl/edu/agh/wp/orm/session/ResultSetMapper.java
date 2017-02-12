@@ -64,10 +64,7 @@ public class ResultSetMapper{
             if (dbManyToOne.isEager() && !isAlreadyJoined(dbManyToOne)) {
                 Object manyToOne = getObject(resultSet,dbManyToOne.getColumnName());
 
-                QueryCreator queryCreator = new SelectQueryCreator(EntitiesRepository.getInstance().getTable(dbManyToOne.getJoinedClass()));
-                List<Criterion> idCriterion = new ArrayList<>();
-                idCriterion.add(Restrictions.eq(dbManyToOne.getColumnName(), manyToOne));
-                String sqlJoinedQuery = queryCreator.createQuery(idCriterion).getSQLQuery();
+                String sqlJoinedQuery = selectSqlQuery(dbManyToOne,manyToOne);
                 Object joinedEntity = uniqueResultSet(dbManyToOne.getJoinedClass(), sqlJoinedQuery);
 
                 dbManyToOne.setValue(entity, joinedEntity);
@@ -77,16 +74,20 @@ public class ResultSetMapper{
         for (DBOneToManyReference dbOneToMany : tableObject.getOneToManyReference()) {
             if (dbOneToMany.isEager() && !isAlreadyJoined(dbOneToMany)) {
 
-                QueryCreator queryCreator = new SelectQueryCreator(EntitiesRepository.getInstance().getTable(dbOneToMany.getJoinedClass()));
-                List<Criterion> idCriterion = new ArrayList<>();
-                idCriterion.add(Restrictions.eq(dbOneToMany.getColumnName(), id));
-                String sqlJoinedQuery = queryCreator.createQuery(idCriterion).getSQLQuery();
+                String sqlJoinedQuery = selectSqlQuery(dbOneToMany,id);
                 List joinedEntities = listResultSet(dbOneToMany.getJoinedClass(), sqlJoinedQuery);
                 dbOneToMany.setValue(entity, joinedEntities);
             }
         }
 
         return entity;
+    }
+
+    private String selectSqlQuery(DBAbstractReference reference, Object idValue) {
+        QueryCreator queryCreator = new SelectQueryCreator(EntitiesRepository.getInstance().getTable(reference.getJoinedClass()));
+        List<Criterion> idCriterion = new ArrayList<>();
+        idCriterion.add(Restrictions.eq(reference.getColumnName(), idValue));
+        return queryCreator.createQuery(idCriterion).getSQLQuery();
     }
 
     private Object getObject(ResultSet resultSet,String columnLabel) {
@@ -108,6 +109,7 @@ public class ResultSetMapper{
     private boolean isAlreadyJoined(DBAbstractReference reference) {
         return joinedClasses.contains(reference.getJoinedClass());
     }
+
     private Statement getStatement() {
         try {
             return connection.createStatement();
