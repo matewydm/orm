@@ -32,7 +32,7 @@ public class AnnotationDatabaseObjectMapper implements DatabaseObjectMapper {
                 throw new ORMException("Class not found",e);
             }
             DBTableObject table = mapper.getTable(clazz);
-             entities.addEntity(table);
+            entities.addEntity(table);
       }
       return entities;
 

@@ -40,11 +40,11 @@ public class UpdateTest {
         session.update(nonExistent);
     }
 
-//    @Test
-//    public void updateTest() throws Exception {
-//        Person person = new Person();
-//        person.setId(5);
-//        session.save(person);
-//        session.update(person);
-//    }
+    @Test
+    public void updateTest() throws Exception {
+        Person person = new Person();
+        person.setId(16);
+        session.save(person);
+        session.update(person);
+    }
 }

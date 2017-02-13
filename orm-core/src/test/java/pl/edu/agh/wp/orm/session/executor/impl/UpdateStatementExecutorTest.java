@@ -29,14 +29,24 @@ public class UpdateStatementExecutorTest {
         date = new java.sql.Date((new Date()).getTime()).toString();
 
     }
-//
-//    @Test
-//    public void execute() throws Exception {
-//        String sqlString = "UPDATE czekoladki SET name = 'Dare' WHERE idczekoladki = 'b01';";
-//        Connection connection = factory.openSession().getConnection();
-//        Statement st = connection.createStatement();
-//        UpdateStatementExecutor executor = new UpdateStatementExecutor(st);
-//        Object o = executor.execute(sqlString);
-//        Assert.assertNotNull(o);
-//    }
+
+    @Test
+    public void execute() throws Exception {
+        String sqlString = "UPDATE Person SET name = 'Darenie' WHERE per_id = 15;";
+        Connection connection = factory.openSession().getConnection();
+        Statement st = connection.createStatement();
+        UpdateStatementExecutor executor = new UpdateStatementExecutor(st);
+        Object o = executor.execute(sqlString);
+        Assert.assertNotNull(o);
+    }
+
+    @Test
+    public void execute1() throws Exception{
+        String sqlString = "Update Czekoladki SET nazwa = 'Dare' where idczekoladki = 'b01';";
+        Connection connection = factory.openSession().getConnection();
+        Statement st = connection.createStatement();
+        UpdateStatementExecutor executor = new UpdateStatementExecutor(st);
+        Object o = executor.execute(sqlString);
+        Assert.assertNotNull(o);
+    }
 }

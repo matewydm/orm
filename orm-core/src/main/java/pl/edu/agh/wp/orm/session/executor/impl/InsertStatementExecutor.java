@@ -16,7 +16,6 @@ public class InsertStatementExecutor extends StatementExecutor{
 
     public Object execute(String sql) {
         try {
-
              statement.execute(sql,Statement.RETURN_GENERATED_KEYS);
              ResultSet rs = statement.getGeneratedKeys();
              if(rs.next())

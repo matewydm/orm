@@ -86,6 +86,14 @@ public class DefaultSession implements Session {
     }
 
     @Override
+    public void create(Object object){
+        EntitiesRepository repository = EntitiesRepository.getInstance();
+        DBTableObject table = repository.getTable(object.getClass());
+        executeTableCreation(table,object);
+    }
+
+
+    @Override
     public Object get(Object id, Class clazz) {
         DBTableObject table = entitiesInformation.getTable(clazz);
         return createCriteria(clazz)

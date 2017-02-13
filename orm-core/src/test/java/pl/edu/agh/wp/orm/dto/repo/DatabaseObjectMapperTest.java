@@ -15,8 +15,6 @@ public class DatabaseObjectMapperTest {
     @Before
     public void setUp() throws Exception {
         tableMapper = factory.getMapper();
-
-
     }
 
     @Test
