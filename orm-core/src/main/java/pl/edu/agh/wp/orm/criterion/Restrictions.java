@@ -1,17 +1,21 @@
 package pl.edu.agh.wp.orm.criterion;
 
 import pl.edu.agh.wp.orm.criterion.queries.*;
-import pl.edu.agh.wp.orm.postres.DatabaseStatement;
+import pl.edu.agh.wp.orm.criterion.queries.logical.ConjunctionCriterion;
+import pl.edu.agh.wp.orm.criterion.queries.logical.DisjunctionCriterion;
+import pl.edu.agh.wp.orm.criterion.queries.nullable.IsNotNullCriterion;
+import pl.edu.agh.wp.orm.criterion.queries.nullable.IsNullCriterion;
+import pl.edu.agh.wp.orm.criterion.queries.simple.*;
 
 public class Restrictions {
 
 
     public static Criterion and(Criterion left, Criterion right){
-        return new LogicalCriterion(left,right, DatabaseStatement.AND);
+        return new ConjunctionCriterion(left,right);
     }
 
     public static Criterion or(AbstractCriterion left, AbstractCriterion right){
-        return new LogicalCriterion(left,right, DatabaseStatement.OR);
+        return new DisjunctionCriterion(left,right);
     }
 
     public static Criterion in(String column, Object[] array){
@@ -19,35 +23,35 @@ public class Restrictions {
     }
 
     public static Criterion gt(String column, Object value){
-        return new SimpleCriterion(column,value,DatabaseStatement.GREATER);
+        return new GtCriterion(column,value);
     }
 
     public static Criterion ge(String column, Object value){
-        return new SimpleCriterion(column,value,DatabaseStatement.GREATER_EQUAL);
+        return new GeCriterion(column,value);
     }
 
     public static Criterion lt(String column, Object value){
-        return new SimpleCriterion(column,value,DatabaseStatement.LESS);
+        return new LtCriterion(column,value);
     }
 
     public static Criterion le(String column, Object value){
-        return new SimpleCriterion(column,value,DatabaseStatement.LESS_EQUAL);
+        return new LqCriterion(column,value);
     }
 
     public static Criterion eq(String column, Object value){
-        return new SimpleCriterion(column,value,DatabaseStatement.EQUAL);
+        return new EqCriterion(column,value);
     }
 
     public static Criterion isNull(String column){
-        return new NullCriterion(column,DatabaseStatement.NULL);
+        return new IsNullCriterion(column);
     }
 
     public static Criterion isNotNull(String column){
-        return new NullCriterion(column,DatabaseStatement.NOT_NULL);
+        return new IsNotNullCriterion(column);
     }
 
     public static Criterion like(String column, Object value) {
-        return new SimpleCriterion(column,value,DatabaseStatement.LIKE);
+        return new LikeCriterion(column,value);
     }
 
     public static Criterion between(String column, Object minValue, Object maxValue) {

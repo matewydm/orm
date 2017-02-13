@@ -54,6 +54,7 @@ public class ResultSetMapper{
         DBIdObject dbId = tableObject.getIdObject();
         Object id = getObject(resultSet,dbId.getColumnName());
         dbId.setGeneretedId(entity, id);
+        dbId.addPersistedId(id);
 
         for (DBColumnObject dbColumn : tableObject.getColumns()) {
             Object column = getObject(resultSet,dbColumn.getColumnName());
