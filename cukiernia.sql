@@ -1,4 +1,5 @@
 CREATE TABLE artykuly (
+    id_artkuly serial,
     idzamowienia integer NOT NULL,
     idpudelka character(4) NOT NULL,
     sztuk integer NOT NULL
