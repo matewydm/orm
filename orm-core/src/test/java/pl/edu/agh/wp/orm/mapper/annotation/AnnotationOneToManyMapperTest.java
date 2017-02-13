@@ -3,6 +3,7 @@ package pl.edu.agh.wp.orm.mapper.annotation;
 import org.junit.Assert;
 import org.junit.Test;
 import pl.edu.agh.wp.orm.example.Person;
+import pl.edu.agh.wp.orm.example.pancakes.Zamowienia;
 import pl.edu.agh.wp.orm.mapper.OneToManyMapper;
 
 import java.lang.reflect.Field;
@@ -14,7 +15,7 @@ public class AnnotationOneToManyMapperTest {
     public void getManyToOneReferences() throws Exception {
         OneToManyMapper mapper = new AnnotationOneToManyMapper();
         List<Field> list = new ArrayList<>();
-        list.add(Person.class.getDeclaredField("address"));
+        list.add(Zamowienia.class.getDeclaredField("artykuly"));
        Assert.assertNotNull(mapper.getOneToManyReferences(list));
     }
 

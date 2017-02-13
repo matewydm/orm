@@ -24,7 +24,7 @@ public class CreateQueryCreatorTest {
 
     @Test
     public void toSQLString() throws Exception {
-        String expected = "CREATE TABLE Pirson (PirsonID INTEGER, CUDO_AGE INTEGER, Name VARCHAR(100), firstname VARCHAR(100), date DATE);";
+        String expected = "CREATE TABLE Pirson (PirsonID INTEGER PRIMARY KEY , CUDO_AGE INTEGER, Name VARCHAR(100), firstname VARCHAR(100), date DATE);";
         DBTableObject table = mapper.getTable(Pirson.class);
         QueryCreator queryCreator = new CreateQueryCreator(table);
         DBQuery query = queryCreator.createQuery(null);
@@ -33,7 +33,7 @@ public class CreateQueryCreatorTest {
 
     @Test
     public void toSQLStringPerson() throws Exception {
-        String expected = "CREATE TABLE Person (per_id INTEGER, lastname VARCHAR(50), age INTEGER, birth_date DATE, name VARCHAR(50));";
+        String expected = "CREATE TABLE Person (per_id INTEGER PRIMARY KEY , lastname VARCHAR(50), age INTEGER, birth_date DATE, name VARCHAR(50));";
         DBTableObject table = mapper.getTable(Person.class);
         QueryCreator queryCreator = new CreateQueryCreator(table);
         DBQuery query = queryCreator.createQuery(null);
@@ -43,7 +43,7 @@ public class CreateQueryCreatorTest {
     // Test z referencjami
     @Test
     public void toSQLStringPhone() throws Exception {
-        String expected = "CREATE TABLE PhoneNumber (phone_id INTEGER, model VARCHAR(50), version VARCHAR(50), address_ID INTEGER, person_ID INTEGER);";
+        String expected = "CREATE TABLE PhoneNumber (phone_id INTEGER PRIMARY KEY , model VARCHAR(50), version VARCHAR(50), person_ID INTEGER);";
         DBTableObject table = mapper.getTable(PhoneNumber.class);
         QueryCreator queryCreator = new CreateQueryCreator(table);
         DBQuery query = queryCreator.createQuery(null);
