@@ -54,7 +54,6 @@ public class Configuration {
     }
 
     public SessionFactory buildSessionFactory() {
-        validateProperties();
         if(enabledAnnotation){
             ORMFactory ormFactory = new AnnotationORMFactory();
             TableMapper mapper = ormFactory.getMapper();
@@ -63,10 +62,6 @@ public class Configuration {
         }else{
             throw new ORMException("Enable Annotation processing");
         }
-    }
-
-    private void validateProperties(){
-        //TODO sprawdz czy sa wszystkie jak nie to rzuc wyjatek
     }
 
     public String getProperty(String key) {
