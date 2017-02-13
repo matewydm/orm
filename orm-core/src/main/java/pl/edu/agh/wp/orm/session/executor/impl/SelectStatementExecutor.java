@@ -28,8 +28,6 @@ public class SelectStatementExecutor extends StatementExecutor{
     }
 
     public ResultSet execute(String sqlQuery) {
-        ResultSet resultSet;
-        List<Object> outputList = new ArrayList<>();
         try {
             return statement.executeQuery(sqlQuery);
         } catch (SQLException e) {

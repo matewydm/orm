@@ -20,7 +20,7 @@ public class IntegerType implements TypeConverter {
     }
 
     @Override
-    public Object getObject(String dbfield) {
-        return Integer.valueOf(dbfield);
+    public Object getObject(String dbField) {
+        return Integer.valueOf(dbField);
     }
 }

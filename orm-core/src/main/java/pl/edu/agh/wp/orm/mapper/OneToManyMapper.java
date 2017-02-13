@@ -6,6 +6,6 @@ import java.lang.reflect.Field;
 import java.util.List;
 
 public interface OneToManyMapper {
-    List<DBOneToManyReference> getManyToOneReferences(List<Field> fields);
+    List<DBOneToManyReference> getOneToManyReferences(List<Field> fields);
 
 }

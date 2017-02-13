@@ -44,10 +44,10 @@ public class Person {
         this.date = date;
     }
 
-    @DBColumn(name = "name")
+    @DBColumn(name = "name", maxLength = 50)
     private String firstname ;
 
-    @DBColumn(name = "lastname")
+    @DBColumn(name = "lastname", maxLength = 50)
     private String lastname ;
 
     @DBColumn(name = "age")

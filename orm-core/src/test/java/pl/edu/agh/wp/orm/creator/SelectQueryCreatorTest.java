@@ -6,8 +6,10 @@ import org.junit.Test;
 import pl.edu.agh.wp.orm.criterion.Restrictions;
 import pl.edu.agh.wp.orm.criterion.queries.AbstractCriterion;
 import pl.edu.agh.wp.orm.criterion.queries.Criterion;
+import pl.edu.agh.wp.orm.dto.DBTableObject;
 import pl.edu.agh.wp.orm.dto.queries.DBQuery;
 import pl.edu.agh.wp.orm.example.Person;
+import pl.edu.agh.wp.orm.example.PhoneNumber;
 import pl.edu.agh.wp.orm.mapper.TableMapper;
 import pl.edu.agh.wp.orm.mapper.factory.AnnotationORMFactory;
 import pl.edu.agh.wp.orm.mapper.factory.ORMFactory;
@@ -39,5 +41,6 @@ public class SelectQueryCreatorTest {
         DBQuery query = queryCreator.createQuery(criterionList);
         Assert.assertEquals(expected,query.getSQLQuery());
     }
+
 
 }

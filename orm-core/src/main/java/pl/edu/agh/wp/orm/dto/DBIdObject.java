@@ -1,7 +1,6 @@
 package pl.edu.agh.wp.orm.dto;
 
 import pl.ed.agh.wp.orm.annotations.converter.types.TypeConverter;
-import pl.ed.agh.wp.orm.annotations.enums.DatabaseTypes;
 import pl.ed.agh.wp.orm.annotations.enums.GenerationType;
 import pl.edu.agh.wp.orm.exception.ORMException;
 import pl.edu.agh.wp.orm.postres.CommonKey;
@@ -19,7 +18,7 @@ public class DBIdObject {
     private GenerationType generationType;
     private String sequenceName;
     private TypeConverter converter;
-    private List<Object> persistetIds = new ArrayList<>();
+    private List<Object> persistedIds = new ArrayList<>();
     public Field getField() {
         return field;
     }
@@ -93,6 +92,6 @@ public class DBIdObject {
     }
 
     public void addPersistedId(Object o){
-        persistetIds.add(o);
+        persistedIds.add(o);
     }
 }

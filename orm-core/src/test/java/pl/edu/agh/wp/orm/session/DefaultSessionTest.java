@@ -7,6 +7,7 @@ import pl.ed.agh.wp.orm.annotations.DBTable;
 import pl.edu.agh.wp.orm.configuration.Configuration;
 import pl.edu.agh.wp.orm.dto.DBTableObject;
 import pl.edu.agh.wp.orm.dto.repo.EntitiesRepository;
+import pl.edu.agh.wp.orm.example.Address;
 import pl.edu.agh.wp.orm.example.Person;
 
 import static org.junit.Assert.*;
@@ -22,6 +23,18 @@ public class DefaultSessionTest {
         session.simplySave(p,dbTable);
 
         Assert.assertNotNull(p.getId());
+    }
+
+    @Test
+    public void simplySaveTest2() throws Exception {
+        DefaultSession session = (DefaultSession) factory.openSession();
+        Address a = new Address();
+
+        DBTableObject dbTable = EntitiesRepository.getInstance().getTable(a.getClass());
+
+        session.simplySave(a,dbTable);
+
+        Assert.assertNotNull(a.getId());
     }
 
     @Before

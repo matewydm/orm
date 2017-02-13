@@ -12,8 +12,6 @@ public abstract class StatementExecutor<T extends Object> {
 
     protected final Statement statement;
 
-
-
     public StatementExecutor(Statement statement){
 
         this.statement = statement;

@@ -1,42 +1,70 @@
 package pl.edu.agh.wp.orm.dto;
 
-import pl.ed.agh.wp.orm.annotations.enums.DBFetchType;
+import pl.edu.agh.wp.orm.exception.ORMException;
 
-public class DBOneToManyReference {
-    private String column;
-    private String joinTable;
-    private Class jointedClass;
-    private DBFetchType fetch;
+import java.lang.reflect.Field;
 
-    public String getColumn() {
-        return column;
+public class DBOneToManyReference extends DBAbstractReference{
+
+    public DBOneToManyReference(Field field) {
+        super(field);
     }
 
-    public void setColumn(String column) {
-        this.column = column;
+    public void setValue(Object entity,Object dataBaseField){
+        try {
+            field.set(entity,dataBaseField);
+        } catch (IllegalAccessException   e) {
+            throw new ORMException("Cannot set Object ",e);
+        }
     }
 
-    public String getJoinTable() {
-        return joinTable;
+    @Override
+    public boolean isUnique() {
+        throw new UnsupportedOperationException();
     }
 
-    public void setJoinTable(String joinTable) {
-        this.joinTable = joinTable;
+    @Override
+    public boolean isNullable() {
+        throw new UnsupportedOperationException();
     }
 
-    public Class getJointedClass() {
-        return jointedClass;
+    @Override
+    public int getMaxLength() {
+        throw new UnsupportedOperationException();
     }
 
-    public void setJointedClass(Class jointedClass) {
-        this.jointedClass = jointedClass;
+    @Override
+    public int getScale() {
+        throw new UnsupportedOperationException();
     }
 
-    public DBFetchType getFetch() {
-        return fetch;
+    @Override
+    public int getPrecision() {
+        throw new UnsupportedOperationException();
     }
 
-    public void setFetch(DBFetchType fetch) {
-        this.fetch = fetch;
+    @Override
+    public void setUnique(boolean unique) {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public void setNullable(boolean nullable) {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public void setMaxLength(int maxLength) {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public void setScale(int scale) {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public void setPrecision(int precision) {
+        throw new UnsupportedOperationException();
     }
 }

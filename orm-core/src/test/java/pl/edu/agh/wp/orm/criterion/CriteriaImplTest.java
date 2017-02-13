@@ -4,6 +4,8 @@ import org.junit.Before;
 import org.junit.Test;
 import pl.edu.agh.wp.orm.configuration.Configuration;
 import pl.edu.agh.wp.orm.example.Person;
+import pl.edu.agh.wp.orm.example.pancakes.Klienci;
+import pl.edu.agh.wp.orm.example.pancakes.Zamowienia;
 import pl.edu.agh.wp.orm.session.Session;
 import pl.edu.agh.wp.orm.session.SessionFactory;
 
@@ -40,5 +42,19 @@ public class CriteriaImplTest {
                         Restrictions.between("age",0,20)) )
                 .add( Restrictions.like("lastname","%"))
                 .list();
+    }
+
+    @Test
+    public void executeEmpty() throws Exception {
+        Session session = factory.openSession();
+
+        List person = session.createCriteria(Person.class).list();
+    }
+
+    @Test
+    public void executeTest2() throws Exception {
+        Session session = factory.openSession();
+
+        List zamowienia = session.createCriteria(Zamowienia.class).list();
     }
 }
