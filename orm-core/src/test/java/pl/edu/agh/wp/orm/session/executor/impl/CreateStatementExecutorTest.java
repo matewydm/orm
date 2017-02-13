@@ -13,6 +13,7 @@ import java.sql.Statement;
 
 public class CreateStatementExecutorTest {
     SessionFactory factory;
+
     @Before
     public void setUp() throws Exception {
         Configuration configuration = new Configuration()
