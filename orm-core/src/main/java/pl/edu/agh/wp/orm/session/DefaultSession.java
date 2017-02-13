@@ -64,6 +64,12 @@ public class DefaultSession implements Session {
 
         for (DBOneToManyReference ref : table.getOneToManyReference()){
             Object value = ref.getValue(object);
+            if(value != null && !savedClass.contains(ref.getJoinedClass())){
+                Iterable<Object> it = (Iterable) value;
+                for (Object listElement : it) {
+                    save(listElement);
+                }
+            }
 
         }
     }
