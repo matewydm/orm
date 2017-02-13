@@ -31,10 +31,10 @@ public class Person {
     public void setAge(Integer age) {
         this.age = age;
     }
-
-    public void setAddress(List<Address> address) {
-        this.address = address;
-    }
+//
+//    public void setAddress(List<Address> address) {
+//        this.address = address;
+//    }
 
     public void setTransients(Integer transients) {
         this.transients = transients;
@@ -53,8 +53,8 @@ public class Person {
     @DBColumn(name = "age")
     private Integer age;
 
-    @DBOneToMany
-    private List<Address> address;
+//    @DBOneToMany
+//    private List<Address> address;
     private Integer transients;
 
     @DBColumn(name = "birth_date")
@@ -62,7 +62,7 @@ public class Person {
     private Date date ;
     public Person(){
 
-        address= new ArrayList<>();
+//        address= new ArrayList<>();
         firstname ="Mati";
         lastname ="xd";
         age = 20;
@@ -70,7 +70,7 @@ public class Person {
     }
 
     public Person(String fName,String lName){
-        address= new ArrayList<>();
+//        address= new ArrayList<>();
 
         firstname = fName;
         lastname =lName;

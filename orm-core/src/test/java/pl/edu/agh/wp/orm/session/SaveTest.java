@@ -40,7 +40,7 @@ public class SaveTest {
 
         addressList.add(new Address());
         addressList.add(new Address());
-        person.setAddress(addressList);
+//        person.setAddress(addressList);
 
         session.save(person);
 

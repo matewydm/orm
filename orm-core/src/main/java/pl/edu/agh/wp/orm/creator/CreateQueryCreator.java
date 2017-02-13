@@ -37,7 +37,8 @@ public class CreateQueryCreator implements QueryCreator{
 
     private void handleId(DBQuery query, DBIdObject id){
         query.appendWithSpace(id.getColumnName());
-        query.append(id.getConverter().getType().toString());
+        query.appendWithSpace(id.getConverter().getType().toString());
+        query.appendWithSpace("PRIMARY KEY");
     }
 
     private void handleColumns(DBQuery query, List<DBColumnObject> columns) {

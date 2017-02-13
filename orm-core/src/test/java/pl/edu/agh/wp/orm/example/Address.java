@@ -2,7 +2,6 @@ package pl.edu.agh.wp.orm.example;
 
 import pl.ed.agh.wp.orm.annotations.*;
 
-@DBTable
 public class Address {
 
     @DBId

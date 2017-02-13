@@ -18,8 +18,6 @@ public class PhoneNumber {
     @DBManyToOne
     private Person person;
 
-    @DBManyToOne
-    private Address address;
 
     public Integer getId() {
         return id;
@@ -53,11 +51,4 @@ public class PhoneNumber {
         this.person = person;
     }
 
-    public Address getAddress() {
-        return address;
-    }
-
-    public void setAddress(Address address) {
-        this.address = address;
-    }
 }
