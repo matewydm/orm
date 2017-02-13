@@ -45,12 +45,6 @@ public class DefaultSession implements Session {
     public void save(Object object) {
         Set<Class>  savedClass =  new HashSet<>();
         save(object,savedClass);
-        EntitiesRepository repository = EntitiesRepository.getInstance();
-        DBTableObject table = repository.getTable(object.getClass());
-        List<DBManyToOneReference> referenceList = table.getManyToOneReferences();
-        for (DBManyToOneReference reference : referenceList) {
-//
-        }
     }
 
     private void save(Object object, Set<Class> savedClass) {
@@ -86,14 +80,6 @@ public class DefaultSession implements Session {
     }
 
     @Override
-    public void create(Object object){
-        EntitiesRepository repository = EntitiesRepository.getInstance();
-        DBTableObject table = repository.getTable(object.getClass());
-        executeTableCreation(table,object);
-    }
-
-
-    @Override
     public Object get(Object id, Class clazz) {
         DBTableObject table = entitiesInformation.getTable(clazz);
         return createCriteria(clazz)
@@ -116,6 +102,33 @@ public class DefaultSession implements Session {
             logger.error(e);
         }
         return false;
+    }
+
+    @Override
+    public void beginTransaction() {
+        try {
+            connection.setAutoCommit(false);
+        } catch (SQLException e) {
+            throw new ORMException("Cannot begin transation", e);
+        }
+    }
+
+    @Override
+    public void rollback() {
+        try {
+            connection.rollback();
+        } catch (SQLException e) {
+            throw new ORMException("Cannot rollback action", e);
+        }
+    }
+
+    @Override
+    public void commit() {
+        try {
+            connection.commit();
+        } catch (SQLException e) {
+            throw new ORMException("Cannot commit action", e);
+        }
     }
 
     @Override

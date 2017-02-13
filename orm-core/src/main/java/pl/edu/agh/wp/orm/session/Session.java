@@ -22,6 +22,12 @@ public interface Session {
 
     boolean isOpened();
 
+    void beginTransaction();
+
+    void rollback();
+
+    void commit();
+
     void close();
 
     Criteria createCriteria(Class clazz);
