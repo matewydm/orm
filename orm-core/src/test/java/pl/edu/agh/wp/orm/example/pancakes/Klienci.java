@@ -29,13 +29,13 @@ public class Klienci {
 
     @DBOneToMany(fetch = DBFetchType.EAGER)
     @DBJoinColumn(columnName = "idklienta")
-    private List<Zamowienia> zamowienia;
+    private Set<Zamowienia> zamowienia;
 
-    public List<Zamowienia> getZamowienia() {
+    public Set<Zamowienia> getZamowienia() {
         return zamowienia;
     }
 
-    public void setZamowienia(List<Zamowienia> zamowienia) {
+    public void setZamowienia(Set<Zamowienia> zamowienia) {
         this.zamowienia = zamowienia;
     }
 
