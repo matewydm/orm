@@ -84,13 +84,13 @@ public class DefaultSession implements Session {
         executeUpdate(table,object);
 
     }
-
-    @Override
-    public void create(Object object){
-        EntitiesRepository repository = EntitiesRepository.getInstance();
-        DBTableObject table = repository.getTable(object.getClass());
-        executeTableCreation(table,object);
-    }
+//
+//    @Override
+//    public void create(Object object){
+//        EntitiesRepository repository = EntitiesRepository.getInstance();
+//        DBTableObject table = repository.getTable(object.getClass());
+//        executeTableCreation(table,object);
+//    }
 
 
     @Override

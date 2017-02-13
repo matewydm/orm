@@ -1,8 +1,10 @@
 package pl.edu.agh.wp.orm.creator;
 
 
+import pl.ed.agh.wp.orm.annotations.DBManyToOne;
 import pl.ed.agh.wp.orm.annotations.DBTable;
 import pl.edu.agh.wp.orm.configuration.Configuration;
+import pl.edu.agh.wp.orm.dto.DBManyToOneReference;
 import pl.edu.agh.wp.orm.dto.DBTableObject;
 import pl.edu.agh.wp.orm.dto.queries.DBQuery;
 import pl.edu.agh.wp.orm.dto.repo.EntitiesRepository;
@@ -24,13 +26,19 @@ public class DatabaseCreator{
 
         configuration.buildSessionFactory();
         List<DBQuery> queryList = new ArrayList<>();
-
+        List<DBQuery> alterList = new ArrayList<>();
         for (DBTableObject object : EntitiesRepository.getInstance()){
             QueryCreator queryCreator = new CreateQueryCreator(object);
             DBQuery query = queryCreator.createQuery(null);
-            query.getSQLQuery();
             queryList.add(query);
+            for(DBManyToOneReference ref: object.getManyToOneReferences()) {
+                QueryCreator alterCreator = new AlterQueryCreator(object,ref);
+                alterList.add(alterCreator.createQuery(null));
+            }
+
         }
+        System.out.println("da");
+
     }
 
     }
