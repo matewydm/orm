@@ -2,6 +2,7 @@ package pl.edu.agh.wp.orm.session;
 
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import pl.ed.agh.wp.orm.annotations.DBTable;
 import pl.edu.agh.wp.orm.configuration.Configuration;
@@ -21,6 +22,7 @@ import static org.junit.Assert.*;
 
 public class DefaultSessionTest {
     SessionFactory factory;
+
     @Test
     public void simplySaveTest() throws Exception {
         DefaultSession session = (DefaultSession) factory.openSession();
@@ -32,17 +34,17 @@ public class DefaultSessionTest {
         Assert.assertNotNull(p.getId());
     }
 
-//    @Test
-//    public void simplySaveTest2() throws Exception {
-//        DefaultSession session = (DefaultSession) factory.openSession();
-//        Address a = new Address();
-//
-//        DBTableObject dbTable = EntitiesRepository.getInstance().getTable(a.getClass());
-//
-//        session.simplySave(a,dbTable);
-//
-//        Assert.assertNotNull(a.getId());
-//    }
+    @Ignore
+    public void simplySaveTest2() throws Exception {
+        DefaultSession session = (DefaultSession) factory.openSession();
+        Address a = new Address();
+
+        DBTableObject dbTable = EntitiesRepository.getInstance().getTable(a.getClass());
+
+        session.simplySave(a,dbTable);
+
+        Assert.assertNotNull(a.getId());
+    }
 
     @Test
     public void saveTest() throws Exception {
@@ -56,7 +58,6 @@ public class DefaultSessionTest {
         zamowienia.setArtykuly(articles);
         a.setZamowienia(zamowienia);
         session.save(zamowienia);
-
 
     }
 

@@ -1,5 +1,6 @@
 package pl.edu.agh.wp.orm.creator;
 
+import pl.ed.agh.wp.orm.annotations.DBColumn;
 import pl.edu.agh.wp.orm.dto.DBColumnObject;
 import pl.edu.agh.wp.orm.dto.DBIdObject;
 import pl.edu.agh.wp.orm.dto.DBManyToOneReference;
@@ -10,27 +11,22 @@ import pl.edu.agh.wp.orm.dto.queries.DBQuery;
 
 import java.util.List;
 
-public class AlterQueryCreator extends QueryCreator{
+public class AlterQueryCreator implements QueryCreator {
     private DBTableObject tableObject;
-
-    public AlterQueryCreator(DBTableObject tableObject){
+    private DBManyToOneReference reference;
+    public AlterQueryCreator(DBTableObject tableObject,DBManyToOneReference ref){
         this.tableObject = tableObject;
+        this.reference = ref;
     }
 
     @Override
     public DBQuery createQuery(Object object) {
-        DBQuery query = new AlterQuery(tableObject.getFullName());
+        DBQuery query = new AlterQuery(tableObject.getFullName(),reference.getColumnName(),reference.getJoinTable());
         query.doStartQuery();
-        List<DBManyToOneReference> references = tableObject.getManyToOneReferences();
-        DBIdObject id = tableObject.getIdObject();
-        handleId(query,id);
-
-        handleColumns(query, columns);
-        handleReference(query, references);
         query.doEndQuery();
         return query;
     }
-    }
+
 
 
 }

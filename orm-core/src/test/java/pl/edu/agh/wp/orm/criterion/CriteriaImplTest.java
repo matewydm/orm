@@ -1,5 +1,6 @@
 package pl.edu.agh.wp.orm.criterion;
 
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import pl.edu.agh.wp.orm.configuration.Configuration;
@@ -42,6 +43,8 @@ public class CriteriaImplTest {
                         Restrictions.between("age",0,20)) )
                 .add( Restrictions.like("lastname","%"))
                 .list();
+
+        Assert.assertNotNull(person);
     }
 
     @Test
@@ -49,6 +52,8 @@ public class CriteriaImplTest {
         Session session = factory.openSession();
 
         List person = session.createCriteria(Person.class).list();
+
+        Assert.assertNotNull(person);
     }
 
     @Test
@@ -56,5 +61,7 @@ public class CriteriaImplTest {
         Session session = factory.openSession();
 
         List zamowienia = session.createCriteria(Zamowienia.class).list();
+
+        Assert.assertNotNull(zamowienia);
     }
 }

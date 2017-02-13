@@ -33,14 +33,14 @@ public class DeleteTest {
         session = configuration.buildSessionFactory().openSession();
     }
 
-//TODO
-//    @Test
-//    public void deleteTest() throws Exception {
-//        Person person = new Person();
-//        person.setId(1000);
-//        session.save(person);
-//        session.delete(person);
-//    }
+
+    @Test
+    public void deleteTest() throws Exception {
+        Person person = new Person();
+        person.setId(1000);
+        session.save(person);
+        session.delete(person);
+    }
 
 
     @Test(expected = ORMNoSuchRecordException.class)
