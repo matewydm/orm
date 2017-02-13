@@ -32,7 +32,7 @@ public class UpdateStatementExecutorTest {
 
     @Test
     public void execute() throws Exception {
-        String sqlString = "UPDATE Person SET name = 'Darenie' WHERE per_id = 15;";
+        String sqlString = "UPDATE Person SET name = 'Darenie' WHERE per_id = 3;";
         Connection connection = factory.openSession().getConnection();
         Statement st = connection.createStatement();
         UpdateStatementExecutor executor = new UpdateStatementExecutor(st);
