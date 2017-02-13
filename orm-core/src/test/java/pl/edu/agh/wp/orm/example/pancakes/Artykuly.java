@@ -7,7 +7,8 @@ import pl.ed.agh.wp.orm.annotations.enums.DBFetchType;
 public class Artykuly {
 
     @DBId
-    private String idArtykulu;
+    @DBGeneratedValue
+    private Integer idArtykulu;
 
     @DBManyToOne(fetch = DBFetchType.EAGER)
     @DBJoinColumn(columnName = "idzamowienia", tableName = "Zamowienia")
@@ -16,11 +17,19 @@ public class Artykuly {
     @DBColumn
     private Integer sztuk;
 
-    public String getIdArtykulu() {
+    public Artykuly() {
+    }
+
+    public Artykuly(Integer idArtykulu, Integer sztuk) {
+        this.idArtykulu = idArtykulu;
+        this.sztuk = sztuk;
+    }
+
+    public Integer getIdArtykulu() {
         return idArtykulu;
     }
 
-    public void setIdArtykulu(String idArtykulu) {
+    public void setIdArtykulu(Integer idArtykulu) {
         this.idArtykulu = idArtykulu;
     }
 

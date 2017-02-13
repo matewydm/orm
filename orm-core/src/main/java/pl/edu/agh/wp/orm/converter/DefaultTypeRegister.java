@@ -3,6 +3,8 @@ package pl.edu.agh.wp.orm.converter;
 import pl.ed.agh.wp.orm.annotations.enums.DatabaseTypes;
 import pl.edu.agh.wp.orm.converter.types.*;
 import pl.ed.agh.wp.orm.annotations.converter.types.TypeConverter;
+import pl.edu.agh.wp.orm.converter.types.time.DateTimeStamp;
+import pl.edu.agh.wp.orm.converter.types.time.DateType;
 import pl.edu.agh.wp.orm.exception.ORMUnsupportedTypeConvert;
 
 import java.util.Map;
@@ -40,7 +42,11 @@ public class DefaultTypeRegister implements TypeRegister {
 
     @Override
     public TypeConverter getConverter(Class clazz) {
-        return register.get(clazz);
+
+        TypeConverter converter = register.get(clazz);
+        if(converter !=null) return converter;
+        throw new ORMUnsupportedTypeConvert("Cannot support converter for" +clazz.getSimpleName());
+
     }
 
     private void addRegisterDefault() {
@@ -50,5 +56,6 @@ public class DefaultTypeRegister implements TypeRegister {
         register(new BooleanType());
         register(new FloatType());
         register(new LongType());
+        register(new DateTimeStamp());
     }
 }

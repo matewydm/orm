@@ -25,6 +25,7 @@ public abstract class AnnotationReferenceMapper extends TypeMatcher {
 
     @Override
     protected TypeConverter getType(Field field) {
+        //TODO
         Field id =  ReflectionUtils.getAllFields(field.getType()).stream().filter(AnnotationUtils::hasIdAnnotation).findAny().get();
         return super.getType(id);
     }

@@ -1,14 +1,10 @@
 package pl.edu.agh.wp.orm.creator;
 
-import pl.ed.agh.wp.orm.annotations.DBColumn;
 import pl.ed.agh.wp.orm.annotations.enums.GenerationType;
-import pl.edu.agh.wp.orm.dto.DBColumnObject;
-import pl.edu.agh.wp.orm.dto.DBIdObject;
-import pl.edu.agh.wp.orm.dto.DBTableObject;
+import pl.edu.agh.wp.orm.dto.*;
 import pl.edu.agh.wp.orm.dto.queries.DBQuery;
 import pl.edu.agh.wp.orm.dto.queries.InsertQuery;
 import pl.edu.agh.wp.orm.exception.ORMException;
-import pl.edu.agh.wp.orm.postres.DatabaseStatement;
 
 import java.util.List;
 
@@ -34,7 +30,10 @@ public class InsertQueryCreator implements QueryCreator {
             query.appendColumnWithArgument(column.getColumnName(),column.getSQLStringValue(object));
 
         }
-
+        for (DBManyToOneReference ref : tableObject.getManyToOneReferences()){
+            query.append(",");
+            query.appendColumnWithArgument(ref.getColumnName(),ref.getIdSQLString(object));
+        }
         query.doEndQuery();
         return query;
     }

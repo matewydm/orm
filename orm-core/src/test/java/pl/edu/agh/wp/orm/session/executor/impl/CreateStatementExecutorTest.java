@@ -1,6 +1,7 @@
 package pl.edu.agh.wp.orm.session.executor.impl;
 
 
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -26,6 +27,12 @@ public class CreateStatementExecutorTest {
 
         factory = configuration.buildSessionFactory();
 
+    }
+
+    @After
+    public void tearDown() throws Exception {
+        Connection connection = factory.openSession().getConnection();
+        connection.createStatement().executeUpdate("DROP TABLE pirson ");
     }
 
     @Test

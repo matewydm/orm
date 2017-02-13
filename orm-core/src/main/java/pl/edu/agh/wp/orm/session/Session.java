@@ -28,6 +28,5 @@ public interface Session {
 
     Statement getStatement();
 
-
     Connection getConnection();
 }
