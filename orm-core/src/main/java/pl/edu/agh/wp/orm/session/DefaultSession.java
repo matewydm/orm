@@ -1,12 +1,14 @@
 package pl.edu.agh.wp.orm.session;
 
 import org.apache.log4j.Logger;
+import pl.ed.agh.wp.orm.annotations.DBOneToMany;
 import pl.edu.agh.wp.orm.creator.DeleteQueryCreator;
 import pl.edu.agh.wp.orm.creator.InsertQueryCreator;
 import pl.edu.agh.wp.orm.creator.QueryCreator;
 import pl.edu.agh.wp.orm.criterion.Criteria;
 import pl.edu.agh.wp.orm.criterion.CriteriaImpl;
 import pl.edu.agh.wp.orm.dto.DBManyToOneReference;
+import pl.edu.agh.wp.orm.dto.DBOneToManyReference;
 import pl.edu.agh.wp.orm.dto.DBTableObject;
 import pl.edu.agh.wp.orm.dto.queries.DBQuery;
 import pl.edu.agh.wp.orm.dto.repo.EntitiesRepository;
@@ -19,6 +21,7 @@ import pl.edu.agh.wp.orm.session.executor.impl.InsertStatementExecutor;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 
 public class DefaultSession implements Session {
@@ -34,14 +37,30 @@ public class DefaultSession implements Session {
 
     @Override
     public void save(Object object) {
+        List<Class>  savedClass =  new ArrayList<>();
+        save(object,savedClass);
         EntitiesRepository repository = EntitiesRepository.getInstance();
         DBTableObject table = repository.getTable(object.getClass());
         List<DBManyToOneReference> referenceList = table.getManyToOneReferences();
         for (DBManyToOneReference reference : referenceList) {
-//            reference.get
+//
         }
     }
 
+    private void save(Object object, List<Class> savedClass) {
+        savedClass.add(object.getClass();
+        DBTableObject table = EntitiesRepository.getInstance().getTable(object.getClass());
+        for (DBManyToOneReference ref:  table.getManyToOneReferences()){
+            Object value = ref.getValue(object);
+            if(value !=null)
+                save(object);
+        }
+        simplySave(object,table);
+
+        for (DBOneToManyReference ref : table.getOneToManyReference()){
+            Object value =
+        }
+    }
 
 
     @Override

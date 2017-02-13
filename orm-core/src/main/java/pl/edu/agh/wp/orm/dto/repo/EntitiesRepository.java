@@ -1,6 +1,7 @@
 package pl.edu.agh.wp.orm.dto.repo;
 
 import pl.edu.agh.wp.orm.dto.DBTableObject;
+import pl.edu.agh.wp.orm.exception.ORMNoSuchTableException;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -24,7 +25,10 @@ public class EntitiesRepository {
     }
 
     public DBTableObject getTable(Class clazz){
-        return repositories.get(clazz);
+        DBTableObject dbTableObject = repositories.get(clazz);
+        if(dbTableObject != null)
+            return dbTableObject;
+        throw  new ORMNoSuchTableException("Cannot find class "+clazz.getName());
     }
 
 
