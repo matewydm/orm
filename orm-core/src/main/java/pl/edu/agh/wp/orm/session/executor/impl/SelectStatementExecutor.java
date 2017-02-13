@@ -35,33 +35,4 @@ public class SelectStatementExecutor extends StatementExecutor{
         }
     }
 
-//        try {
-//            resultSet = statement.executeQuery(sqlQuery);
-//            while (resultSet.next()) {
-//                Field[] columnFields = clazz.getDeclaredFields();
-//
-//                Object obj = clazz.newInstance();
-//                for (DBColumnObject column : table.getColumns()) {
-//
-//                    Object columnValue = resultSet.getObject(column.getColumnName());
-//
-//                    for (Field columnField : columnFields) {
-//                        if (columnField.isAnnotationPresent(DBColumn.class)) {
-//                            String columnName = columnField.getAnnotation(DBColumn.class).name();
-//                            if (column.getColumnName().equalsIgnoreCase(columnName) && columnValue != null) {
-//
-//                                Field newColumnField = obj.getClass().getDeclaredField(columnField.getName());
-//                                newColumnField.setAccessible(true);
-//                                newColumnField.set(obj, columnValue);
-//                                break;
-//                            }
-//                        }
-//                    }
-//                }
-//                outputList.add(obj);
-//            }
-//        }
-//        catch (SQLException | NoSuchFieldException | IllegalAccessException | InstantiationException e) {
-//            e.printStackTrace();
-//        }
 }
