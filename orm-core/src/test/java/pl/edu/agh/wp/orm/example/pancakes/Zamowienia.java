@@ -22,7 +22,7 @@ public class Zamowienia {
     private Date datarealizacji;
 
     @DBOneToMany(fetch = DBFetchType.EAGER)
-    @DBJoinColumn(columnName = "id")
+    @DBJoinColumn(columnName = "id_artykulu")
     private List<Artykuly> artykuly;
 
     public Zamowienia() {

@@ -9,6 +9,6 @@ birth_date DATE
 CREATE TABLE address
 (
   Id INTEGER PRIMARY KEY ,
-  PERSON_ID Integer FOREIGN KEY REFERENCES person,
+  PERSON_ID Integer,
   STREET VARCHAR(40)
 );

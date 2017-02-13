@@ -31,7 +31,7 @@ public class SelectStatementExecutor extends StatementExecutor{
         try {
             return statement.executeQuery(sqlQuery);
         } catch (SQLException e) {
-            throw new ORMException("Exception while executing select query");
+            throw new ORMException("Exception while executing select query", e);
         }
     }
 

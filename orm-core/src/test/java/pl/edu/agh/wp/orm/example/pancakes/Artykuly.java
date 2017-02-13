@@ -8,7 +8,7 @@ public class Artykuly {
 
     @DBId
     @DBGeneratedValue
-    private Integer idArtykulu;
+    private Integer id_Artykulu;
 
     @DBManyToOne(fetch = DBFetchType.EAGER)
     @DBJoinColumn(columnName = "idzamowienia", tableName = "Zamowienia")
@@ -20,17 +20,17 @@ public class Artykuly {
     public Artykuly() {
     }
 
-    public Artykuly(Integer idArtykulu, Integer sztuk) {
-        this.idArtykulu = idArtykulu;
+    public Artykuly(Integer id_Artykulu, Integer sztuk) {
+        this.id_Artykulu = id_Artykulu;
         this.sztuk = sztuk;
     }
 
-    public Integer getIdArtykulu() {
-        return idArtykulu;
+    public Integer getId_Artykulu() {
+        return id_Artykulu;
     }
 
-    public void setIdArtykulu(Integer idArtykulu) {
-        this.idArtykulu = idArtykulu;
+    public void setId_Artykulu(Integer id_Artykulu) {
+        this.id_Artykulu = id_Artykulu;
     }
 
     public Zamowienia getZamowienia() {

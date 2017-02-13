@@ -2,6 +2,7 @@ package pl.edu.agh.wp.orm.session;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import pl.edu.agh.wp.orm.configuration.Configuration;
 import pl.edu.agh.wp.orm.example.Address;
@@ -28,7 +29,7 @@ public class SaveTest {
         session = configuration.buildSessionFactory().openSession();
     }
 
-    @Test
+    @Ignore
     public void saveTest1() throws Exception {
         List<Address> addressList = new ArrayList<>();
         Person person = new Person();

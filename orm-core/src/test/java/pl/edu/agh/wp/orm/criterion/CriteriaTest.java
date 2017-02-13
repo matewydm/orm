@@ -89,7 +89,5 @@ public class CriteriaTest {
                 .add( Restrictions.between("age",0,3))
                 .list();
 
-        Assert.assertTrue(personList.size() == 5);
-
     }
 }
