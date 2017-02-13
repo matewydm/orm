@@ -28,10 +28,10 @@ public class TestMain {
                 .setAnnotationParsing(true)
                 .addScannedPackage("pl.edu.agh");
 
-        /*SessionFactory session = configuration.buildSessionFactory();
+        SessionFactory session = configuration.buildSessionFactory();
         List<DBQuery> list = new ArrayList<>();
         EntitiesRepository repo = EntitiesRepository.getInstance();
-        for(DBTableObject table : repo){
+        /*for(DBTableObject table : repo){
             list.add(quer);
         }
 
@@ -39,12 +39,12 @@ public class TestMain {
             ALterFoer
                     ALTER TABLE table.get + add FOREGIN key()
                     refere nes
-        }
+        }*/
 
     }
-    */
+
     }
-}
+
 
 
 
