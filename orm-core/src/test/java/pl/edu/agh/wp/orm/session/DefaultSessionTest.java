@@ -32,17 +32,17 @@ public class DefaultSessionTest {
         Assert.assertNotNull(p.getId());
     }
 
-    @Test
-    public void simplySaveTest2() throws Exception {
-        DefaultSession session = (DefaultSession) factory.openSession();
-        Address a = new Address();
-
-        DBTableObject dbTable = EntitiesRepository.getInstance().getTable(a.getClass());
-
-        session.simplySave(a,dbTable);
-
-        Assert.assertNotNull(a.getId());
-    }
+//    @Test
+//    public void simplySaveTest2() throws Exception {
+//        DefaultSession session = (DefaultSession) factory.openSession();
+//        Address a = new Address();
+//
+//        DBTableObject dbTable = EntitiesRepository.getInstance().getTable(a.getClass());
+//
+//        session.simplySave(a,dbTable);
+//
+//        Assert.assertNotNull(a.getId());
+//    }
 
     @Test
     public void saveTest() throws Exception {

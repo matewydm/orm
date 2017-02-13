@@ -1,6 +1,6 @@
 CREATE TABLE public.person
 (
-  per_id serial NOT NULL,
+  per_id serial,
   name character varying NOT NULL,
   lastname character varying NOT NULL,
   age integer NOT NULL,

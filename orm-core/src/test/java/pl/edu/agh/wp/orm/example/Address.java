@@ -12,6 +12,7 @@ public class Address {
 
 
     @DBManyToOne
+    @DBColumn(name = "person_id")
     private Person person;
 
     @DBColumn
