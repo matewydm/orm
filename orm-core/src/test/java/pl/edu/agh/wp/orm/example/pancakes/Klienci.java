@@ -31,6 +31,21 @@ public class Klienci {
     @DBJoinColumn(columnName = "idklienta")
     private Set<Zamowienia> zamowienia;
 
+    public Klienci(Integer idklienta, String nazwa, String ulica, String miejscowosc, String kod, String telefon) {
+        this.idklienta = idklienta;
+        this.nazwa = nazwa;
+        this.ulica = ulica;
+        this.miejscowosc = miejscowosc;
+        this.kod = kod;
+        this.telefon = telefon;
+
+    }
+
+    public Klienci() {
+    }
+
+
+
     public Set<Zamowienia> getZamowienia() {
         return zamowienia;
     }

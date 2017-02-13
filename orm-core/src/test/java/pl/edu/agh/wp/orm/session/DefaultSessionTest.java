@@ -9,6 +9,13 @@ import pl.edu.agh.wp.orm.dto.DBTableObject;
 import pl.edu.agh.wp.orm.dto.repo.EntitiesRepository;
 import pl.edu.agh.wp.orm.example.Address;
 import pl.edu.agh.wp.orm.example.Person;
+import pl.edu.agh.wp.orm.example.pancakes.Artykuly;
+import pl.edu.agh.wp.orm.example.pancakes.Klienci;
+import pl.edu.agh.wp.orm.example.pancakes.Zamowienia;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 import static org.junit.Assert.*;
 
@@ -35,6 +42,22 @@ public class DefaultSessionTest {
         session.simplySave(a,dbTable);
 
         Assert.assertNotNull(a.getId());
+    }
+
+    @Test
+    public void saveTest() throws Exception {
+        Session session =factory.openSession();
+        Klienci k = new Klienci(1,"Janek Kowalski","ul","stw","12-120","78428644");
+        Zamowienia zamowienia = new Zamowienia(1,k,new Date());
+        Artykuly a =new Artykuly(10,12);
+        List<Artykuly> articles = new ArrayList<>();
+
+        articles.add(a);
+        zamowienia.setArtykuly(articles);
+        a.setZamowienia(zamowienia);
+        session.save(zamowienia);
+
+
     }
 
     @Before

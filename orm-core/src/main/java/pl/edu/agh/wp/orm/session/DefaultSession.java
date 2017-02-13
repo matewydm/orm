@@ -26,7 +26,9 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class DefaultSession implements Session {
 
@@ -41,7 +43,7 @@ public class DefaultSession implements Session {
 
     @Override
     public void save(Object object) {
-        List<Class>  savedClass =  new ArrayList<>();
+        Set<Class>  savedClass =  new HashSet<>();
         save(object,savedClass);
         EntitiesRepository repository = EntitiesRepository.getInstance();
         DBTableObject table = repository.getTable(object.getClass());
@@ -51,14 +53,14 @@ public class DefaultSession implements Session {
         }
     }
 
-    private void save(Object object, List<Class> savedClass) {
+    private void save(Object object, Set<Class> savedClass) {
         savedClass.add(object.getClass());
         DBTableObject table = EntitiesRepository.getInstance().getTable(object.getClass());
         for (DBManyToOneReference ref:  table.getManyToOneReferences()){
             Object value = ref.getValue(object);
 
             if(value !=null && !savedClass.contains(value.getClass()))
-                save(object);
+                save(value,savedClass);
         }
         simplySave(object,table);
 
@@ -67,7 +69,7 @@ public class DefaultSession implements Session {
             if(value != null && !savedClass.contains(ref.getJoinedClass())){
                 Iterable<Object> it = (Iterable) value;
                 for (Object listElement : it) {
-                    save(listElement);
+                    save(listElement,savedClass);
                 }
             }
 

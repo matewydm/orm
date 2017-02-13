@@ -6,7 +6,6 @@ import pl.ed.agh.wp.orm.annotations.enums.DatabaseTypes;
 import java.util.Date;
 
 public class DateType implements TypeConverter {
-    private static String DATE_FORMAT ="yyyy-mm-dd";
     @Override
     public Class getObjectClass() {
         return Date.class;
