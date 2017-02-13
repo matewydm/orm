@@ -54,14 +54,6 @@ public class DefaultSession implements Session {
     }
 
     @Override
-    public void create(Object object){
-        EntitiesRepository repository = EntitiesRepository.getInstance();
-        DBTableObject table = repository.getTable(object.getClass());
-        executeTableCreation(table,object);
-    }
-
-
-    @Override
     public Object get(Object id, Class clazz) {
         DBTableObject table = entitiesInformation.getTable(clazz);
         return createCriteria(clazz)
@@ -113,21 +105,6 @@ public class DefaultSession implements Session {
 
     }
 
-    public void executeTableCreation(DBTableObject table, Object object) throws ORMException {
-        if(table != null){
-            QueryCreator queryCreator = new CreateQueryCreator(table);
-            DBQuery query = queryCreator.createQuery(object);
-            CreateStatementExecutor createExecutor = new CreateStatementExecutor(getStatement());
-            Object id = createExecutor.execute(query.getSQLQuery());
-            if(id == null)
-                throw new ORMNoSuchRecordException("There is no such record in database");
-        }
-        else {
-            throw new ORMNoSuchTableException("Given class has no table in database");
-        }
-    }
-
-
     public Statement getStatement() {
         try {
             return connection.createStatement();
@@ -138,31 +115,22 @@ public class DefaultSession implements Session {
     }
 
     private void executeDeletion(DBTableObject table, Object object) throws ORMException {
-        if (table != null) {
-            QueryCreator queryCreator =  new DeleteQueryCreator(table);
-            DBQuery query = queryCreator.createQuery(object);
-            DeleteStatementExecutor deleteExecutor = new DeleteStatementExecutor(getStatement());
-            Object id = deleteExecutor.execute(query.getSQLQuery());
-            if(id == null)
-                throw new ORMNoSuchRecordException("There is no such record in database");
-        }
-        else {
-            throw new ORMNoSuchTableException("Given class has no table in database");
-        }
+        QueryCreator queryCreator =  new DeleteQueryCreator(table);
+        DBQuery query = queryCreator.createQuery(object);
+        DeleteStatementExecutor deleteExecutor = new DeleteStatementExecutor(getStatement());
+        Object id = deleteExecutor.execute(query.getSQLQuery());
+        if(id == null)
+            throw new ORMNoSuchRecordException("There is no such record in database");
+
     }
 
     private void executeUpdate(DBTableObject table, Object object) throws ORMException{
-        if (table != null) {
-            QueryCreator queryCreator =  new UpdateQueryCreator(table);
-            DBQuery query = queryCreator.createQuery(object);
-            UpdateStatementExecutor updateExecutor = new UpdateStatementExecutor(getStatement());
-            Object id = updateExecutor.execute(query.getSQLQuery());
-            if(id == null)
-                throw new ORMNoSuchRecordException("There is no such record in database");
-        }
-        else {
-            throw new ORMNoSuchTableException("Given class has no table in database");
-        }
+        QueryCreator queryCreator =  new UpdateQueryCreator(table);
+        DBQuery query = queryCreator.createQuery(object);
+        UpdateStatementExecutor updateExecutor = new UpdateStatementExecutor(getStatement());
+        Object id = updateExecutor.execute(query.getSQLQuery());
+        if(id == null)
+            throw new ORMNoSuchRecordException("There is no such record in database");
     }
 
 
