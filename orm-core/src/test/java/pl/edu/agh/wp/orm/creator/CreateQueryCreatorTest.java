@@ -46,9 +46,8 @@ public class CreateQueryCreatorTest {
         String expected = "CREATE TABLE PhoneNumber (phone_id INTEGER, model VARCHAR(50), version VARCHAR(50), address_ID INTEGER, person_ID INTEGER);";
         DBTableObject table = mapper.getTable(PhoneNumber.class);
         QueryCreator queryCreator = new CreateQueryCreator(table);
-        PhoneNumber p = new PhoneNumber();
-        DBQuery query = queryCreator.createQuery(p);
+        DBQuery query = queryCreator.createQuery(null);
         query.getSQLQuery();
         Assert.assertEquals(expected, query.getSQLQuery());
-        }
+    }
 }

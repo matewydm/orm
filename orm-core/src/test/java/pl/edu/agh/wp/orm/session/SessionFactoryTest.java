@@ -3,6 +3,10 @@ package pl.edu.agh.wp.orm.session;
 import org.junit.Assert;
 import org.junit.Test;
 import pl.edu.agh.wp.orm.configuration.Configuration;
+import pl.edu.agh.wp.orm.dto.repo.AnnotationDatabaseObjectMapper;
+import pl.edu.agh.wp.orm.dto.repo.EntitiesRepository;
+import pl.edu.agh.wp.orm.mapper.TableMapper;
+import pl.edu.agh.wp.orm.mapper.factory.AnnotationORMFactory;
 
 public class SessionFactoryTest {
 
@@ -18,6 +22,7 @@ public class SessionFactoryTest {
                 .addScannedPackage("pl.edu.agh");
 
         Session session = configuration.buildSessionFactory().openSession();
+
 
         Assert.assertTrue(session.isOpened());
 

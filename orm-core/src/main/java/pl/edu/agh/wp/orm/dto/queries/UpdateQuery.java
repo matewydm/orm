@@ -30,7 +30,6 @@ public class UpdateQuery extends DBQuery{
     public void handleSetQuery(DBTableObject dbTableObject, Object object){
         appendWithSpace(DatabaseStatement.SET);
         List<DBColumnObject> columns = dbTableObject.getColumns();
-
         for(int i = 0 ; i < columns.size() - 1; i++){
             appendEquation(columns.get(i).getColumnName(),columns.get(i).getSQLStringValue(object));
             appendWithSpace(",");

@@ -37,4 +37,15 @@ public class CreateStatementExecutorTest {
         Object o = executor.execute(sqlString);
         Assert.assertNotNull(o);
     }
+
+    @Test
+    public void execute1() throws  Exception{
+        String sqlString = "CREATE TABLE Person (per_id Integer NOT NULL, name VARCHAR(20), lastname VARCHAR(20), age INTEGER, birth_date DATE);";
+        Connection connection = factory.openSession().getConnection();
+        Statement st = connection.createStatement();
+        CreateStatementExecutor executor = new CreateStatementExecutor(st);
+        Object o = executor.execute(sqlString);
+        Assert.assertNotNull(o);
+    }
+
 }
